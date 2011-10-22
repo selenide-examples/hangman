@@ -1,0 +1,28 @@
+#wordInWork {
+  font-family: "Courier New", Courier, monospace;
+}
+
+#wordInWork span {
+	font-size: 60px;
+	margin-left: 10px;
+}
+
+#alphabet td {
+	font-size: 48px;
+	width: 60px;
+	text-align: center;
+}
+
+.buttonover {
+	background:#aaaaaa;
+}
+
+.used {
+	color: green;
+	text-decoration:line-through;
+}
+
+.nonused {
+	color: red;
+	text-decoration:line-through;
+}
