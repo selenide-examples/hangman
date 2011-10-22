@@ -1,6 +1,7 @@
 
 var wordInWork;
 var alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+var isPlaying = false;
 var failures = 0;
 
 function startGame() {
@@ -9,6 +10,14 @@ function startGame() {
 	showFailures(0);
 	showAlphabet();
 	showWordInWork();
+	$("#startGame").hide();
+	$("#gameWin").hide();
+	$("#gameLost").hide();
+	isPlaying = true;
+}
+
+function isGameLost() {
+  return failures > 5;
 }
 
 function showWordInWork() {
@@ -22,7 +31,6 @@ function showWordInWork() {
 }
 
 function showFailures(failures) {
-	$("#failures").text(failures);
   switch (failures) {
     case 0:
       $("#hangmanImageContainer .hangman").hide();
@@ -43,12 +51,22 @@ function showFailures(failures) {
     case 5:
       $("#hangmanImageContainer #hangman5").show();
       break;
-    default:
-      $("#hangmanImageContainer #chair").hide();
-      $("#hangmanImageContainer .body").hide();
-      $("#hangmanImageContainer #gameOver").show();
-      break;
   }
+}
+
+function gameOver() {
+  wordInWork = word;
+  showWordInWork();
+
+  $("#hangmanImageContainer #chair").hide();
+  $("#hangmanImageContainer .body").hide();
+  if (isGameLost()) {
+    $("#gameLost").show();
+  } else {
+    $("#gameWin").show();
+  }
+  $("#startGame").show();
+  isPlaying = false;
 }
 
 function showAlphabet() {
@@ -62,6 +80,10 @@ function showAlphabet() {
 		letterContainer.text(alphabet.charAt(i));
 		letterContainer.attr("letter", alphabet.charAt(i));
 		letterContainer.appendTo(alphabetContainer);
+
+		if (i % 11 == 10) {
+		  $("</tr><tr>").appendTo(alphabetContainer);
+		}
 	}
 
 	alphabetContainer.append("</tr></table>");
@@ -77,6 +99,10 @@ function setCharAt(str,index,chr) {
 }
 
 function guessLetter(letter) {
+  if (!isPlaying) {
+    return;
+  }
+
 	var letterGuessed = false;
 	for (i=0; i<word.length; i++) {
 		if (word.charAt(i).toLowerCase() == letter.toLowerCase()) {
@@ -91,18 +117,16 @@ function guessLetter(letter) {
 		letterContainer.addClass("used");
 		showWordInWork();
 		if (wordInWork.indexOf("_") == -1) {
-			alert("YOU WIN!");
-			startGame();
+			gameOver();
 		}
 	}
 	else {
 		letterContainer.addClass("nonused");
 		failures++;
 		showFailures(failures);
-//		if (failures > 5) {
-//			alert("You loose... :(\nAnswer is: " + word);
-//			startGame();
-//		}
+		if (isGameLost()) {
+			gameOver();
+		}
 	}
 }
 

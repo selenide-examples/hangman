@@ -28,7 +28,9 @@
 }
 
 #hangmanImageContainer {
-  position: relative;
+  position: absolute;
+  left: 750px;
+  top: 50px;
 }
 
 img#chair {
@@ -38,7 +40,7 @@ img#chair {
   top: 340px;
 }
 
-img#gameOver {
+img.gameOver {
   position: absolute;
   width: 200px;
   left: 260px;
@@ -67,4 +69,11 @@ img#hangman4 {
 }
 img#hangman5 {
   clip: rect(142px, 500px, 390px, 250px);
+}
+
+#startGame {
+  display: none;
+  position: absolute;
+  left: 300px;
+  top: 380px;
 }
