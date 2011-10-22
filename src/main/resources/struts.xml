@@ -8,7 +8,7 @@
   <constant name="struts.convention.classes.reload" value="true"/>
   <constant name="struts.i18n.encoding" value="UTF-8"/>
   <constant name="struts.action.extension" value=""/>
-  <constant name="struts.action.excludePattern" value="/js/.*,/css/.*"/>
+  <constant name="struts.action.excludePattern" value="/js/.*,/css/.*,/img/.*"/>
   <constant name="struts.ui.theme" value="xhtml"/>
   <constant name="struts.freemarker.templatesCache" value="false"/>
   <constant name="struts.convention.exclude.parentClassLoader" value="false"/>

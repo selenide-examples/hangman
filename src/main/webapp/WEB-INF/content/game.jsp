@@ -37,5 +37,16 @@
 		<h2>Неудачных попыток:</h2>
 		<div id="failures"></div>
 
+    <div id="hangmanImageContainer">
+		  <img id="hangman1" class="hangman" src="img/hangman.png"/>
+		  <img id="hangman2" class="hangman" src="img/hangman.png"/>
+		  <img id="hangman3" class="hangman" src="img/hangman.png"/>
+		  <img id="hangman4" class="hangman body" src="img/hangman.png"/>
+		  <img id="hangman5" class="hangman body" src="img/hangman.png"/>
+		  <img id="chair" src="http://uh.ru/files/a/18/4155/images/fn_oakley_stool-25vi3bg.jpg"/>
+		  <img id="gameOver" src="img/gameOver.png"/>
+
+		</div>
+
 	</body>
 </html>

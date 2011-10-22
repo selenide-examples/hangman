@@ -22,7 +22,33 @@ function showWordInWork() {
 }
 
 function showFailures(failures) {
-	$("#failures").text(failures);	
+	$("#failures").text(failures);
+  switch (failures) {
+    case 0:
+      $("#hangmanImageContainer .hangman").hide();
+      $("#hangmanImageContainer #chair").show();
+      break;
+    case 1:
+      $("#hangmanImageContainer #hangman1").show();
+      break;
+    case 2:
+      $("#hangmanImageContainer #hangman2").show();
+      break;
+    case 3:
+      $("#hangmanImageContainer #hangman3").show();
+      break;
+    case 4:
+      $("#hangmanImageContainer #hangman4").show();
+      break;
+    case 5:
+      $("#hangmanImageContainer #hangman5").show();
+      break;
+    default:
+      $("#hangmanImageContainer #chair").hide();
+      $("#hangmanImageContainer .body").hide();
+      $("#hangmanImageContainer #gameOver").show();
+      break;
+  }
 }
 
 function showAlphabet() {
@@ -73,10 +99,10 @@ function guessLetter(letter) {
 		letterContainer.addClass("nonused");
 		failures++;
 		showFailures(failures);
-		if (failures > 5) {
-			alert("You loose... :(\nAnswer is: " + word);
-			startGame();
-		}
+//		if (failures > 5) {
+//			alert("You loose... :(\nAnswer is: " + word);
+//			startGame();
+//		}
 	}
 }
 

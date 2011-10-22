@@ -26,3 +26,45 @@
 	color: red;
 	text-decoration:line-through;
 }
+
+#hangmanImageContainer {
+  position: relative;
+}
+
+img#chair {
+  position: absolute;
+  width: 160px;
+  left: 275px;
+  top: 340px;
+}
+
+img#gameOver {
+  position: absolute;
+  width: 200px;
+  left: 260px;
+  top: 80px;
+  display: none;
+}
+
+img.hangman {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+
+img#hangman1 {
+  clip: rect(0px, 250px, 390px, 200px);
+}
+img#hangman2 {
+  clip: rect(0px, 500px, 30px, 200px);
+}
+img#hangman3 {
+  clip: rect(30px, 500px, 62px, 250px);
+}
+img#hangman4 {
+  clip: rect(62px, 500px, 142px, 250px);
+}
+img#hangman5 {
+  clip: rect(142px, 500px, 390px, 250px);
+}
