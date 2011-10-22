@@ -1,18 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'war'
 
-war {
-  from 'web'
-}
-
 repositories{
     mavenCentral()
 }
 
 dependencies {
-  compile 'org.mortbay.jetty:jetty:6.1.26'
-  compile 'jetty:javax.servlet:5.1.12'
-  compile 'org.mortbay.jetty:jsp-2.1:6.1.14'
+  providedCompile 'org.mortbay.jetty:jetty:6.1.26'
+  providedCompile 'jetty:javax.servlet:5.1.12'
+  providedRuntime 'org.mortbay.jetty:jsp-2.1:6.1.14'
   compile 'org.apache.struts:struts2-core:2.2.3'
   compile 'org.apache.struts.xwork:xwork-core:2.2.3'
   compile 'org.apache.struts:struts2-convention-plugin:2.2.3'
@@ -23,12 +19,11 @@ dependencies {
 
 task libs(type: Sync) {
   from configurations.compile
-  into "$buildDir/lib/compile"
-}
-
-task testLibs(type: Sync, dependsOn: libs) {
+  from configurations.providedCompile
+  from configurations.runtime
+  from configurations.providedRuntime
   from configurations.testCompile
-  into "$buildDir/lib/test"
+  into "$buildDir/lib"
 }
 
 [compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
@@ -38,14 +33,11 @@ test {
   systemProperties 'file.encoding': 'UTF-8'
 }
 
-task(compile, dependsOn: testLibs, type: Compile) {
-}
-
-task(run, dependsOn: 'build', type: JavaExec) {
+task(run, dependsOn: 'compile', type: JavaExec) {
   main = 'ee.era.hangman.Launcher'
   classpath = sourceSets.main.runtimeClasspath
   systemProperty 'file.encoding', 'UTF-8'
 }
 
-defaultTasks 'clean', 'testLibs'
+defaultTasks 'clean', 'libs', 'test', 'war'
 
