@@ -61,7 +61,7 @@ public class Launcher {
   protected Handler[] createWebapps() {
     return new Handler[]{
         createWebApp("/logs", "logs"),
-        createWebApp("/", "web")
+        createWebApp("/hangman", "src/main/webapp")
     };
   }
 

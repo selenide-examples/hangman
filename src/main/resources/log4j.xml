@@ -31,7 +31,7 @@
 
   <root>
     <level value="INFO"/>
-    <appender-ref ref="general"/>
+    <!--<appender-ref ref="general"/>-->
     <appender-ref ref="console"/>
   </root>
 
