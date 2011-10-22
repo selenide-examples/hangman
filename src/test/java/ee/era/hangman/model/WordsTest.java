@@ -21,7 +21,7 @@ public class WordsTest {
   }
 
   @Test
-  public void choosesRandomTopicAndWord() throws Exception {
+  public void choosesRandomTopicAndWord() {
     Map<String, Integer> count = new HashMap<String, Integer>();
     count.put("гвоздь", 0);
     count.put("унитаз", 0);

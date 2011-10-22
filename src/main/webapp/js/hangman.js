@@ -1,11 +1,9 @@
 
-var wordInWork;
 var alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 var isPlaying = false;
 var failures = 0;
 
 function startGame() {
-	wordInWork = word.replace(/./g, "_");
 	failures = 0;
 	showFailures(0);
 	showAlphabet();
@@ -55,7 +53,6 @@ function showFailures(failures) {
 }
 
 function gameOver() {
-  wordInWork = word;
   showWordInWork();
 
   $("#hangmanImageContainer #chair").hide();
@@ -93,41 +90,38 @@ function showAlphabet() {
 	$("#alphabet td").click(function() {guessLetter($(this).text());});
 }
 
-function setCharAt(str,index,chr) {
-	if (index > str.length-1) return str;
-	return str.substr(0,index) + chr + str.substr(index+1);
-}
-
 function guessLetter(letter) {
   if (!isPlaying) {
     return;
   }
 
-	var letterGuessed = false;
-	for (i=0; i<word.length; i++) {
-		if (word.charAt(i).toLowerCase() == letter.toLowerCase()) {
-			letterGuessed = true;
-			wordInWork = setCharAt(wordInWork, i, word.charAt(i));
-		}
-	}
-
 	var letterContainer = $("*[letter=" + letter + "]");
 	letterContainer.unbind("click");
-	if (letterGuessed == true) {
-		letterContainer.addClass("used");
-		showWordInWork();
-		if (wordInWork.indexOf("_") == -1) {
-			gameOver();
-		}
-	}
-	else {
-		letterContainer.addClass("nonused");
-		failures++;
-		showFailures(failures);
-		if (isGameLost()) {
-			gameOver();
-		}
-	}
+
+  $.ajax({
+    url: "guess?letter=" + letter,
+    async: false,
+    dataType: 'json',
+    success: function (result) {
+      console.log(result);
+
+      wordInWork = result.wordInWork;
+      showWordInWork();
+
+      failures = result.failures;
+      showFailures(failures);
+
+      if (result.guessed == true) {
+        letterContainer.addClass("used");
+      } else {
+        letterContainer.addClass("nonused");
+      }
+
+      if (result.gameOver) {
+        gameOver();
+      }
+    }
+  });
 }
 
 $(function() {

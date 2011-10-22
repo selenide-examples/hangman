@@ -12,6 +12,7 @@ dependencies {
   compile 'org.apache.struts:struts2-core:2.2.3'
   compile 'org.apache.struts.xwork:xwork-core:2.2.3'
   compile 'org.apache.struts:struts2-convention-plugin:2.2.3'
+  compile 'org.apache.struts:struts2-json-plugin:2.2.3'
   compile 'org.slf4j:slf4j-log4j12:1.6.2'
   testCompile 'junit:junit:4.9'
   testCompile 'org.hamcrest:hamcrest-all:1.1'

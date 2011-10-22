@@ -18,7 +18,7 @@
 	<body>
 	  <script language="JavaScript">
 	    var topic = "${word.topic}";
-      var word = "${word.word}";
+      var wordInWork = "${wordInWork}";
 	  </script>
 
 		<h2>Тема:</h2>
