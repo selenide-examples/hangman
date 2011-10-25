@@ -7,8 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public abstract class UITest {
-  WebDriver browser;
-  Launcher server;
+  protected WebDriver browser;
+  private Launcher server;
 
   @Before
   public void startServer() throws Exception {
@@ -37,5 +37,10 @@ public abstract class UITest {
       server.stop();
       server = null;
     }
+  }
+
+  protected void open(String relativeUrl) {
+    browser.get("http://localhost:8888" + relativeUrl);
+
   }
 }
