@@ -4,7 +4,6 @@ import com.github.selenide.UITest;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class HangmanSpec extends UITest {

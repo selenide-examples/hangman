@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'war'
 
 repositories{
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
@@ -16,6 +16,9 @@ dependencies {
   compile 'org.slf4j:slf4j-log4j12:1.6.2'
   testCompile 'junit:junit:4.9'
   testCompile 'org.hamcrest:hamcrest-all:1.1'
+  testCompile 'org.seleniumhq.selenium:selenium-java:2.9.0'
+//  testCompile 'com.github.selenide:selenide:1.0-SNAPSHOT'
+  testCompile fileTree(dir: 'lib', include: '*.jar')
 }
 
 task libs(type: Sync) {
