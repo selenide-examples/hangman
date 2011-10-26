@@ -5,8 +5,10 @@ import ee.era.hangman.model.Words;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
+import static ee.era.hangman.di.DependencyInjection.inject;
+
 public class Game extends GameActionSupport {
-  Words words = new Words();
+  Words words = inject(Words.class);
 
   @Action(value = "game", results = {
       @Result(name = "success", location = "game.jsp")})

@@ -7,7 +7,7 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 
 public class Words {
-  final Map<String, List<String>> topics = new HashMap<String, List<String>>();
+  protected final Map<String, List<String>> topics = new HashMap<String, List<String>>();
 
   public Words() {
     topics.put("дом", asList("гвоздь", "унитаз", "чайник", "табурет", "стул", "ложка", "чашка", "пиала", "мухобойка", "компьютер", "люстра", "секция", "мебель", "балкон", "подвал"));
