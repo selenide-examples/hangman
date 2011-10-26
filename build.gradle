@@ -35,9 +35,15 @@ task libs(type: Sync) {
 
 test {
   systemProperties 'file.encoding': 'UTF-8'
+  exclude 'ee/era/hangman/uitest/**/*.*'
+}
+
+task uitest(type: Test) {
+  systemProperties 'file.encoding': 'UTF-8'
+  include 'ee/era/hangman/uitest/**/*.*'
+
 //  systemProperties 'webdriver.chrome.driver': '/usr/bin/chromedriver'
 //  systemProperties 'browser': 'chrome'
-//  systemProperties '-auth': '/dev/null'
 }
 
 task(run, dependsOn: 'compile', type: JavaExec) {
