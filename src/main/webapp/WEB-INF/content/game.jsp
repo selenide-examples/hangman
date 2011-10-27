@@ -17,6 +17,7 @@
 	</head>
 	<body>
 	  <script language="JavaScript">
+	    var alphabet = "${alphabet}";
 	    var topic = "${word.topic}";
       var wordInWork = "${wordInWork}";
 	  </script>

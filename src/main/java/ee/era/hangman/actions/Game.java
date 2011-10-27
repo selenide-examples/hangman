@@ -21,4 +21,9 @@ public class Game extends GameActionSupport {
     return SUCCESS;
   }
 
+  public String getAlphabet() {
+    return "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+    //  return "ABCDEFGHIJKLMNOPQRSŠZŽTUVWÕÄÖÜXY";
+    //  return "ABCDEFGHIJKLMNOPRSTUVWXYZ";
+  }
 }

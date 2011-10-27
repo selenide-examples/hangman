@@ -1,5 +1,3 @@
-
-var alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 var isPlaying = false;
 var failures = 0;
 
