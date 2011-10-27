@@ -24,7 +24,7 @@ public class GuessTest {
         return new Word("software development", "agile");
       }
     };
-    game.execute();
+    game.startGame();
   }
 
   @Test

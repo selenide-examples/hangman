@@ -26,7 +26,7 @@ public class GameTest {
 
   @Test
   public void initializesRandomWord() {
-    game.execute();
+    game.startGame();
     assertThat(game.getWord().getTopic(), equalTo("software development"));
     assertThat(game.getWord().getWord(), equalTo("agile"));
     assertThat(game.getWordInWork(), equalTo("_____"));

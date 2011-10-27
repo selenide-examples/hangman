@@ -12,8 +12,7 @@ public class Game extends GameActionSupport {
 
   @Action(value = "game", results = {
       @Result(name = "success", location = "game.jsp")})
-  @Override
-  public String execute() {
+  public String startGame() {
     Word randomWord = words.getRandomWord();
     setWord(randomWord);
     setWordInWork(randomWord.getWord().replaceAll(".", "_"));
