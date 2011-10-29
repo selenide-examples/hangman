@@ -4,11 +4,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import ee.era.hangman.model.Word;
 import org.apache.struts2.interceptor.SessionAware;
 
+import java.util.Date;
 import java.util.Map;
 
 abstract class GameActionSupport extends ActionSupport implements SessionAware {
 
   private Map<String, Object> session;
+  private static final String startTime = new Date().toString();
 
   @Override
   public void setSession(Map<String, Object> session) {
@@ -37,5 +39,9 @@ abstract class GameActionSupport extends ActionSupport implements SessionAware {
 
   public void setFailures(int failures) {
     session.put("failures", failures);
+  }
+
+  public String getStartTime() {
+    return startTime;
   }
 }
