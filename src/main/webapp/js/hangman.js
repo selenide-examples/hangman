@@ -6,7 +6,7 @@ function startGame() {
 	showFailures(0);
 	showAlphabet();
 	showWordInWork();
-	$("#startGame").hide();
+	$(".restartGame").hide();
 	$("#gameWin").hide();
 	$("#gameLost").hide();
 	isPlaying = true;
@@ -60,7 +60,7 @@ function gameOver() {
   } else {
     $("#gameWin").show();
   }
-  $("#startGame").show();
+  $(".restartGame").show();
   isPlaying = false;
 }
 
@@ -82,6 +82,7 @@ function showAlphabet() {
 	}
 
 	alphabetContainer.append("</tr></table>");
+	alphabetContainer.append('<button class="restartGame" onClick="location.href=\'game\';"><nobr>Сыграть ещё</nobr></button>');
 
 	$("#alphabet td").attr("onmouseover", "$(this).addClass('buttonover')");
 	$("#alphabet td").attr("onmouseout", "$(this).removeClass('buttonover')");

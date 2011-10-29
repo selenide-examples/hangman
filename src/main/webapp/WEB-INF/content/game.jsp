@@ -29,7 +29,7 @@
 		<div id="wordInWork"></div>
 
 		<h2>Угадайте букву:</h2>
-		<div id="alphabet"></div>
+    <div id="alphabet"></div>
 
     <div id="hangmanImageContainer">
       <h1 align="center">Виселица</h1>
@@ -42,7 +42,7 @@
 		  <img id="chair" src="img/chair.jpg"/>
 		  <img id="gameWin" class='gameOver' src="img/thumbs-up.jpeg" style="width: 400px;"/>
 		  <img id="gameLost" class='gameOver' src="img/gameOver.png"/>
-      <button id="startGame" onClick="location.href='game';"><nobr>Сыграть ещё</nobr></button>
+      <button id="startGame" class="restartGame" onClick="location.href='game';"><nobr>Сыграть ещё</nobr></button>
 		</div>
 
 	</body>

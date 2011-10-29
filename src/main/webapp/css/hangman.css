@@ -72,7 +72,6 @@ img#hangman5 {
 }
 
 #startGame {
-  display: none;
   position: absolute;
   left: 300px;
   top: 380px;
