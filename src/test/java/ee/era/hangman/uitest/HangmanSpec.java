@@ -1,8 +1,10 @@
 package ee.era.hangman.uitest;
 
+import com.github.selenide.Condition;
 import com.github.selenide.UITest;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.Words;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -12,11 +14,14 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class HangmanSpec extends UITest {
-  @Test
-  public void showsGameControls() {
+  @Before
+  public void startGame() {
     wire(Words.class, WordsMock.class);
     open("/game");
+  }
 
+  @Test
+  public void showsGameControls() {
     assertTrue(webdriver.findElement(By.id("topic")).isDisplayed());
     assertTrue(webdriver.findElement(By.id("wordInWork")).isDisplayed());
     assertTrue(webdriver.findElement(By.id("alphabet")).isDisplayed());
