@@ -29,6 +29,7 @@ public class GuessTest {
 
   @Test
   public void ifLetterIsGuessedItsShown() {
+    assertEquals("_____", guess.getWordInWork());
     guess.letter = 'G';
     guess.guessLetter();
     assertEquals("_g___", guess.getWordInWork());
