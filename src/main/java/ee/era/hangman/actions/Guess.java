@@ -33,7 +33,7 @@ public class Guess extends GameActionSupport {
     else {
       setFailures(getFailures() + 1);
       if (getFailures() > 5) {
-//        setWordInWork(getWord().getWord()); // TODO uncomment
+        setWordInWork(getWord().getWord()); // TODO Create unit-tests for this case
         gameOver = true;
       }
     }
