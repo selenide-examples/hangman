@@ -20,7 +20,7 @@ public class GuessTest {
     guess.setSession(session);
     game.words = new Words() {
       @Override
-      public Word getRandomWord() {
+      public Word getRandomWord(String language) {
         return new Word("software development", "agile");
       }
     };

@@ -9,7 +9,7 @@ import java.util.Map;
 
 abstract class GameActionSupport extends ActionSupport implements SessionAware {
 
-  private Map<String, Object> session;
+  protected Map<String, Object> session;
   private static final String startTime = new Date().toString();
 
   @Override

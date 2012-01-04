@@ -18,7 +18,7 @@ public class GameTest {
     game.setSession(new HashMap<String, Object>());
     game.words = new Words() {
       @Override
-      public Word getRandomWord() {
+      public Word getRandomWord(String language) {
         return new Word("software development", "agile");
       }
     };

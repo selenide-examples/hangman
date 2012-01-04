@@ -58,7 +58,7 @@ public class HangmanSpec extends UITest {
 
   public static class WordsMock extends Words {
     @Override
-    public Word getRandomWord() {
+    public Word getRandomWord(String language) {
       return new Word("дом", "гвоздь");
     }
   }

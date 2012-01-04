@@ -22,6 +22,10 @@
       var wordInWork = "${wordInWork}";
 	  </script>
 
+    <a href="?language=rus">RUS</a>
+    <a href="?language=est">EST</a>
+    <a href="?language=eng">ENG</a>
+
 		<h2>Тема:</h2>
 		<div id="topic"></div>
 
