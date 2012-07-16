@@ -3,6 +3,9 @@ apply plugin: 'war'
 
 repositories{
   mavenCentral()
+//  maven {
+//      url "https://oss.sonatype.org/content/repositories/comcodeborne-146/"
+//  }
 }
 
 dependencies {
@@ -16,9 +19,7 @@ dependencies {
   compile 'org.slf4j:slf4j-log4j12:1.6.2'
   testCompile 'junit:junit:4.9'
   testCompile 'org.hamcrest:hamcrest-all:1.1'
-  testCompile 'org.seleniumhq.selenium:selenium-java:2.15.0'
-//  testCompile 'com.github.selenide:selenide:1.0-SNAPSHOT'
-  testCompile fileTree(dir: 'lib', include: '*.jar')
+  testCompile 'com.codeborne:selenide:1.4'
 }
 
 task libs(type: Sync) {
@@ -26,8 +27,12 @@ task libs(type: Sync) {
   from configurations.providedCompile
   from configurations.runtime
   from configurations.providedRuntime
-  from configurations.testCompile
   into "$buildDir/lib"
+}
+
+task testLibs(type: Sync) {
+  from configurations.testCompile
+  into "$buildDir/lib-test"
 }
 
 [compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
@@ -52,5 +57,5 @@ task(run, dependsOn: 'compile', type: JavaExec) {
   systemProperty 'file.encoding', 'UTF-8'
 }
 
-defaultTasks 'clean', 'libs', 'test', 'war'
+defaultTasks 'clean', 'libs', 'testLibs', 'test', 'war'
 
