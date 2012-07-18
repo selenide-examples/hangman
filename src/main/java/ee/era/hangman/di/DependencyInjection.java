@@ -10,8 +10,7 @@ public class DependencyInjection {
     try {
       if (beanClassName == null) {
         return beanClass.newInstance();
-      }
-      else {
+      } else {
         return (T) forName(beanClassName).newInstance();
       }
     } catch (Exception e) {

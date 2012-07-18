@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
@@ -13,9 +14,10 @@ import static org.junit.Assert.*;
 public class GuessTest {
   Game game = new Game();
   Guess guess = new Guess();
+
   @Before
   public void startGame() {
-    HashMap<String, Object> session = new HashMap<String, Object>();
+    Map<String, Object> session = new HashMap<String, Object>();
     game.setSession(session);
     guess.setSession(session);
     game.words = new Words() {

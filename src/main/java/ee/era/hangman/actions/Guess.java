@@ -1,6 +1,5 @@
 package ee.era.hangman.actions;
 
-import ee.era.hangman.model.Word;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
@@ -9,8 +8,8 @@ import org.apache.struts2.convention.annotation.Result;
 public class Guess extends GameActionSupport {
   public char letter;
 
-  private boolean guessed = false;
-  private boolean gameOver = false;
+  private boolean guessed;
+  private boolean gameOver;
 
   @Action(value = "guess", results = {
       @Result(name = "success", type = "json")})
@@ -20,7 +19,7 @@ public class Guess extends GameActionSupport {
     for (int i = 0; i < word.length(); i++) {
       if (word.charAt(i) == Character.toLowerCase(letter)) {
         guessed = true;
-        wordInWork = wordInWork.substring(0, i) + word.charAt(i) + wordInWork.substring(i+1);
+        wordInWork = wordInWork.substring(0, i) + word.charAt(i) + wordInWork.substring(i + 1);
       }
     }
 
@@ -29,8 +28,7 @@ public class Guess extends GameActionSupport {
       if (!wordInWork.contains("_")) {
         gameOver = true;
       }
-    }
-    else {
+    } else {
       setFailures(getFailures() + 1);
       if (getFailures() > 5) {
         setWordInWork(getWord().getWord()); // TODO Create unit-tests for this case

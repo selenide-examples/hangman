@@ -14,7 +14,7 @@ public class Launcher {
 
   public Launcher(int port) {
     this.port = port;
-    this.server = new Server();
+    server = new Server();
   }
 
   public Launcher run() throws Exception {
@@ -35,6 +35,7 @@ public class Launcher {
 
   private void addShutdownHook() {
     Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
       public void run() {
         Launcher.this.stop();
       }

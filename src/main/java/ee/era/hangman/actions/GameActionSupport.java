@@ -7,7 +7,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import java.util.Date;
 import java.util.Map;
 
-abstract class GameActionSupport extends ActionSupport implements SessionAware {
+class GameActionSupport extends ActionSupport implements SessionAware {
 
   protected Map<String, Object> session;
   private static final String startTime = new Date().toString();
