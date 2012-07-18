@@ -20,9 +20,14 @@ public class GuessTest {
     Map<String, Object> session = new HashMap<String, Object>();
     game.setSession(session);
     guess.setSession(session);
+    game.language = "eng";
     game.words = new Words() {
       @Override
       public Word getRandomWord(String language) {
+        if ("rus".equals(language))
+          return new Word("методологии разработки", "аджайл");
+        if ("est".equals(language))
+          return new Word("tarkvara metoodikad", "agiilne");
         return new Word("software development", "agile");
       }
     };
@@ -45,5 +50,17 @@ public class GuessTest {
     assertEquals("_____", guess.getWordInWork());
     assertFalse(guess.isGuessed());
     assertThat(game.getFailures(), equalTo(1));
+  }
+
+  @Test
+  public void supportsRussian() {
+    game.language = "rus";
+    game.startGame();
+
+    assertEquals("______", guess.getWordInWork());
+    guess.letter = 'Ж';
+    guess.guessLetter();
+    assertEquals("__ж___", guess.getWordInWork());
+    assertTrue(guess.isGuessed());
   }
 }

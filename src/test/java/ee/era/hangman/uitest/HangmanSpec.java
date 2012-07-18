@@ -10,12 +10,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Condition.hasClass;
 import static com.codeborne.selenide.Condition.hasText;
 import static com.codeborne.selenide.Condition.visible;
 import static ee.era.hangman.di.DependencyInjection.*;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -65,10 +69,36 @@ public class HangmanSpec {
     assertElement(By.id("wordInWork"), hasText("гвоздь"));
   }
 
+  @Test
+  public void userCanChooseLanguage() {
+    getElement(By.linkText("EST")).click();
+    assertEquals(27, alphabetLetters().size());
+    assertElement(By.id("topic"), hasText("maja"));
+    assertElement(By.id("wordInWork"), hasText("____"));
+
+    getElement(By.linkText("RUS")).click();
+    assertEquals(33, alphabetLetters().size());
+    assertElement(By.id("topic"), hasText("дом"));
+    assertElement(By.id("wordInWork"), hasText("______"));
+
+    getElement(By.linkText("ENG")).click();
+    assertEquals(26, alphabetLetters().size());
+    assertElement(By.id("topic"), hasText("house"));
+    assertElement(By.id("wordInWork"), hasText("____"));
+  }
+
+  private List<WebElement> alphabetLetters() {
+    return getElements(By.xpath("//*[@id='alphabet']//td"));
+  }
+
   public static class WordsMock extends Words {
     @Override
     public Word getRandomWord(String language) {
-      return new Word("дом", "гвоздь");
+      if ("rus".equals(language))
+        return new Word("дом", "гвоздь");
+      if ("est".equals(language))
+        return new Word("maja", "nael");
+      return new Word("house", "nail");
     }
   }
 }
