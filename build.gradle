@@ -9,9 +9,8 @@ repositories{
 }
 
 dependencies {
-  providedCompile 'org.mortbay.jetty:jetty:6.1.26'
+  providedCompile fileTree(dir: 'lib-jetty', include: '*.jar')
   providedCompile 'jetty:javax.servlet:5.1.12'
-  providedRuntime 'org.mortbay.jetty:jsp-2.1:6.1.14'
   compile 'org.apache.struts:struts2-core:2.2.3'
   compile 'org.apache.struts.xwork:xwork-core:2.2.3'
   compile 'org.apache.struts:struts2-convention-plugin:2.2.3'
@@ -45,10 +44,9 @@ test {
 
 task uitest(type: Test) {
   systemProperties 'file.encoding': 'UTF-8'
+  systemProperties 'browser': 'chrome'
+  systemProperties 'webdriver.chrome.driver': '/usr/bin/chromedriver'
   include 'ee/era/hangman/uitest/**/*.*'
-
-//  systemProperties 'webdriver.chrome.driver': '/usr/bin/chromedriver'
-//  systemProperties 'browser': 'chrome'
 }
 
 task(run, dependsOn: 'compile', type: JavaExec) {
