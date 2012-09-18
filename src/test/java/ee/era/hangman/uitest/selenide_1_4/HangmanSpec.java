@@ -1,4 +1,4 @@
-package ee.era.hangman.uitest;
+package ee.era.hangman.uitest.selenide_1_4;
 
 import static com.codeborne.selenide.DOM.*;
 import static com.codeborne.selenide.Navigation.*;
@@ -6,6 +6,7 @@ import static com.codeborne.selenide.Navigation.*;
 import ee.era.hangman.Launcher;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.Words;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,11 +25,19 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class HangmanSpec {
+  private static Launcher launcher;
+
   @BeforeClass
   public static void startServer() throws Exception {
     wire(Words.class, WordsMock.class);
-    new Launcher(8080).run();
+    launcher = new Launcher(8080);
+    launcher.run();
     baseUrl = "http://localhost:8080/hangman";
+  }
+
+  @AfterClass
+  public static void stopServer() {
+    launcher.stop();
   }
 
   @Before
