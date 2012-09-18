@@ -24,7 +24,7 @@ public class Words {
             new TopicWords("söök", "juust", "vorst", "või", "võileib", "burger", "viiner", "puder", "seljanka", "borš", "šnitsel", "piim", "kohupiim", "seen", "pitsa"),
             new TopicWords("fauna", "krooks", "kikerikii", "kukeleegu", "muu", "huige", "küünis")
         )),
-        new Language("eng", "ABCDEFGHIJKLMNOPRSTUVWXYZ", asList(
+        new Language("eng", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", asList(
             new TopicWords("house", "bedroom")
         ))
     );
