@@ -1,5 +1,6 @@
-package ee.era.hangman.uitest.selenide_1_7;
+package ee.era.hangman.uitest.selenide_1_6;
 
+import com.codeborne.selenide.ScreenShooter;
 import ee.era.hangman.Launcher;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.Words;
@@ -7,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,14 +16,17 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.DOM.*;
+import static com.codeborne.selenide.DOM.$;
 import static com.codeborne.selenide.Navigation.baseUrl;
 import static com.codeborne.selenide.Navigation.open;
 import static ee.era.hangman.di.DependencyInjection.wire;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.*;
 
-public class HangmanSpec {
+@RunWith(ScreenShooter.class)
+public class HangmanSpec_1_6 {
   private static Launcher launcher;
-/*
+
   @BeforeClass
   public static void startServer() throws Exception {
     wire(Words.class, WordsMock.class);
@@ -47,48 +52,48 @@ public class HangmanSpec {
     $("#alphabet").shouldBe(visible);
     $("#hangmanImageContainer").shouldBe(visible);
 
-    $("#topic").shouldHave(text("дом"));
-    $("#wordInWork").shouldHave(text("______"));
+    $("#topic").should(haveText("дом"));
+    $("#wordInWork").should(haveText("______"));
   }
 
   @Test
   public void guessLetterByClickingLetter() {
-    $(By.xpath("/*//*[@letter='О']")).click();
-    waitUntil(By.xpath("/*//*[@letter='О']"), hasClass("used"));
+    $(By.xpath("//*[@letter='О']")).click();
+    waitUntil(By.xpath("//*[@letter='О']"), hasClass("used"));
 
-    $(By.xpath("/*//*[@letter='Б']")).click();
-    waitUntil(By.xpath("/*//*[@letter='Б']"), hasClass("nonused"));
+    $(By.xpath("//*[@letter='Б']")).click();
+    waitUntil(By.xpath("//*[@letter='Б']"), hasClass("nonused"));
   }
 
   @Test
   public void successfulGame() {
-    $(By.xpath("/*//*[@letter='О']")).click();
-    $(By.xpath("/*//*[@letter='З']")).click();
-    $(By.xpath("/*//*[@letter='Д']")).click();
-    $(By.xpath("/*//*[@letter='Г']")).click();
-    $(By.xpath("/*//*[@letter='В']")).click();
-    $(By.xpath("/*//*[@letter='Ь']")).click();
-    waitFor("#startGame");
+    $(By.xpath("//*[@letter='О']")).click();
+    $(By.xpath("//*[@letter='З']")).click();
+    $(By.xpath("//*[@letter='Д']")).click();
+    $(By.xpath("//*[@letter='Г']")).click();
+    $(By.xpath("//*[@letter='В']")).click();
+    $(By.xpath("//*[@letter='Ь']")).click();
+    waitFor(By.id("startGame"));
     $("#gameWin").shouldBe(visible);
-    $("#wordInWork").shouldHave(text("гвоздь"));
+    $("#wordInWork").should(haveText("гвоздь"));
   }
 
   @Test
   public void userCanChooseLanguage() {
     $(By.linkText("EST")).click();
     assertEquals(27, alphabetLetters().size());
-    $("#topic").shouldHave(text("maja"));
-    $("#wordInWork").shouldHave(text("____"));
+    $("#topic").should(haveText("maja"));
+    $("#wordInWork").should(haveText("____"));
 
     $(By.linkText("RUS")).click();
     assertEquals(33, alphabetLetters().size());
-    $("#topic").shouldHave(text("дом"));
-    $("#wordInWork").shouldHave(text("______"));
+    $("#topic").should(haveText("дом"));
+    $("#wordInWork").should(haveText("______"));
 
     $(By.linkText("ENG")).click();
     assertEquals(26, alphabetLetters().size());
-    $("#topic").shouldHave(text("house"));
-    $("#wordInWork").shouldHave(text("____"));
+    $("#topic").should(haveText("house"));
+    $("#wordInWork").should(haveText("____"));
   }
 
   private List<WebElement> alphabetLetters() {
@@ -104,5 +109,5 @@ public class HangmanSpec {
         return new Word("maja", "nael");
       return new Word("house", "nail");
     }
-  }*/
+  }
 }

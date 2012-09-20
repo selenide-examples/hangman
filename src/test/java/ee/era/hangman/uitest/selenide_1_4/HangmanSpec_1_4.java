@@ -3,6 +3,7 @@ package ee.era.hangman.uitest.selenide_1_4;
 import static com.codeborne.selenide.DOM.*;
 import static com.codeborne.selenide.Navigation.*;
 
+import com.codeborne.selenide.ScreenShooter;
 import ee.era.hangman.Launcher;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.Words;
@@ -10,6 +11,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -24,7 +26,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class HangmanSpec {
+@RunWith(ScreenShooter.class)
+public class HangmanSpec_1_4 {
   private static Launcher launcher;
 
   @BeforeClass
