@@ -3,6 +3,9 @@ apply plugin: 'war'
 
 repositories{
   mavenCentral()
+  maven {
+      url "https://oss.sonatype.org/content/repositories/snapshots/"
+  }
 //  maven {
 //      url "https://oss.sonatype.org/content/repositories/comcodeborne-146/"
 //  }
@@ -18,7 +21,7 @@ dependencies {
   compile 'org.slf4j:slf4j-log4j12:1.6.2'
   testCompile 'junit:junit:4.9'
   testCompile 'org.hamcrest:hamcrest-all:1.1'
-  testCompile 'com.codeborne:selenide:1.6'
+  testCompile 'com.codeborne:selenide:1.7-SNAPSHOT'
 }
 
 task libs(type: Sync) {
