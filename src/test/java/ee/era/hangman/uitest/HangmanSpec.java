@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 public class HangmanSpec {
   @Rule
-  public ScreenShooter makeScreenshotOnFailure = new ScreenShooter().onSucceeded();
+  public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failed().succeeded();
 
   private static Launcher launcher;
   @BeforeClass
