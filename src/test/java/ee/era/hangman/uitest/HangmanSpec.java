@@ -14,12 +14,13 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.DOM.*;
 import static com.codeborne.selenide.Navigation.baseUrl;
 import static com.codeborne.selenide.Navigation.open;
+import static com.codeborne.selenide.junit.ScreenShooter.failedTests;
 import static ee.era.hangman.di.DependencyInjection.wire;
 import static org.junit.Assert.assertEquals;
 
 public class HangmanSpec {
   @Rule
-  public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failed().succeeded();
+  public ScreenShooter makeScreenshotOnFailure = failedTests().succeededTests();
 
   private static Launcher launcher;
   @BeforeClass
