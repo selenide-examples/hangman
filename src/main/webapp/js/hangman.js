@@ -102,8 +102,6 @@ function guessLetter(letter) {
     async: false,
     dataType: 'json',
     success: function (result) {
-      console.log(result);
-
       wordInWork = result.wordInWork;
       showWordInWork();
 
