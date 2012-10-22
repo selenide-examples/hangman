@@ -1,4 +1,4 @@
-package ee.era.hangman.uitest;
+package ee.era.hangman.uitest.selenide_1_7;
 
 import com.codeborne.selenide.junit.ScreenShooter;
 import ee.era.hangman.Launcher;
@@ -18,7 +18,7 @@ import static com.codeborne.selenide.junit.ScreenShooter.failedTests;
 import static ee.era.hangman.di.DependencyInjection.wire;
 import static org.junit.Assert.assertEquals;
 
-public class HangmanSpec {
+public class HangmanSpec_1_7 {
   @Rule
   public ScreenShooter makeScreenshotOnFailure = failedTests().succeededTests();
 
