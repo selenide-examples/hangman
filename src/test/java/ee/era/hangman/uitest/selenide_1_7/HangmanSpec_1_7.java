@@ -61,18 +61,18 @@ public class HangmanSpec_1_7 {
     $(By.xpath("//*[@letter='О']")).click();
     waitUntil(By.xpath("//*[@letter='О']"), hasClass("used"));
 
-    $(By.xpath("/*//*[@letter='Б']")).click();
+    $(By.xpath("//*[@letter='Б']")).click();
     waitUntil(By.xpath("//*[@letter='Б']"), hasClass("nonused"));
   }
 
   @Test
   public void successfulGame() {
-    $(By.xpath("/*//*[@letter='О']")).click();
-    $(By.xpath("/*//*[@letter='З']")).click();
-    $(By.xpath("/*//*[@letter='Д']")).click();
-    $(By.xpath("/*//*[@letter='Г']")).click();
-    $(By.xpath("/*//*[@letter='В']")).click();
-    $(By.xpath("/*//*[@letter='Ь']")).click();
+    $(By.xpath("//*[@letter='О']")).click();
+    $(By.xpath("//*[@letter='З']")).click();
+    $(By.xpath("//*[@letter='Д']")).click();
+    $(By.xpath("//*[@letter='Г']")).click();
+    $(By.xpath("//*[@letter='В']")).click();
+    $(By.xpath("//*[@letter='Ь']")).click();
     waitFor("#startGame");
     $("#gameWin").shouldBe(visible);
     $("#wordInWork").shouldHave(text("гвоздь"));
