@@ -50,14 +50,4 @@ public class Guess extends GameActionSupport {
   public boolean isGameOver() {
     return gameOver;
   }
-
-  @Override
-  public String getWordInWork() {
-    return super.getWordInWork();
-  }
-
-  @Override
-  public int getFailures() {
-    return super.getFailures();
-  }
 }
