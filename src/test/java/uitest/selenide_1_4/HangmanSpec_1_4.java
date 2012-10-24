@@ -1,4 +1,4 @@
-package ee.era.hangman.uitest.selenide_1_4;
+package uitest.selenide_1_4;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.DOM.*;

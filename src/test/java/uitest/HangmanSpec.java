@@ -1,4 +1,4 @@
-package ee.era.hangman.uitest;
+package uitest;
 
 import com.codeborne.selenide.junit.ScreenShooter;
 import ee.era.hangman.Launcher;

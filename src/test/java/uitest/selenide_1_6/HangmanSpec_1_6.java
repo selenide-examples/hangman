@@ -1,4 +1,4 @@
-package ee.era.hangman.uitest.selenide_1_6;
+package uitest.selenide_1_6;
 
 import com.codeborne.selenide.ScreenShooter;
 import ee.era.hangman.Launcher;
@@ -20,7 +20,6 @@ import static com.codeborne.selenide.DOM.$;
 import static com.codeborne.selenide.Navigation.baseUrl;
 import static com.codeborne.selenide.Navigation.open;
 import static ee.era.hangman.di.DependencyInjection.wire;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 @RunWith(ScreenShooter.class)
