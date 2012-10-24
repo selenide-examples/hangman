@@ -4,6 +4,8 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
+import static java.lang.Character.toLowerCase;
+
 @ParentPackage("json-default")
 public class Guess extends GameActionSupport {
   public char letter;
@@ -17,7 +19,7 @@ public class Guess extends GameActionSupport {
     String word = getWord().getWord();
     String wordInWork = getWordInWork();
     for (int i = 0; i < word.length(); i++) {
-      if (word.charAt(i) == Character.toLowerCase(letter)) {
+      if (toLowerCase(word.charAt(i)) == toLowerCase(letter)) {
         guessed = true;
         wordInWork = wordInWork.substring(0, i) + word.charAt(i) + wordInWork.substring(i + 1);
       }

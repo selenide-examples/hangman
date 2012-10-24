@@ -28,7 +28,7 @@ public class GuessTest {
           return new Word("методологии разработки", "аджайл");
         if ("est".equals(language))
           return new Word("tarkvara metoodikad", "agiilne");
-        return new Word("software development", "agile");
+        return new Word("software development", "agilE");
       }
     };
     game.startGame();
@@ -40,6 +40,15 @@ public class GuessTest {
     guess.letter = 'G';
     guess.guessLetter();
     assertEquals("_g___", guess.getWordInWork());
+    assertTrue(guess.isGuessed());
+  }
+
+  @Test
+  public void initialWordIsCaseInsensitive() {
+    assertEquals("_____", guess.getWordInWork());
+    guess.letter = 'e';
+    guess.guessLetter();
+    assertEquals("____E", guess.getWordInWork());
     assertTrue(guess.isGuessed());
   }
 
