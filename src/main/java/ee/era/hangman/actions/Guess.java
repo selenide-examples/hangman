@@ -16,17 +16,9 @@ public class Guess extends GameActionSupport {
   @Action(value = "guess", results = {
       @Result(name = "success", type = "json")})
   public String guessLetter() {
-    guessed = false;
-    gameOver = false;
+    String wordInWork = replaceLetter(letter);
 
-    String word = getWord().getWord();
-    String wordInWork = getWordInWork();
-    for (int i = 0; i < word.length(); i++) {
-      if (toLowerCase(word.charAt(i)) == toLowerCase(letter)) {
-        guessed = true;
-        wordInWork = wordInWork.substring(0, i) + word.charAt(i) + wordInWork.substring(i + 1);
-      }
-    }
+    gameOver = false;
 
     if (guessed) {
       setWordInWork(wordInWork);
@@ -41,6 +33,22 @@ public class Guess extends GameActionSupport {
       }
     }
     return SUCCESS;
+  }
+
+  private String replaceLetter(char letter) {
+    guessed = false;
+
+    String word = getWord().getWord();
+    String wordInWork = getWordInWork();
+
+    for (int i = 0; i < word.length(); i++) {
+      if (toLowerCase(word.charAt(i)) == toLowerCase(letter)) {
+        wordInWork = wordInWork.substring(0, i) + word.charAt(i) + wordInWork.substring(i + 1);
+        guessed = true;
+      }
+    }
+
+    return wordInWork;
   }
 
   public boolean isGuessed() {
