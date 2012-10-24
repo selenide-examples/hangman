@@ -19,6 +19,7 @@ dependencies {
   testCompile 'junit:junit:4.9'
   testCompile 'org.hamcrest:hamcrest-all:1.1'
   testCompile 'com.codeborne:selenide:1.7'
+  testCompile 'com.opera:operadriver:0.18'
 }
 
 task libs(type: Sync) {
