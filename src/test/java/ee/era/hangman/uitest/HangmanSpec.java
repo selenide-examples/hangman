@@ -43,6 +43,7 @@ public class HangmanSpec {
   @Before
   public void startGame() {
     open("/game");
+    $(By.linkText("RUS")).click();
   }
 
   @Test
@@ -75,6 +76,24 @@ public class HangmanSpec {
     $(By.xpath("//*[@letter='Ь']")).click();
     waitFor("#startGame");
     $("#gameWin").shouldBe(visible);
+    $("#wordInWork").shouldHave(text("гвоздь"));
+  }
+
+  @Test
+  public void lostGame() {
+    $(By.xpath("//*[@letter='А']")).click();
+    $(By.xpath("//*[@letter='Б']")).click();
+    $(By.xpath("//*[@letter='В']")).click();
+    $(By.xpath("//*[@letter='Г']")).click();
+    $(By.xpath("//*[@letter='Д']")).click();
+    $(By.xpath("//*[@letter='Е']")).click();
+    $(By.xpath("//*[@letter='Ё']")).click();
+    $(By.xpath("//*[@letter='Ж']")).click();
+    $(By.xpath("//*[@letter='З']")).click();
+    $(By.xpath("//*[@letter='И']")).click();
+    waitFor("#startGame");
+    $("#gameWin").shouldBe(hidden);
+    $("#gameLost").shouldBe(visible);
     $("#wordInWork").shouldHave(text("гвоздь"));
   }
 

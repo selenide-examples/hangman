@@ -19,7 +19,7 @@ public class GameTest {
     game.words = new Words() {
       @Override
       public Word getRandomWord(String language) {
-        return new Word("software development", "agile");
+        return new Word("Software Development", "agiLe");
       }
     };
   }
@@ -27,8 +27,8 @@ public class GameTest {
   @Test
   public void initializesRandomWord() {
     game.startGame();
-    assertThat(game.getWord().getTopic(), equalTo("software development"));
-    assertThat(game.getWord().getWord(), equalTo("agile"));
+    assertThat(game.getWord().getTopic(), equalTo("Software Development"));
+    assertThat(game.getWord().getWord(), equalTo("agiLe"));
     assertThat(game.getWordInWork(), equalTo("_____"));
     assertThat(game.getFailures(), equalTo(0));
   }

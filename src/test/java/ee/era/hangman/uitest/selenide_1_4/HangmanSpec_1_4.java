@@ -1,6 +1,8 @@
 package ee.era.hangman.uitest.selenide_1_4;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.DOM.*;
+import static com.codeborne.selenide.DOM.assertElement;
 import static com.codeborne.selenide.Navigation.*;
 
 import com.codeborne.selenide.ScreenShooter;
@@ -17,9 +19,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.hasClass;
-import static com.codeborne.selenide.Condition.hasText;
-import static com.codeborne.selenide.Condition.visible;
 import static ee.era.hangman.di.DependencyInjection.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
@@ -46,6 +45,7 @@ public class HangmanSpec_1_4 {
   @Before
   public void startGame() {
     open("/game");
+    getElement(By.linkText("RUS")).click();
   }
 
   @Test
@@ -78,6 +78,24 @@ public class HangmanSpec_1_4 {
     getElement(By.xpath("//*[@letter='Ь']")).click();
     waitFor(By.id("startGame"));
     assertElement(By.id("gameWin"), visible);
+    assertElement(By.id("wordInWork"), hasText("гвоздь"));
+  }
+
+  @Test
+  public void lostGame() {
+    getElement(By.xpath("//*[@letter='А']")).click();
+    getElement(By.xpath("//*[@letter='Б']")).click();
+    getElement(By.xpath("//*[@letter='В']")).click();
+    getElement(By.xpath("//*[@letter='Г']")).click();
+    getElement(By.xpath("//*[@letter='Д']")).click();
+    getElement(By.xpath("//*[@letter='Е']")).click();
+    getElement(By.xpath("//*[@letter='Ё']")).click();
+    getElement(By.xpath("//*[@letter='Ж']")).click();
+    getElement(By.xpath("//*[@letter='З']")).click();
+    getElement(By.xpath("//*[@letter='И']")).click();
+    waitFor("#startGame");
+    assertElement(By.id("gameWin"), hidden);
+    assertElement(By.id("gameLost"), visible);
     assertElement(By.id("wordInWork"), hasText("гвоздь"));
   }
 

@@ -16,6 +16,9 @@ public class Guess extends GameActionSupport {
   @Action(value = "guess", results = {
       @Result(name = "success", type = "json")})
   public String guessLetter() {
+    guessed = false;
+    gameOver = false;
+
     String word = getWord().getWord();
     String wordInWork = getWordInWork();
     for (int i = 0; i < word.length(); i++) {
@@ -33,7 +36,7 @@ public class Guess extends GameActionSupport {
     } else {
       setFailures(getFailures() + 1);
       if (getFailures() > 5) {
-        setWordInWork(getWord().getWord()); // TODO Create unit-tests for this case
+        setWordInWork(getWord().getWord());
         gameOver = true;
       }
     }

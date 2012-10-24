@@ -37,8 +37,7 @@ public class GuessTest {
   @Test
   public void ifLetterIsGuessedItsShown() {
     assertEquals("_____", guess.getWordInWork());
-    guess.letter = 'G';
-    guess.guessLetter();
+    guessLetter('G');
     assertEquals("_g___", guess.getWordInWork());
     assertTrue(guess.isGuessed());
   }
@@ -46,19 +45,25 @@ public class GuessTest {
   @Test
   public void initialWordIsCaseInsensitive() {
     assertEquals("_____", guess.getWordInWork());
-    guess.letter = 'e';
-    guess.guessLetter();
+    guessLetter('e');
     assertEquals("____E", guess.getWordInWork());
     assertTrue(guess.isGuessed());
   }
 
   @Test
   public void ifLetterIsNotGuessedThenFailuresCounterGrows() {
-    guess.letter = 'x';
-    guess.guessLetter();
+    guessLetter('x');
     assertEquals("_____", guess.getWordInWork());
     assertFalse(guess.isGuessed());
     assertThat(game.getFailures(), equalTo(1));
+  }
+
+  @Test
+  public void showsWordWhenGameIsOver() {
+    guessLetter('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j');
+    assertThat(guess.getFailures(), equalTo(6));
+    assertThat(guess.getWordInWork(), equalTo("agilE"));
+    assertTrue(guess.isGameOver());
   }
 
   @Test
@@ -71,5 +76,12 @@ public class GuessTest {
     guess.guessLetter();
     assertEquals("__ж___", guess.getWordInWork());
     assertTrue(guess.isGuessed());
+  }
+
+  private void guessLetter(char... letters) {
+    for (char letter : letters) {
+      guess.letter = letter;
+      guess.guessLetter();
+    }
   }
 }
