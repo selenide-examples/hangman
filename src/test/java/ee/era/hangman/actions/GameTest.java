@@ -6,12 +6,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 public class GameTest {
-  Game game = new Game();
+  Game game = new Game() {
+    @Override
+    public Locale getLocale() {
+      return Locale.ENGLISH;
+    }
+  };
 
   @Before
   public void startGame() {

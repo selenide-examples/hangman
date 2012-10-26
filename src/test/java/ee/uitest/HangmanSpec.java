@@ -1,4 +1,4 @@
-package uitest.selenide_1_7;
+package ee.uitest;
 
 import com.codeborne.selenide.junit.ScreenShooter;
 import ee.era.hangman.Launcher;
@@ -18,7 +18,7 @@ import static com.codeborne.selenide.junit.ScreenShooter.failedTests;
 import static ee.era.hangman.di.DependencyInjection.wire;
 import static org.junit.Assert.assertEquals;
 
-public class HangmanSpec_1_7 {
+public class HangmanSpec {
   @Rule
   public ScreenShooter makeScreenshotOnFailure = failedTests().succeededTests();
 
@@ -122,9 +122,9 @@ public class HangmanSpec_1_7 {
   public static class WordsMock extends Words {
     @Override
     public Word getRandomWord(String language) {
-      if ("rus".equals(language))
+      if ("ru".equals(language))
         return new Word("дом", "гвоздь");
-      if ("est".equals(language))
+      if ("et".equals(language))
         return new Word("maja", "nael");
       return new Word("house", "nail");
     }

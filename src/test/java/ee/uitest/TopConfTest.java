@@ -1,4 +1,4 @@
-package uitest;
+package ee.uitest;
 
 import com.codeborne.selenide.ShouldableWebElement;
 import org.junit.Before;

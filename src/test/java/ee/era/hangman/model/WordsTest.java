@@ -9,7 +9,7 @@ import static java.util.Arrays.asList;
 import static org.junit.Assert.assertTrue;
 
 public class WordsTest {
-  Words words = new Words(new Language("rus", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", asList(
+  Words words = new Words(new Language("ru", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", asList(
       new TopicWords("дом", "гвоздь", "унитаз", "чайник"),
       new TopicWords("флора", "гвоздика", "куст"),
       new TopicWords("фауна", "верблюд")
@@ -26,7 +26,7 @@ public class WordsTest {
     count.put("верблюд", 0);
 
     for (int i = 0; i < 2 * 6000; i++) {
-      Word randomWord = words.getRandomWord("rus");
+      Word randomWord = words.getRandomWord("ru");
       count.put(randomWord.getWord(), count.get(randomWord.getWord()) + 1);
     }
 

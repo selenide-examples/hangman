@@ -6,13 +6,20 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 public class GuessTest {
-  Game game = new Game();
+  public Locale locale = new Locale("ru");
+  Game game = new Game() {
+    @Override
+    public Locale getLocale() {
+      return locale;
+    }
+  };
   Guess guess = new Guess();
 
   @Before
@@ -20,13 +27,13 @@ public class GuessTest {
     Map<String, Object> session = new HashMap<String, Object>();
     game.setSession(session);
     guess.setSession(session);
-    game.language = "eng";
+    locale = new Locale("en");
     game.words = new Words() {
       @Override
       public Word getRandomWord(String language) {
-        if ("rus".equals(language))
+        if ("ru".equals(language))
           return new Word("методологии разработки", "аджайл");
-        if ("est".equals(language))
+        if ("es".equals(language))
           return new Word("tarkvara metoodikad", "agiilne");
         return new Word("software development", "agilE");
       }
@@ -68,7 +75,7 @@ public class GuessTest {
 
   @Test
   public void supportsRussian() {
-    game.language = "rus";
+    locale = new Locale("ru");
     game.startGame();
 
     assertEquals("______", guess.getWordInWork());

@@ -11,7 +11,7 @@ public class Words {
 
   public Words() {
     this(
-        new Language("rus", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", asList(
+        new Language("ru", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", asList(
             new TopicWords("дом", "гвоздь", "унитаз", "чайник", "табурет", "стул", "ложка", "чашка", "пиала", "мухобойка", "компьютер", "люстра", "секция", "мебель", "балкон", "подвал"),
             new TopicWords("флора", "гвоздика", "куст", "флорист", "плющ", "мухоловка", "баобаб"),
             new TopicWords("фауна", "верблюд", "лис", "селёдка", "паук", "олень", "муха", "лошадь", "ягнёнок", "динозавр", "креветка"),
@@ -19,12 +19,12 @@ public class Words {
             new TopicWords("тело человека", "прыщ", "кровь", "козявка", "ноздря", "ягодицы", "мозжечок", "мозг", "ноготь", "грудь", "висок", "перхоть", "хрящ", "клык", "щёки", "лицо"),
             new TopicWords("веселье", "цирк")
         )),
-        new Language("est", "ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜ", asList(
+        new Language("et", "ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜ", asList(
             new TopicWords("kodu", "vood", "laud", "tool", "kapp", "hiir", "kušett", "rõdu", "aken", "aknalaud"),
             new TopicWords("söök", "juust", "vorst", "või", "võileib", "burger", "viiner", "puder", "seljanka", "borš", "šnitsel", "piim", "kohupiim", "seen", "pitsa"),
             new TopicWords("fauna", "krooks", "kikerikii", "kukeleegu", "muu", "huige", "küünis")
         )),
-        new Language("eng", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", asList(
+        new Language("en", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", asList(
             new TopicWords("house", "bedroom")
         ))
     );

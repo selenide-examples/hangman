@@ -1,4 +1,4 @@
-package uitest;
+package ee.uitest;
 
 import com.codeborne.selenide.junit.ScreenShooter;
 import ee.era.hangman.Launcher;
@@ -37,9 +37,9 @@ public abstract class AbstractHangmanTest {
   public static class WordsMock extends Words {
     @Override
     public Word getRandomWord(String language) {
-      if ("rus".equals(language))
+      if ("ru".equals(language))
         return new Word("дом", "гвоздь");
-      if ("est".equals(language))
+      if ("et".equals(language))
         return new Word("maja", "nael");
       return new Word("beer parties", "TopConf");
     }

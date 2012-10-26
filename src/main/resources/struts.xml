@@ -7,6 +7,8 @@
   <constant name="struts.devMode" value="true"/>
   <constant name="struts.convention.classes.reload" value="true"/>
   <constant name="struts.i18n.encoding" value="UTF-8"/>
+  <constant name="struts.locale" value="ru"/>
+  <constant name="struts.custom.i18n.resources" value="messages" />
   <constant name="struts.action.extension" value=""/>
   <constant name="struts.action.excludePattern" value="/js/.*,/css/.*,/img/.*"/>
   <constant name="struts.ui.theme" value="xhtml"/>

@@ -1,4 +1,4 @@
-package uitest.selenide_1_4;
+package ee.uitest.selenide_1_4;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.DOM.*;
@@ -124,9 +124,9 @@ public class HangmanSpec_1_4 {
   public static class WordsMock extends Words {
     @Override
     public Word getRandomWord(String language) {
-      if ("rus".equals(language))
+      if ("ru".equals(language))
         return new Word("дом", "гвоздь");
-      if ("est".equals(language))
+      if ("et".equals(language))
         return new Word("maja", "nael");
       return new Word("house", "nail");
     }

@@ -82,7 +82,7 @@ function showAlphabet() {
 	}
 
 	alphabetContainer.append("</tr></table>");
-	alphabetContainer.append('<button class="restartGame" onClick="location.href=\'game\';"><nobr>Сыграть ещё</nobr></button>');
+	alphabetContainer.append($("#startGame").clone().removeAttr('id'));
 
 	$("#alphabet td").attr("onmouseover", "$(this).addClass('buttonover')");
 	$("#alphabet td").attr("onmouseout", "$(this).removeClass('buttonover')");

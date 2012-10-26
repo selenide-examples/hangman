@@ -40,14 +40,14 @@ task testLibs(type: Sync) {
 
 test {
   systemProperties 'file.encoding': 'UTF-8'
-  exclude 'ee/era/hangman/uitest/**/*.*'
+  exclude 'ee/era/hangman/ee/uitest/**/*.*'
 }
 
 task uitest(type: Test) {
   systemProperties 'file.encoding': 'UTF-8'
   systemProperties 'browser': 'chrome'
   systemProperties 'webdriver.chrome.driver': '/usr/bin/chromedriver'
-  include 'ee/era/hangman/uitest/**/*.*'
+  include 'ee/era/hangman/ee/uitest/**/*.*'
 }
 
 task(run, dependsOn: 'compile', type: JavaExec) {
