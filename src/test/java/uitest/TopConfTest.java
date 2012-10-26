@@ -40,12 +40,8 @@ public class TopConfTest extends AbstractHangmanTest {
     $("#wordInWork").shouldHave(text("TopConf"));
   }
 
-  private ShouldableWebElement letter(final char letter) {
-    return $(By.xpath("//*[@letter='" + letter + "']"));
-  }
-
   @Test
-  public void userHasAtLeast6Tries() {
+  public void userHas6Tries() {
     letter('A').click();
     letter('B').click();
     letter('C').click();
@@ -56,5 +52,9 @@ public class TopConfTest extends AbstractHangmanTest {
     letter('I').click();
     $("#gameLost").shouldBe(visible);
     $("#wordInWork").shouldHave(text("TopConf"));
+  }
+
+  private ShouldableWebElement letter(final char letter) {
+    return $(By.xpath("//*[@letter='" + letter + "']"));
   }
 }
