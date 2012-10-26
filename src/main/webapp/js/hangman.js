@@ -102,7 +102,7 @@ function guessLetter(letter) {
     async: false,
     dataType: 'json',
     success: function (result) {
-      wordInWork = result.wordInWork;
+      wordInWork = result.word;
       showWordInWork();
 
       failures = result.failures;

@@ -18,8 +18,8 @@
 	<body>
 	  <script language="JavaScript">
 	    var alphabet = "${alphabet}";
-	    var topic = "${word.topic}";
-      var wordInWork = "${wordInWork}";
+	    var topic = "${topic}";
+      var wordInWork = "${word}";
 	  </script>
 
     <a href="?request_locale=ru">RUS</a>
