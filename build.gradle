@@ -11,14 +11,15 @@ repositories{
 dependencies {
   providedCompile fileTree(dir: 'lib-jetty', include: '*.jar')
   providedCompile 'jetty:javax.servlet:5.1.12'
-  compile 'org.apache.struts:struts2-core:2.2.3'
-  compile 'org.apache.struts.xwork:xwork-core:2.2.3'
-  compile 'org.apache.struts:struts2-convention-plugin:2.2.3'
-  compile 'org.apache.struts:struts2-json-plugin:2.2.3'
-  compile 'org.slf4j:slf4j-log4j12:1.6.2'
+  compile 'org.apache.struts:struts2-core:2.3.4.1'
+  compile 'org.apache.struts.xwork:xwork-core:2.3.4.1'
+  compile 'org.apache.struts:struts2-convention-plugin:2.3.4.1'
+  compile 'org.apache.struts:struts2-json-plugin:2.3.4.1'
+  compile 'org.slf4j:slf4j-log4j12:1.7.2'
+  runtime 'log4j:log4j:1.2.17'
   testCompile 'junit:junit:4.9'
   testCompile 'org.hamcrest:hamcrest-all:1.1'
-  testCompile 'com.codeborne:selenide:1.7'
+  testCompile 'com.codeborne:selenide:1.8-SNAPSHOT'
   testCompile 'com.opera:operadriver:0.18'
 }
 
