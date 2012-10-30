@@ -9,8 +9,9 @@ repositories{
 }
 
 dependencies {
-  providedCompile fileTree(dir: 'lib-jetty', include: '*.jar')
-  providedCompile 'jetty:javax.servlet:5.1.12'
+  providedCompile 'org.eclipse.jetty:jetty-server:8.1.7.v20120910'
+  providedCompile 'org.eclipse.jetty:jetty-webapp:8.1.7.v20120910'
+  providedCompile 'javax.servlet:servlet-api:2.3'
   compile 'org.apache.struts:struts2-core:2.3.4.1'
   compile 'org.apache.struts.xwork:xwork-core:2.3.4.1'
   compile 'org.apache.struts:struts2-convention-plugin:2.3.4.1'

@@ -1,12 +1,10 @@
 package ee.era.hangman;
 
-
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Handler;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.nio.SelectChannelConnector;
-import org.mortbay.jetty.webapp.WebAppContext;
-import org.mortbay.thread.QueuedThreadPool;
+import org.eclipse.jetty.server.Connector;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.server.nio.SelectChannelConnector;
+import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Launcher {
   private final int port;
@@ -20,14 +18,16 @@ public class Launcher {
   public Launcher run() throws Exception {
     System.out.println("Start jetty launcher at " + port);
 
-    server.setThreadPool(new QueuedThreadPool(100));
-
     Connector connector = new SelectChannelConnector();
     connector.setPort(port);
     connector.setMaxIdleTime(30000);
-    server.setConnectors(new Connector[]{connector});
+    server.addConnector(connector);
 
-    server.setHandlers(createWebapps());
+    HandlerCollection webapps = new HandlerCollection();
+    webapps.addHandler(new WebAppContext("logs", "/logs"));
+    webapps.addHandler(new WebAppContext("src/main/webapp", "/hangman"));
+    server.setHandler(webapps);
+
     addShutdownHook();
     server.start();
     return this;
@@ -57,13 +57,6 @@ public class Launcher {
     webapp.setContextPath(contextPath);
     webapp.setWar(webappLocation);
     return webapp;
-  }
-
-  protected Handler[] createWebapps() {
-    return new Handler[]{
-        createWebApp("/logs", "logs"),
-        createWebApp("/hangman", "src/main/webapp")
-    };
   }
 
   public static void main(String[] args) throws Exception {
