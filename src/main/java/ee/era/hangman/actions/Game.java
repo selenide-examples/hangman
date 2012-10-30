@@ -14,7 +14,8 @@ public class Game extends GameActionSupport {
   private Hangman game;
 
   @Action(value = "game", results = {
-      @Result(name = "success", location = "game.jsp")})
+      @Result(name = "success", type = "freemarker", location = "game.ftl")
+  })
   public String startGame() {
     randomWord = words.getRandomWord(getLanguage());
     game = new Hangman(randomWord.getWord());
