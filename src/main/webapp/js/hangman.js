@@ -73,7 +73,7 @@ function showAlphabet() {
 	for (i=0; i<alphabet.length; i++) {
 		var letterContainer = $("<td></td>");
 		letterContainer.text(alphabet.charAt(i));
-		letterContainer.attr("letter", alphabet.charAt(i));
+    letterContainer.addClass("letter");
 		letterContainer.appendTo(alphabetContainer);
 
 		if (i % 11 == 10) {
@@ -84,21 +84,21 @@ function showAlphabet() {
 	alphabetContainer.append("</tr></table>");
 	alphabetContainer.append($("#startGame").clone().removeAttr('id'));
 
-	$("#alphabet td").attr("onmouseover", "$(this).addClass('buttonover')");
-	$("#alphabet td").attr("onmouseout", "$(this).removeClass('buttonover')");
-	$("#alphabet td").click(function() {guessLetter($(this).text());});
+	$(".letter").mouseover(function() {$(this).addClass('buttonover');});
+	$(".letter").mouseout(function() {$(this).removeClass('buttonover');});
+	$(".letter").click(function() {guessLetter(this)});
 }
 
-function guessLetter(letter) {
+function guessLetter(letterContainer) {
   if (!isPlaying) {
     return;
   }
 
-	var letterContainer = $("*[letter=" + letter + "]");
+	letterContainer = $(letterContainer);
 	letterContainer.unbind("click");
 
   $.ajax({
-    url: "guess?letter=" + letter,
+    url: "guess?letter=" + letterContainer.text(),
     async: false,
     dataType: 'json',
     success: function (result) {
