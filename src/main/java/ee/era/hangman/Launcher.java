@@ -52,13 +52,6 @@ public class Launcher {
     }
   }
 
-  protected WebAppContext createWebApp(String contextPath, String webappLocation) {
-    WebAppContext webapp = new WebAppContext();
-    webapp.setContextPath(contextPath);
-    webapp.setWar(webappLocation);
-    return webapp;
-  }
-
   public static void main(String[] args) throws Exception {
     new Launcher(8081).run();
   }
