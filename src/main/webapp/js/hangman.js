@@ -73,6 +73,7 @@ function showAlphabet() {
 	for (i=0; i<alphabet.length; i++) {
 		var letterContainer = $("<td></td>");
 		letterContainer.text(alphabet.charAt(i));
+    letterContainer.attr("letter", alphabet.charAt(i));
     letterContainer.addClass("letter");
 		letterContainer.appendTo(alphabetContainer);
 
