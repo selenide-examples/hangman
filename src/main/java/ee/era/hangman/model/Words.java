@@ -25,7 +25,7 @@ public class Words {
             new TopicWords("fauna", "krooks", "kikerikii", "kukeleegu", "muu", "huige", "küünis")
         )),
         new Language("en", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", asList(
-            new TopicWords("house", "bedroom")
+            new TopicWords("house", "sofa")
         ))
     );
   }

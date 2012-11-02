@@ -8,7 +8,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 
-import static com.codeborne.selenide.Navigation.baseUrl;
 import static com.codeborne.selenide.junit.ScreenShooter.failedTests;
 import static ee.era.hangman.di.DependencyInjection.wire;
 
@@ -23,7 +22,6 @@ public abstract class AbstractHangmanTest {
     wire(Words.class, WordsMock.class);
     launcher = new Launcher(8080);
     launcher.run();
-    baseUrl = "http://localhost:8080/hangman";
   }
 
   @AfterClass
@@ -41,7 +39,7 @@ public abstract class AbstractHangmanTest {
         return new Word("дом", "гвоздь");
       if ("et".equals(language))
         return new Word("maja", "nael");
-      return new Word("beer parties", "TopConf");
+      return new Word("house", "sofa");
     }
   }
 }
