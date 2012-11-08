@@ -36,6 +36,37 @@ subprojects {
     testLogging.showStandardStreams = true
     workingDir = project.projectDir.getParentFile()
   }
+
+  task ie(type: Test) {
+    systemProperties['browser'] = 'ie'
+    systemProperties['timeout'] = '12000'
+    systemProperties 'file.encoding': 'UTF-8'
+    testLogging.showStandardStreams = true
+    workingDir = project.projectDir.getParentFile()
+  }
+
+  task htmlunit(type: Test) {
+    systemProperties['browser'] = 'htmlunit'
+    systemProperties 'file.encoding': 'UTF-8'
+    testLogging.showStandardStreams = true
+    workingDir = project.projectDir.getParentFile()
+  }
+
+  task chrome(type: Test) {
+    systemProperties['browser'] = 'chrome'
+    systemProperties['webdriver.chrome.driver'] = '/usr/bin/chromedriver'
+    systemProperties 'file.encoding': 'UTF-8'
+    testLogging.showStandardStreams = true
+    workingDir = project.projectDir.getParentFile()
+  }
+
+  task opera(type: Test) {
+    systemProperties['browser'] = 'opera'
+    systemProperties['timeout'] = '20000'
+    systemProperties 'file.encoding': 'UTF-8'
+    testLogging.showStandardStreams = true
+    workingDir = project.projectDir.getParentFile()
+  }
 }
 
 configure(subprojects.findAll { project -> project.name == 'game' }) {
