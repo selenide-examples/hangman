@@ -118,3 +118,7 @@ configure(subprojects.findAll { project -> project.name != 'game' }) {
     into "$buildDir/lib"
   }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.2'
+}
