@@ -1,3 +1,3 @@
 dependencies {
-  testCompile 'com.codeborne:selenide:1.8-SNAPSHOT'
+  testCompile 'com.codeborne:selenide:1.8'
 }

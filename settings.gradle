@@ -1,1 +1,1 @@
-include "game", "selenide_1_4", "selenide_1_6", "selenide_1_7", "selenide_1_8"
+include "game", "selenide_1_4", "selenide_1_6", "selenide_1_7", "selenide_1_8", "selenide_1_9"
