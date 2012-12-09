@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp server/jetty-runner.jar --port $PORT game/build/libs/game.war
+web: game/build/libs/game.war
