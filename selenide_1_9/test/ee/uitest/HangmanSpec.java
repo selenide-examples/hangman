@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.DOM.$;
 import static com.codeborne.selenide.DOM.$$;
-import static com.codeborne.selenide.DOM.waitUntil;
 import static com.codeborne.selenide.Navigation.open;
 import static com.codeborne.selenide.Selectors.byText;
 import static org.junit.Assert.assertEquals;
@@ -58,17 +57,17 @@ public class HangmanSpec extends AbstractHangmanTest {
   @Test
   public void userCanChooseLanguage() {
     $(By.linkText("EST")).click();
-    waitUntil("#topic", hasText("maja"));
+    $("#topic").shouldHave(text("maja"));
     $("#wordInWork").shouldHave(text("____"));
     assertEquals(27, $$("#alphabet .letter").size());
 
     $(By.linkText("RUS")).click();
-    waitUntil("#topic", hasText("дом"));
+    $("#topic").shouldHave(text("дом"));
     $("#wordInWork").shouldHave(text("______"));
     assertEquals(33, $$("#alphabet .letter").size());
 
     $(By.linkText("ENG")).click();
-    waitUntil("#topic", hasText("house"));
+    $("#topic").shouldHave(text("house"));
     $("#wordInWork").shouldHave(text("____"));
     assertEquals(26, $$("#alphabet .letter").size());
   }

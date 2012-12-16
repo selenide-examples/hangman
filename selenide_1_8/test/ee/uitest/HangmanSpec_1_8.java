@@ -1,8 +1,11 @@
 package ee.uitest;
 
 import com.codeborne.selenide.ShouldableWebElement;
-import org.junit.Before;
-import org.junit.Test;
+import com.codeborne.selenide.junit.ScreenShooter;
+import ee.era.hangman.Launcher;
+import ee.era.hangman.model.Word;
+import ee.era.hangman.model.Words;
+import org.junit.*;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
@@ -11,9 +14,30 @@ import static com.codeborne.selenide.DOM.$$;
 import static com.codeborne.selenide.DOM.waitUntil;
 import static com.codeborne.selenide.Navigation.open;
 import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.junit.ScreenShooter.failedTests;
+import static ee.era.hangman.di.DependencyInjection.wire;
 import static org.junit.Assert.assertEquals;
 
-public class HangmanSpec extends AbstractHangmanTest {
+public class HangmanSpec_1_8 {
+  private static Launcher launcher;
+  @Rule
+  public ScreenShooter makeScreenshotOnFailure = failedTests().succeededTests();
+
+  @BeforeClass
+  public static void startServer() throws Exception {
+    wire(Words.class, WordsMock.class);
+    launcher = new Launcher(8080);
+    launcher.run();
+  }
+
+  @AfterClass
+  public static void stopServer() {
+    if (launcher != null) {
+      launcher.stop();
+      launcher = null;
+    }
+  }
+
   @Before
   public void startGame() {
     open("/hangman");
@@ -75,5 +99,16 @@ public class HangmanSpec extends AbstractHangmanTest {
 
   private ShouldableWebElement letter(String letter) {
     return $(byText(letter));
+  }
+
+  public static class WordsMock extends Words {
+    @Override
+    public Word getRandomWord(String language) {
+      if ("ru".equals(language))
+        return new Word("дом", "гвоздь");
+      if ("et".equals(language))
+        return new Word("maja", "nael");
+      return new Word("house", "sofa");
+    }
   }
 }
