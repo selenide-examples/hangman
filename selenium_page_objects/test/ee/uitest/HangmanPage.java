@@ -3,35 +3,25 @@ package ee.uitest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
 public class HangmanPage {
-  private WebDriver driver;
-
-  @FindBy(linkText = "ENG")
-  //@CacheLookup
-  WebElement englishLanguageSwitch;
-
-  @FindBy(linkText = "EST")
-  //@CacheLookup
-  WebElement estonianLanguageSwitch;
-
-  @FindBy(linkText = "RUS")
-  //@CacheLookup
-  WebElement russianLanguageSwitch;
+  private final WebDriver driver;
 
   @FindBy(id = "topic")
-  //@CacheLookup
+  @CacheLookup
   WebElement topic;
 
   @FindBy(id = "wordInWork")
-  //@CacheLookup
+  @CacheLookup
   WebElement wordInWork;
 
   @FindBy(css = "#alphabet .letter")
-  //@CacheLookup
+  @CacheLookup
   List<WebElement> alphabet;
 
   @FindBy(id = "gameWin")
@@ -50,5 +40,10 @@ public class HangmanPage {
 
   public WebElement letter(char letter) {
     return driver.findElement(By.xpath("//*[@letter='" + letter + "']"));
+  }
+
+  public HangmanPage selectLanguage(String language) {
+    driver.findElement(By.linkText(language)).click();
+    return PageFactory.initElements(driver, HangmanPage.class);
   }
 }

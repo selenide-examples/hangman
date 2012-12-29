@@ -66,8 +66,7 @@ public class HangmanTestUsingPageObject {
   public void startGame() throws InterruptedException {
     driver.get("http://localhost:8080/hangman");
     hangmanPage = PageFactory.initElements(driver, HangmanPage.class);
-    hangmanPage.englishLanguageSwitch.click();
-    Thread.sleep(500);
+    hangmanPage.selectLanguage("ENG");
   }
 
   @Test
@@ -84,7 +83,6 @@ public class HangmanTestUsingPageObject {
   public void userCanGuessLetters() throws InterruptedException {
     hangmanPage.guessLetter('S');
     assertEquals("s___", hangmanPage.wordInWork.getText());
-    //Thread.sleep(2000);
     assertThat(hangmanPage.letter('S').getAttribute("class"), containsString("used"));
   }
 
@@ -112,20 +110,17 @@ public class HangmanTestUsingPageObject {
 
   @Test
   public void userCanChooseLanguage() throws InterruptedException {
-    hangmanPage.estonianLanguageSwitch.click();
-    Thread.sleep(500);
+    hangmanPage = hangmanPage.selectLanguage("EST");
     assertEquals("maja", hangmanPage.topic.getText());
     assertEquals("____", hangmanPage.wordInWork.getText());
     assertEquals(27, hangmanPage.alphabet.size());
 
-    hangmanPage.russianLanguageSwitch.click();
-    Thread.sleep(500);
+    hangmanPage = hangmanPage.selectLanguage("RUS");
     assertEquals("дом", hangmanPage.topic.getText());
     assertEquals("______", hangmanPage.wordInWork.getText());
     assertEquals(33, hangmanPage.alphabet.size());
 
-    hangmanPage.englishLanguageSwitch.click();
-    Thread.sleep(500);
+    hangmanPage = hangmanPage.selectLanguage("ENG");
     assertEquals("house", hangmanPage.topic.getText());
     assertEquals("____", hangmanPage.wordInWork.getText());
     assertEquals(26, hangmanPage.alphabet.size());
