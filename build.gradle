@@ -1,4 +1,4 @@
-defaultTasks 'clean', 'libs', 'test'
+defaultTasks 'clean', 'libs', 'test', 'cleanupConflictingResourcesForLocalDevelopment'
 
 subprojects {
   apply plugin: 'java'
@@ -116,6 +116,12 @@ configure(subprojects.findAll { project -> project.name != 'game' }) {
     from configurations.compile
     from configurations.runtime
     into "$buildDir/lib"
+  }
+}
+
+task cleanupConflictingResourcesForLocalDevelopment << {
+  ant.delete {
+    fileset(dir: file('.'), includes: '**/game.jar')
   }
 }
 
