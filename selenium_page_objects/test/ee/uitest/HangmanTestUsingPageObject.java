@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import static ee.era.hangman.di.DependencyInjection.wire;
@@ -18,7 +18,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class HangmanTestUsingPageObject {
-
   private static WebDriver driver;
   private HangmanPage hangmanPage;
 
@@ -53,8 +52,8 @@ public class HangmanTestUsingPageObject {
 
   @BeforeClass
   public static void startBrowser() {
-    // driver = new HtmlUnitDriver();
-    driver = new FirefoxDriver();
+    driver = new HtmlUnitDriver();
+//    driver = new FirefoxDriver();
   }
 
   @AfterClass
@@ -67,6 +66,7 @@ public class HangmanTestUsingPageObject {
     driver.get("http://localhost:8080/hangman");
     hangmanPage = PageFactory.initElements(driver, HangmanPage.class);
     hangmanPage.selectLanguage("ENG");
+    Thread.sleep(1000);
   }
 
   @Test
