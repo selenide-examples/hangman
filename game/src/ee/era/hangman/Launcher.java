@@ -6,17 +6,26 @@ import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 
+import java.io.File;
+
 public class Launcher {
   private final int port;
   private final Server server;
+  private final String workingDir;
 
   public Launcher(int port) {
+    this(port, ".");
+  }
+
+  public Launcher(int port, String folder) {
     this.port = port;
     server = new Server();
+    workingDir = folder;
   }
 
   public Launcher run() throws Exception {
     System.out.println("Start jetty launcher at " + port);
+    System.out.println("Start hangman webapp at " + new File(workingDir + "/game/webapp").getAbsolutePath());
 
     Connector connector = new SelectChannelConnector();
     connector.setPort(port);
@@ -24,7 +33,7 @@ public class Launcher {
     server.addConnector(connector);
 
     HandlerCollection webapps = new HandlerCollection();
-    webapps.addHandler(new WebAppContext("game/webapp", "/hangman"));
+    webapps.addHandler(new WebAppContext(workingDir + "/game/webapp", "/hangman"));
     server.setHandler(webapps);
 
     addShutdownHook();
@@ -52,6 +61,6 @@ public class Launcher {
   }
 
   public static void main(String[] args) throws Exception {
-    new Launcher(8081).run();
+    new Launcher(8081, ".").run();
   }
 }

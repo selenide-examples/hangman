@@ -1,2 +1,2 @@
-include "game", "selenide_1_4", "selenide_1_6", "selenide_1_7", "selenide_1_8", "selenide_1_9", "selenium_page_objects"
-//include "game", "selenium_page_objects"
+include "game", "selenium_page_objects", "selenide_1_4", "selenide_1_6", "selenide_1_7", "selenide_1_8", "selenide_1_9", "selenide"
+//include "game", "selenide"

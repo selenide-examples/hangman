@@ -42,4 +42,8 @@ public abstract class AbstractHangmanTest {
       return new Word("house", "sofa");
     }
   }
+
+  public static void main(String[] args) throws Exception {
+    startServer();
+  }
 }
