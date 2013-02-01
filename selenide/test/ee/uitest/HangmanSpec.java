@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Navigation.open;
 import static com.codeborne.selenide.Selectors.byText;
 import static org.junit.Assert.assertEquals;
 
-public class HangmanSpec extends AbstractHangmanTest {
+public class HangmanSpec {
   @Before
   public void startGame() {
     open("/hangman");
