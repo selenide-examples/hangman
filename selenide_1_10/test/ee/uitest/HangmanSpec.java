@@ -1,13 +1,15 @@
 package ee.uitest;
 
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.ShouldableWebElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.DOM.$;
+import static com.codeborne.selenide.DOM.$$;
+import static com.codeborne.selenide.Navigation.open;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 import static org.junit.Assert.assertEquals;
 
 public class HangmanSpec {
@@ -70,7 +72,7 @@ public class HangmanSpec {
     assertEquals(26, $$("#alphabet .letter").size());
   }
 
-  private SelenideElement letter(String letter) {
+  private ShouldableWebElement letter(String letter) {
     return $(byText(letter));
   }
 }
