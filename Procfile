@@ -1,1 +1,0 @@
-web: game/build/libs/game.war

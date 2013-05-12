@@ -1,128 +1,94 @@
-defaultTasks 'clean', 'libs', 'test', 'cleanupConflictingResourcesForLocalDevelopment'
+defaultTasks 'clean', 'libs', 'test'
 
-subprojects {
-  apply plugin: 'java'
+apply plugin: 'java'
+apply plugin: 'war'
 
-  sourceSets {
-    main {
-      java {srcDir 'src'}
-      resources {srcDir 'src'}
-    }
-    test {
-      java {srcDir 'test'}
-      resources {srcDir 'test'}
-    }
+sourceSets {
+  main {
+    java {srcDir 'src'}
+    resources {srcDir 'src'}
   }
-
-  repositories{
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots/"
-    }
-  }
-
-  task testLibs(type: Sync) {
-    from configurations.testCompile
-    into "$buildDir/lib-test"
-  }
-
-  task libs(dependsOn: ['compileLibs', 'testLibs'])
-
-  [compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
-  [compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
-
   test {
-    systemProperties 'file.encoding': 'UTF-8'
-    testLogging.showStandardStreams = true
-    workingDir = project.projectDir.getParentFile()
-  }
-
-  task ie(type: Test) {
-    systemProperties['browser'] = 'ie'
-    systemProperties['timeout'] = '12000'
-    systemProperties 'file.encoding': 'UTF-8'
-    testLogging.showStandardStreams = true
-    workingDir = project.projectDir.getParentFile()
-  }
-
-  task htmlunit(type: Test) {
-    systemProperties['browser'] = 'htmlunit'
-    systemProperties 'file.encoding': 'UTF-8'
-    testLogging.showStandardStreams = true
-    workingDir = project.projectDir.getParentFile()
-  }
-
-  task chrome(type: Test) {
-    systemProperties['browser'] = 'chrome'
-    systemProperties['webdriver.chrome.driver'] = '/usr/bin/chromedriver'
-    systemProperties 'file.encoding': 'UTF-8'
-    testLogging.showStandardStreams = true
-    workingDir = project.projectDir.getParentFile()
-  }
-
-  task opera(type: Test) {
-    systemProperties['browser'] = 'opera'
-    systemProperties['timeout'] = '20000'
-    systemProperties 'file.encoding': 'UTF-8'
-    testLogging.showStandardStreams = true
-    workingDir = project.projectDir.getParentFile()
+    java {srcDir 'test'}
+    resources {srcDir 'test'}
   }
 }
 
-configure(subprojects.findAll { project -> project.name == 'game' }) {
-  apply plugin: 'java'
-  apply plugin: 'war'
-
-  dependencies {
-    providedCompile 'org.eclipse.jetty:jetty-server:8.1.7.v20120910'
-    providedCompile 'org.eclipse.jetty:jetty-webapp:8.1.7.v20120910'
-    providedCompile 'org.eclipse.jetty:jetty-jsp:8.1.7.v20120910'
-    providedCompile 'org.eclipse.jetty.orbit:javax.servlet:3.0.0.v20120910@jar'
-    compile 'org.apache.struts:struts2-core:2.3.4.1'
-    compile 'org.apache.struts.xwork:xwork-core:2.3.4.1'
-    compile 'org.apache.struts:struts2-convention-plugin:2.3.4.1'
-    compile 'org.apache.struts:struts2-json-plugin:2.3.4.1'
-    compile 'org.slf4j:slf4j-log4j12:1.7.2'
-    testCompile 'junit:junit:4.11'
-    testCompile 'org.hamcrest:hamcrest-all:1.3'
-  }
-
-  task compileLibs(type: Sync) {
-    from configurations.compile
-    from configurations.providedCompile
-    from configurations.runtime
-    from configurations.providedRuntime
-    into "$buildDir/lib"
-  }
-
-  task(run, dependsOn: 'compile', type: JavaExec) {
-    main = 'ee.era.hangman.Launcher'
-    classpath = sourceSets.main.runtimeClasspath
-    systemProperty 'file.encoding', 'UTF-8'
-  }
-
-  war {
-    from 'webapp'
-  }
+repositories{
+  mavenCentral()
+//  maven {
+//      url "https://oss.sonatype.org/content/repositories/snapshots/"
+//  }
 }
 
-configure(subprojects.findAll { project -> project.name != 'game' }) {
-  dependencies {
-    compile project(':game')
-    testCompile 'com.opera:operadriver:1.1'
-  }
-
-  task compileLibs(type: Sync) {
-    from configurations.compile
-    from configurations.runtime
-    into "$buildDir/lib"
-  }
+task libs(type: Sync) {
+  from configurations.compile
+  from configurations.providedCompile
+  from configurations.runtime
+  from configurations.providedRuntime
+  from configurations.testCompile
+  into "$buildDir/lib"
 }
 
-task cleanupConflictingResourcesForLocalDevelopment << {
-  ant.delete {
-    fileset(dir: file('.'), includes: '**/game.jar')
-  }
+[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
+[compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
+
+test {
+  systemProperties 'file.encoding': 'UTF-8'
+  testLogging.showStandardStreams = true
+}
+
+task ie(type: Test) {
+  systemProperties['browser'] = 'ie'
+  systemProperties['timeout'] = '12000'
+  systemProperties 'file.encoding': 'UTF-8'
+  testLogging.showStandardStreams = true
+}
+
+task htmlunit(type: Test) {
+  systemProperties['browser'] = 'htmlunit'
+  systemProperties 'file.encoding': 'UTF-8'
+  testLogging.showStandardStreams = true
+}
+
+task chrome(type: Test) {
+  systemProperties['browser'] = 'chrome'
+  systemProperties['webdriver.chrome.driver'] = '/usr/bin/chromedriver'
+  systemProperties 'file.encoding': 'UTF-8'
+  testLogging.showStandardStreams = true
+}
+
+task opera(type: Test) {
+  systemProperties['browser'] = 'opera'
+  systemProperties['timeout'] = '20000'
+  systemProperties 'file.encoding': 'UTF-8'
+  testLogging.showStandardStreams = true
+}
+
+dependencies {
+  providedCompile 'org.eclipse.jetty:jetty-server:8.1.7.v20120910'
+  providedCompile 'org.eclipse.jetty:jetty-webapp:8.1.7.v20120910'
+  providedCompile 'org.eclipse.jetty:jetty-jsp:8.1.7.v20120910'
+  providedCompile 'org.eclipse.jetty.orbit:javax.servlet:3.0.0.v20120910@jar'
+  compile 'org.apache.struts:struts2-core:2.3.4.1'
+  compile 'org.apache.struts.xwork:xwork-core:2.3.4.1'
+  compile 'org.apache.struts:struts2-convention-plugin:2.3.4.1'
+  compile 'org.apache.struts:struts2-json-plugin:2.3.4.1'
+  compile 'org.slf4j:slf4j-log4j12:1.7.2'
+  testCompile 'junit:junit:4.11'
+  testCompile 'org.hamcrest:hamcrest-all:1.3'
+  testCompile 'com.codeborne:selenide:2.1'
+  testCompile 'com.opera:operadriver:1.1'
+}
+
+task(run, dependsOn: 'compile', type: JavaExec) {
+  main = 'ee.era.hangman.Launcher'
+  classpath = sourceSets.main.runtimeClasspath
+  systemProperty 'file.encoding', 'UTF-8'
+}
+
+war {
+  from 'webapp'
 }
 
 task wrapper(type: Wrapper) {

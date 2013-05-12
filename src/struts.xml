@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+  <constant name="struts.devMode" value="true"/>
+  <constant name="struts.convention.classes.reload" value="true"/>
+  <constant name="struts.i18n.encoding" value="UTF-8"/>
+  <constant name="struts.locale" value="ru"/>
+  <constant name="struts.custom.i18n.resources" value="messages" />
+  <constant name="struts.action.extension" value=""/>
+  <constant name="struts.action.excludePattern" value="/js/.*,/css/.*,/img/.*"/>
+  <constant name="struts.ui.theme" value="xhtml"/>
+  <constant name="struts.freemarker.templatesCache" value="false"/>
+  <constant name="struts.convention.exclude.parentClassLoader" value="false"/>
+  <!--<constant name="struts.convention.action.includeJars" value=".*?/game.*?jar(!/)?"/>-->
+  <constant name="struts.convention.action.fileProtocols" value="jar,code-source"/>
+  <constant name="struts.convention.action.suffix" value=""/>
+  <constant name="struts.convention.package.locators.basePackage" value="ee.era.hangman"/>
+  <constant name="struts.convention.relative.result.types" value="dispatcher,freemarker"/>
+  <constant name="struts.convention.redirect.to.slash" value="false"/>
+
+  <package name="default" extends="struts-default">
+    <default-action-ref name="startGame"/>
+
+    <action name="startGame">
+      <result type="redirectAction">
+        <param name="actionName">game</param>
+        <param name="namespace">/</param>
+      </result>
+    </action>
+  </package>
+</struts>
