@@ -1,7 +1,6 @@
 package uitest.selenide;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.junit.ScreenShooter;
 import org.junit.Assert;
@@ -11,6 +10,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import uitest.AbstractHangmanTest;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class HangmanSpec extends AbstractHangmanTest {
@@ -20,7 +20,7 @@ public class HangmanSpec extends AbstractHangmanTest {
   @Before
   public void startGame() {
     open("/hangman");
-    $(Selectors.byText("ENG")).click();
+    $(byText("ENG")).click();
   }
 
   @Test
@@ -77,6 +77,6 @@ public class HangmanSpec extends AbstractHangmanTest {
   }
 
   private SelenideElement letter(String letter) {
-    return $(Selectors.byText(letter));
+    return $(byText(letter));
   }
 }

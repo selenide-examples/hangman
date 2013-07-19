@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import uitest.AbstractHangmanTest;
 
 import static ee.era.hangman.di.DependencyInjection.wire;
+import static java.lang.Thread.sleep;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
@@ -67,7 +68,7 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
     driver.get("http://localhost:8080/hangman");
     hangmanPage = PageFactory.initElements(driver, HangmanPage.class);
     hangmanPage.selectLanguage("ENG");
-    Thread.sleep(1000);
+    sleep(1000);
   }
 
   @Test
