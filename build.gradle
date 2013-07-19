@@ -36,6 +36,12 @@ task libs(type: Sync) {
 test {
   systemProperties 'file.encoding': 'UTF-8'
   testLogging.showStandardStreams = true
+  include 'ee/era/hangman/**'
+}
+
+task uitest(type: Test) {
+  systemProperties 'file.encoding': 'UTF-8'
+  testLogging.showStandardStreams = true
 }
 
 task ie(type: Test) {
