@@ -2,10 +2,8 @@ package uitest.selenide;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.junit.ScreenShooter;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import uitest.AbstractHangmanTest;
@@ -14,9 +12,6 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class HangmanSpec extends AbstractHangmanTest {
-  @Rule
-  public ScreenShooter makeScreenshotOnFailure = ScreenShooter.failedTests().succeededTests();
-
   @Before
   public void startGame() {
     open("/hangman");
