@@ -45,12 +45,10 @@ public class Launcher {
   }
 
   public final void stop() {
-    if (server != null) {
-      try {
-        System.out.println("Shutdown jetty launcher at " + port);
-        server.stop();
-      } catch (Exception ignore) {
-      }
+    try {
+      System.out.println("Shutdown jetty launcher at " + port);
+      server.stop();
+    } catch (Exception ignore) {
     }
   }
 
