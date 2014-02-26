@@ -1,4 +1,4 @@
-defaultTasks 'clean', 'libs', 'test'
+defaultTasks 'clean', 'test'
 
 apply plugin: 'java'
 apply plugin: 'war'
@@ -30,45 +30,41 @@ task libs(type: Sync) {
   into "$buildDir/lib"
 }
 
+classes.dependsOn libs
+
 [compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
 [compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
 
 test {
-  systemProperties 'file.encoding': 'UTF-8'
-  testLogging.showStandardStreams = true
   include 'ee/era/hangman/**'
 }
 
 task uitest(type: Test) {
-  systemProperties 'file.encoding': 'UTF-8'
-  testLogging.showStandardStreams = true
+  systemProperties['browser'] = 'firefox'
 }
 
 task ie(type: Test) {
   systemProperties['browser'] = 'ie'
   systemProperties['timeout'] = '12000'
-  systemProperties 'file.encoding': 'UTF-8'
-  testLogging.showStandardStreams = true
 }
 
 task htmlunit(type: Test) {
   systemProperties['browser'] = 'htmlunit'
-  systemProperties 'file.encoding': 'UTF-8'
-  testLogging.showStandardStreams = true
 }
 
 task chrome(type: Test) {
   systemProperties['browser'] = 'chrome'
   systemProperties['webdriver.chrome.driver'] = '/usr/bin/chromedriver'
-  systemProperties 'file.encoding': 'UTF-8'
-  testLogging.showStandardStreams = true
 }
 
-task opera(type: Test) {
-  systemProperties['browser'] = 'opera'
-  systemProperties['timeout'] = '20000'
-  systemProperties 'file.encoding': 'UTF-8'
-  testLogging.showStandardStreams = true
+task phantomjs(type: Test) {
+  systemProperties['browser'] = 'phantomjs'
+}
+
+tasks.withType(Test).all { testTask ->
+  testTask.systemProperties['file.encoding'] = 'UTF-8'
+  testTask.testLogging.showStandardStreams = true
+  testTask.outputs.upToDateWhen { false }
 }
 
 dependencies {
@@ -76,15 +72,16 @@ dependencies {
   providedCompile 'org.eclipse.jetty:jetty-webapp:8.1.14.v20131031'
   providedCompile 'org.eclipse.jetty:jetty-jsp:8.1.14.v20131031'
   providedCompile 'org.eclipse.jetty.orbit:javax.servlet:3.0.0.v20120910@jar'
-  compile 'org.apache.struts:struts2-core:2.3.15.3'
-  compile 'org.apache.struts.xwork:xwork-core:2.3.15.3'
-  compile 'org.apache.struts:struts2-convention-plugin:2.3.15.3'
-  compile 'org.apache.struts:struts2-json-plugin:2.3.15.3'
-  compile 'org.slf4j:slf4j-log4j12:1.7.5'
+  compile 'org.apache.struts:struts2-core:2.3.16'
+  compile 'org.apache.struts.xwork:xwork-core:2.3.16'
+  compile 'org.apache.struts:struts2-convention-plugin:2.3.16'
+  compile 'org.apache.struts:struts2-json-plugin:2.3.16'
+  compile 'org.slf4j:slf4j-log4j12:1.7.6'
   testCompile 'junit:junit:4.11'
   testCompile 'org.hamcrest:hamcrest-all:1.3'
-  testCompile 'com.codeborne:selenide:2.5'
+  testCompile 'com.codeborne:selenide:2.8.1'
   testCompile 'com.opera:operadriver:1.5'
+  testCompile group: 'com.github.detro.ghostdriver', name: 'phantomjsdriver', version: '1.1.0', transitive: false
 }
 
 task(run, dependsOn: 'compile', type: JavaExec) {
@@ -98,5 +95,5 @@ war {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.8'
+    gradleVersion = '1.11'
 }
