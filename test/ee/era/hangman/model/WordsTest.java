@@ -7,16 +7,20 @@ import java.util.Map;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 public class WordsTest {
-  Words words = new Words(new Language("ru", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ", asList(
-      new TopicWords("дом", "гвоздь", "унитаз", "чайник"),
-      new TopicWords("флора", "гвоздика", "куст"),
-      new TopicWords("фауна", "верблюд")
-  )));
+  Words words = spy(new Words());
 
   @Test
   public void choosesRandomTopicAndWord() {
+    doReturn(asList(
+        new Word("дом", "гвоздь"), new Word("дом", "унитаз"), new Word("дом", "чайник"),
+        new Word("флора", "гвоздика"), new Word("флора", "куст"),
+        new Word("фауна", "верблюд")
+    )).when(words).getDictionary("ru");
+
     Map<String, Integer> count = new HashMap<String, Integer>();
     count.put("гвоздь", 0);
     count.put("унитаз", 0);

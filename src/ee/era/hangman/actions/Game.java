@@ -1,15 +1,15 @@
 package ee.era.hangman.actions;
 
+import com.google.inject.Inject;
 import ee.era.hangman.model.Hangman;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.Words;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
-import static ee.era.hangman.di.DependencyInjection.inject;
-
 public class Game extends GameActionSupport {
-  Words words = inject(Words.class);
+  @Inject public static Words words;
+
   private Word randomWord;
   private Hangman game;
 

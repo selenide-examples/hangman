@@ -2,13 +2,12 @@ package uitest;
 
 import com.codeborne.selenide.junit.ScreenShooter;
 import ee.era.hangman.Launcher;
+import ee.era.hangman.actions.Game;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.Words;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
-
-import static ee.era.hangman.di.DependencyInjection.wire;
 
 public abstract class AbstractHangmanTest {
   @Rule
@@ -18,9 +17,9 @@ public abstract class AbstractHangmanTest {
 
   @BeforeClass
   public static void startServer() throws Exception {
-    wire(Words.class, WordsMock.class);
     launcher = new Launcher(8080);
     launcher.run();
+    Game.words = new WordsMock();
   }
 
   @AfterClass

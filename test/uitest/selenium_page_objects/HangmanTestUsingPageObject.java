@@ -1,6 +1,8 @@
 package uitest.selenium_page_objects;
 
+import com.codeborne.selenide.WebDriverRunner;
 import ee.era.hangman.Launcher;
+import ee.era.hangman.actions.Game;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.Words;
 import org.junit.AfterClass;
@@ -8,11 +10,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import uitest.AbstractHangmanTest;
 
-import static ee.era.hangman.di.DependencyInjection.wire;
 import static java.lang.Thread.sleep;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -27,9 +27,9 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
 
   @BeforeClass
   public static void startServer() throws Exception {
-    wire(Words.class, WordsMock.class);
     launcher = new Launcher(8080);
     launcher.run();
+    Game.words = new WordsMock();
   }
 
   @AfterClass
@@ -55,7 +55,8 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   @BeforeClass
   public static void startBrowser() {
 //    driver = new HtmlUnitDriver();
-    driver = new FirefoxDriver();
+//    driver = new FirefoxDriver();
+    driver = WebDriverRunner.getWebDriver();
   }
 
   @AfterClass

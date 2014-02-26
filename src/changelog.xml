@@ -1,0 +1,23 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <changeSet id="201402262236" author="Andrei">
+    <createTable tableName="lang_words">
+      <column name="id" type="number" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="lang_words_pk"/>
+      </column>
+      <column name="lang" type="varchar(2)"/>
+      <column name="topic" type="varchar2(62 CHAR)"/>
+      <column name="word" type="varchar2(32 CHAR)"/>
+    </createTable>
+  </changeSet>
+  
+  <changeSet id="201402262343" author="Andrei">
+    <loadData tableName="lang_words" encoding="UTF-8" file="words.001.csv">
+      <column header="LANG" name="lang"/>
+      <column header="TOPIC" name="topic"/>
+      <column header="WORD" name="word"/>
+    </loadData>
+  </changeSet>
+</databaseChangeLog>
