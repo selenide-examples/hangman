@@ -16,6 +16,9 @@ public class LiquibaseServletListener implements javax.servlet.ServletContextLis
   @Inject @Named("dictionary")
   private static DataSource dataSource;
 
+  @Inject @Named("environment")
+  private static String environment;
+
   @Override
   public void contextInitialized(ServletContextEvent servletContextEvent) {
     try (Connection connection = dataSource.getConnection()) {
@@ -25,7 +28,7 @@ public class LiquibaseServletListener implements javax.servlet.ServletContextLis
       try {
         Database database = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(jdbc);
         Liquibase liquibase = new Liquibase("changelog.xml", new ClassLoaderResourceAccessor(), database);
-        liquibase.update("");
+        liquibase.update(environment);
       }
       finally {
         jdbc.close();

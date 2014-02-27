@@ -12,7 +12,8 @@ public class Launcher {
   private final int port;
   private final Server server;
 
-  public Launcher(int port) {
+  public Launcher(String environment, int port) {
+    GuiceListener.environment = environment;
     this.port = port;
     server = new Server();
   }
@@ -53,6 +54,6 @@ public class Launcher {
   }
 
   public static void main(String[] args) throws Exception {
-    new Launcher(8081).run();
+    new Launcher("prod", 8080).run();
   }
 }

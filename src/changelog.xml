@@ -13,12 +13,30 @@
     </createTable>
   </changeSet>
   
-  <changeSet id="201402262343" author="Andrei">
+  <changeSet id="201402262343" author="Andrei" context="prod">
     <loadData tableName="lang_words" encoding="UTF-8" file="words.001.csv">
       <column header="LANG" name="lang"/>
       <column header="TOPIC" name="topic"/>
       <column header="WORD" name="word"/>
     </loadData>
+  </changeSet>
+
+  <changeSet id="201402271356" author="Andrei" context="test">
+    <insert tableName="lang_words">
+      <column name="lang" value="ru"/>
+      <column name="topic" value="дом"/>
+      <column name="word" value="гвоздь"/>
+    </insert>
+    <insert tableName="lang_words">
+      <column name="lang" value="et"/>
+      <column name="topic" value="maja"/>
+      <column name="word" value="nael"/>
+    </insert>
+    <insert tableName="lang_words">
+      <column name="lang" value="en"/>
+      <column name="topic" value="house"/>
+      <column name="word" value="sofa"/>
+    </insert>
   </changeSet>
 
   <changeSet id="201402270857" author="Andrei">

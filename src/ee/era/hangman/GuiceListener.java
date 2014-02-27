@@ -17,6 +17,8 @@ import java.beans.PropertyVetoException;
 
 public class GuiceListener extends GuiceServletContextListener {
 
+  public static String environment = "prod";
+
   public Injector getInjector() {
     return Guice.createInjector(
         new Struts2GuicePluginModule(),
@@ -42,7 +44,11 @@ public class GuiceListener extends GuiceServletContextListener {
             ds.setMaxStatementsPerConnection(3);
             return ds;
           }
+
+          @Provides @Named("environment")
+          public String getEnvironment() {
+            return environment;
+          }
         });
   }
-
 }
