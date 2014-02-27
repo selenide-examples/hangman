@@ -1,13 +1,13 @@
 package uitest.selenide;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import uitest.AbstractHangmanTest;
 
+import static com.codeborne.selenide.CollectionCondition.size;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -20,15 +20,15 @@ public class HangmanSpec extends AbstractHangmanTest {
 
   @Test
   public void showsTopicAndMaskedWordAtTheBeginning() {
-    $("#topic").shouldHave(Condition.text("house"));
-    $("#wordInWork").shouldHave(Condition.text("____"));
+    $("#topic").shouldHave(text("house"));
+    $("#wordInWork").shouldHave(text("____"));
   }
 
   @Test
   public void userCanGuessLetters() {
     letter("S").click();
-    $("#wordInWork").shouldHave(Condition.text("s___"));
-    letter("S").shouldHave(Condition.cssClass("used"));
+    $("#wordInWork").shouldHave(text("s___"));
+    letter("S").shouldHave(cssClass("used"));
   }
 
   @Test
@@ -37,7 +37,7 @@ public class HangmanSpec extends AbstractHangmanTest {
     letter("O").click();
     letter("F").click();
     letter("A").click();
-    $("#gameWin").shouldBe(Condition.visible);
+    $("#gameWin").shouldBe(visible);
   }
 
   @Test
@@ -49,26 +49,26 @@ public class HangmanSpec extends AbstractHangmanTest {
     letter("H").click();
     letter("I").click();
     letter("J").click();
-    letter("B").shouldHave(Condition.cssClass("nonused"));
-    $("#gameLost").shouldBe(Condition.visible);
+    letter("B").shouldHave(cssClass("nonused"));
+    $("#gameLost").shouldBe(visible);
   }
 
   @Test
   public void userCanChooseLanguage() {
     $(By.linkText("EST")).click();
-    $("#topic").shouldHave(Condition.text("maja"));
-    $("#wordInWork").shouldHave(Condition.text("____"));
-    Assert.assertEquals(27, $$("#alphabet .letter").size());
+    $("#topic").shouldHave(text("maja"));
+    $("#wordInWork").shouldHave(text("____"));
+    $$("#alphabet .letter").shouldHave(size(27));
 
     $(By.linkText("RUS")).click();
-    $("#topic").shouldHave(Condition.text("дом"));
-    $("#wordInWork").shouldHave(Condition.text("______"));
-    Assert.assertEquals(33, $$("#alphabet .letter").size());
+    $("#topic").shouldHave(text("дом"));
+    $("#wordInWork").shouldHave(text("______"));
+    $$("#alphabet .letter").shouldHave(size(33));
 
     $(By.linkText("ENG")).click();
-    $("#topic").shouldHave(Condition.text("house"));
-    $("#wordInWork").shouldHave(Condition.text("____"));
-    Assert.assertEquals(26, $$("#alphabet .letter").size());
+    $("#topic").shouldHave(text("house"));
+    $("#wordInWork").shouldHave(text("____"));
+    $$("#alphabet .letter").shouldHave(size(26));
   }
 
   private SelenideElement letter(String letter) {
