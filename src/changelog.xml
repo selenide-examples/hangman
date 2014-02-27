@@ -20,4 +20,31 @@
       <column header="WORD" name="word"/>
     </loadData>
   </changeSet>
+
+  <changeSet id="201402270857" author="Andrei">
+    <createTable tableName="languages">
+      <column name="id" type="number" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="languages_pk"/>
+      </column>
+      <column name="lang" type="varchar(2)">
+        <constraints nullable="false" unique="true" uniqueConstraintName="languages_lang_uq"/>
+      </column>
+      <column name="alphabet" type="varchar2(512 CHAR)"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="201402270859" author="Andrei">
+    <insert tableName="languages">
+      <column name="lang" value="ru"/>
+      <column name="alphabet" value="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"/>
+    </insert>
+    <insert tableName="languages">
+      <column name="lang" value="et"/>
+      <column name="alphabet" value="ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜ"/>
+    </insert>
+    <insert tableName="languages">
+      <column name="lang" value="en"/>
+      <column name="alphabet" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
+    </insert>
+  </changeSet>
 </databaseChangeLog>

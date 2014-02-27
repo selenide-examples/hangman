@@ -19,25 +19,8 @@ public class Words {
   @Inject @Named("dictionary")
   private DataSource dataSource;
 
-  private final Map<String, Language> languages;
-
-  public Words() {
-    this(
-        new Language("ru", "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"),
-        new Language("et", "ABDEFGHIJKLMNOPRSŠZŽTUVÕÄÖÜ"),
-        new Language("en", "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    );
-  }
-
-  protected Words(Language... languages) {
-    this.languages = new HashMap<>(languages.length);
-    for (Language language : languages) {
-      this.languages.put(language.getName(), language);
-    }
-  }
-
   public String getAlphabet(String language) {
-    return languages.get(language).getAlphabet();
+    return getLanguages().get(language).getAlphabet();
   }
 
   public Word getRandomWord(String language) {
@@ -89,6 +72,23 @@ public class Words {
           }
 
           return words;
+        }
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  Map<String, Language> getLanguages() {
+    try (Connection connection = dataSource.getConnection()) {
+      try (PreparedStatement statement = connection.prepareStatement("select lang, alphabet from languages")) {
+        try (ResultSet resultSet = statement.executeQuery()) {
+          Map<String, Language> languages = new HashMap<>();
+          while (resultSet.next()) {
+            Language language = new Language(resultSet.getString(1), resultSet.getString(2));
+            languages.put(language.getName(), language);
+          }
+          return languages;
         }
       }
     } catch (SQLException e) {

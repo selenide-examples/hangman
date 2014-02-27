@@ -1,10 +1,6 @@
 package uitest.selenium_page_objects;
 
 import com.codeborne.selenide.WebDriverRunner;
-import ee.era.hangman.Launcher;
-import ee.era.hangman.actions.Game;
-import ee.era.hangman.model.Word;
-import ee.era.hangman.model.Words;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -22,35 +18,6 @@ import static org.junit.Assert.assertThat;
 public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   private static WebDriver driver;
   private HangmanPage hangmanPage;
-
-  private static Launcher launcher;
-
-  @BeforeClass
-  public static void startServer() throws Exception {
-    launcher = new Launcher(8080);
-    launcher.run();
-    Game.words = new WordsMock();
-  }
-
-  @AfterClass
-  public static void stopServer() {
-    if (launcher != null) {
-      launcher.stop();
-      launcher = null;
-    }
-  }
-
-  public static class WordsMock extends Words {
-    @Override
-    public Word getRandomWord(String language) {
-      if ("ru".equals(language))
-        return new Word("дом", "гвоздь");
-      if ("et".equals(language))
-        return new Word("maja", "nael");
-      return new Word("house", "sofa");
-    }
-  }
-
 
   @BeforeClass
   public static void startBrowser() {
