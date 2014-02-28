@@ -7,9 +7,9 @@ import com.codeborne.selenide.Selectors._
 import com.codeborne.selenide.SelenideElement
 import org.scalatest.{FlatSpec, BeforeAndAfter}
 import org.openqa.selenium.By
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 
-class HangmanScalaTest extends FlatSpec with BeforeAndAfter with ShouldMatchers {
+class HangmanScalaTest extends FlatSpec with BeforeAndAfter with Matchers {
   before {
     open("/hangman")
     $(byText("ENG")).click()
