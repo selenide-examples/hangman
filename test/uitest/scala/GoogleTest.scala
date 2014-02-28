@@ -1,12 +1,12 @@
 package ee.uitest.scala
 
 import org.scalatest.{BeforeAndAfter, FlatSpec}
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest.Matchers
 import com.codeborne.selenide.Selenide._
 import com.codeborne.selenide.Condition._
 import org.openqa.selenium.By
 
-class GoogleTest extends FlatSpec with BeforeAndAfter with ShouldMatchers {
+class GoogleTest extends FlatSpec with BeforeAndAfter with Matchers {
   "User" can "search for any string" in {
     open("http://google.com")
     $(By.name("q")).setValue("Selenide").pressEnter()

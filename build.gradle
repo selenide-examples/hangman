@@ -2,6 +2,7 @@ defaultTasks 'clean', 'test'
 
 apply plugin: 'java'
 apply plugin: 'war'
+apply plugin: 'scala'
 
 sourceSets {
   main {
@@ -11,6 +12,7 @@ sourceSets {
   test {
     java {srcDir 'test'}
     resources {srcDir 'test'}
+    scala { srcDirs 'test' }
   }
 }
 
@@ -86,6 +88,8 @@ dependencies {
   testCompile 'org.mockito:mockito-all:1.9.5'
   testCompile 'com.codeborne:selenide:2.8.1'
   testCompile 'com.opera:operadriver:1.5'
+  testCompile 'org.scala-lang:scala-library:2.10.3'
+  testCompile 'org.scalatest:scalatest_2.10:2.0'
   testCompile group: 'com.github.detro.ghostdriver', name: 'phantomjsdriver', version: '1.1.0', transitive: false
 }
 
