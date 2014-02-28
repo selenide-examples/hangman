@@ -6,8 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class HangmanPage {
   private final WebDriver driver;
@@ -32,6 +35,7 @@ public class HangmanPage {
 
   public HangmanPage(WebDriver driver) {
     this.driver = driver;
+    new WebDriverWait(driver, 3).until(visibilityOfElementLocated(By.id("topic")));
   }
 
   public void guessLetter(char letter) {
