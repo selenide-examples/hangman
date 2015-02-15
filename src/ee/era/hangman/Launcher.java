@@ -1,9 +1,7 @@
 package ee.era.hangman;
 
-import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.io.File;
@@ -15,17 +13,12 @@ public class Launcher {
   public Launcher(String environment, int port) {
     GuiceListener.environment = environment;
     this.port = port;
-    server = new Server();
+    server = new Server(port);
   }
 
   public Launcher run() throws Exception {
     System.out.println("Start jetty launcher at " + port);
     System.out.println("Start hangman webapp at " + new File("webapp").getAbsolutePath());
-
-    Connector connector = new SelectChannelConnector();
-    connector.setPort(port);
-    connector.setMaxIdleTime(30000);
-    server.addConnector(connector);
 
     HandlerCollection webapps = new HandlerCollection();
     webapps.addHandler(new WebAppContext("webapp", "/hangman"));
