@@ -31,8 +31,8 @@ task libs(type: Sync) {
 
 classes.dependsOn libs
 
-[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
-[compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
+[compileJava, compileTestJava, compileScala, compileTestScala]*.options.collect {options -> options.encoding = 'UTF-8'}
+ [compileJava, compileTestJava, compileScala, compileTestScala]*.options.collect {options -> options.debug = true}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
