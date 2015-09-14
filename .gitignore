@@ -1,6 +1,5 @@
 .gradle
 .idea
 build
-*.iml
 out
 *.log
