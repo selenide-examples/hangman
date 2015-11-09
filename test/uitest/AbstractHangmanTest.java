@@ -10,9 +10,6 @@ import org.junit.Rule;
 import static com.codeborne.selenide.junit.ScreenShooter.failedTests;
 
 public abstract class AbstractHangmanTest {
-  @Rule
-  public ScreenShooter makeScreenshotOnFailure = failedTests();
-
   private static Launcher launcher;
 
   @BeforeClass
