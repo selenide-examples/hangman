@@ -39,9 +39,7 @@ To run UI Tests (in FireChrome):
 
 Many thanks to these incredible tools that help us creating open-source software:
 
-![Intellij IDEA](http://www.jetbrains.com/idea/docs/logo_intellij_idea.png)
- 
-![YourKit Java profiler](http://selenide.org/images/yourkit.png)
+![Intellij IDEA](http://www.jetbrains.com/idea/docs/logo_intellij_idea.png) ![YourKit Java profiler](http://selenide.org/images/yourkit.png)
 
 # License
 Hangman is open-source project and distributed under [MIT](http://choosealicense.com/licenses/mit/) license
