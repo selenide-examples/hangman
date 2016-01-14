@@ -10,7 +10,7 @@ class GoogleTest extends FlatSpec with BeforeAndAfter with Matchers {
   "User" can "search for any string" in {
     open("http://google.com")
     $(By.name("q")).setValue("Selenide").pressEnter()
-    $("li.g:eq(3)", 0).shouldHave(text("Selenide - Wikipedia, the free encyclopedia"))
-    $("li.g", 1).shouldHave(text("codeborne/selenide"))
+    $("#ires .g:eq(3)", 0).shouldHave(text("Selenide - Wikipedia, the free encyclopedia"))
+    $("#ires .g", 1).shouldHave(text("codeborne/selenide"))
   }
 }
