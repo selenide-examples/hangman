@@ -14,7 +14,7 @@ To run UI Tests (in FireFox):
   
 * `./gradlew uitest`
 
-To run UI Tests (in FireChrome):
+To run UI Tests (in Chrome):
   
 * `./gradlew chrome`
 
