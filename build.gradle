@@ -69,8 +69,8 @@ tasks.withType(Test).all { testTask ->
 }
 
 dependencies {
-  providedCompile 'org.eclipse.jetty:jetty-server:9.3.7.v20160115'
-  providedCompile 'org.eclipse.jetty:jetty-webapp:9.3.7.v20160115'
+  providedCompile 'org.eclipse.jetty:jetty-server:9.3.9.M1'
+  providedCompile 'org.eclipse.jetty:jetty-webapp:9.3.9.M1'
   providedCompile 'org.eclipse.jetty:jetty-jsp:9.3.0.M1'
   providedCompile 'org.eclipse.jetty.toolchain:jetty-osgi-servlet-api:3.1.0.M3'
 
