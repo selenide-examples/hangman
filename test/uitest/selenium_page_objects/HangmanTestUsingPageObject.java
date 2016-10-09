@@ -1,12 +1,11 @@
 package uitest.selenium_page_objects;
 
-import com.codeborne.selenide.WebDriverRunner;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.support.PageFactory;
 import uitest.AbstractHangmanTest;
 
@@ -24,7 +23,8 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   public static void startBrowser() {
 //    driver = new HtmlUnitDriver();
 //    driver = new FirefoxDriver();
-    driver = new ChromeDriver();
+//    driver = new ChromeDriver();
+    driver = new PhantomJSDriver();
   }
 
   @AfterClass
