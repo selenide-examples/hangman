@@ -29,7 +29,9 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
 
   @AfterClass
   public static void closeBrowser() {
-    driver.close();
+    if (driver != null) {
+      driver.close();
+    }
   }
 
   @Before
