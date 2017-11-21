@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class HangmanPage {
   public void selectLanguage(String language) {
-    letter(language).click();
+    $(byText(language)).click();
   }
 
   public void shouldHaveTopic(String topic) {
