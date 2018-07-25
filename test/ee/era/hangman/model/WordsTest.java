@@ -11,7 +11,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 public class WordsTest {
-  Words words = spy(new Words());
+  private Words words = spy(new Words());
 
   @Test
   public void choosesRandomTopicAndWord() {
@@ -21,7 +21,7 @@ public class WordsTest {
         new Word("фауна", "верблюд")
     )).when(words).getDictionary("ru");
 
-    Map<String, Integer> count = new HashMap<String, Integer>();
+    Map<String, Integer> count = new HashMap<>();
     count.put("гвоздь", 0);
     count.put("унитаз", 0);
     count.put("чайник", 0);

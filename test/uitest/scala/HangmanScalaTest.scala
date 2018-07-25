@@ -1,4 +1,4 @@
-package ee.uitest.scala
+package uitest.scala
 
 import com.codeborne.selenide.Condition._
 import com.codeborne.selenide.Selenide._

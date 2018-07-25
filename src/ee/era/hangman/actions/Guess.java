@@ -5,8 +5,6 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
-import static java.lang.Character.toLowerCase;
-
 @ParentPackage("json-default")
 public class Guess extends GameActionSupport {
   public char letter;

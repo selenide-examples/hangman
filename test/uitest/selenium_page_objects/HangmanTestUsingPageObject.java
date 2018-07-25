@@ -53,7 +53,7 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   }
 
   @Test
-  public void userCanGuessLetters() throws InterruptedException {
+  public void userCanGuessLetters() {
     hangmanPage.guessLetter('S');
     assertEquals("s___", hangmanPage.wordInWork.getText());
     assertThat(hangmanPage.letter('S').getAttribute("class"), containsString("used"));
@@ -82,7 +82,7 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   }
 
   @Test
-  public void userCanChooseLanguage() throws InterruptedException {
+  public void userCanChooseLanguage() {
     hangmanPage = hangmanPage.selectLanguage("EST");
     assertEquals("maja", hangmanPage.topic.getText());
     assertEquals("____", hangmanPage.wordInWork.getText());

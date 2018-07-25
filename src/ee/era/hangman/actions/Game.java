@@ -8,7 +8,8 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
 
 public class Game extends GameActionSupport {
-  @Inject public static Words words;
+  @Inject
+  private Words words;
 
   private Word randomWord;
   private Hangman game;

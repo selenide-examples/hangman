@@ -1,13 +1,9 @@
 package uitest;
 
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.junit.ScreenShooter;
 import ee.era.hangman.Launcher;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Rule;
-
-import static com.codeborne.selenide.junit.ScreenShooter.failedTests;
 
 public abstract class AbstractHangmanTest {
   private static Launcher launcher;

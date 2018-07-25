@@ -1,6 +1,7 @@
 package ee.era.hangman.model;
 
 import static java.lang.Character.toLowerCase;
+import static org.apache.commons.lang3.StringUtils.repeat;
 
 public class Hangman {
   private final String correctWord;
@@ -10,7 +11,7 @@ public class Hangman {
 
   public Hangman(String correctWord) {
     this.correctWord = correctWord;
-    word = correctWord.replaceAll(".", "_");
+    word = repeat('_', correctWord.length());
   }
 
   public int getErrors() {

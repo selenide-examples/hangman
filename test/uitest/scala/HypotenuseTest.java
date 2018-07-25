@@ -1,4 +1,4 @@
-package ee.uitest.scala;
+package uitest.scala;
 
 import org.junit.Test;
 

@@ -11,7 +11,6 @@ import com.google.inject.struts2.Struts2GuicePluginModule;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import ee.era.hangman.actions.Game;
 
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 
@@ -33,7 +32,7 @@ public class GuiceListener extends GuiceServletContextListener {
           }
 
           @Provides @Named("dictionary") @Singleton
-          public DataSource addDataSource() throws NamingException, PropertyVetoException {
+          public DataSource addDataSource() throws PropertyVetoException {
             ComboPooledDataSource ds = new ComboPooledDataSource();
             ds.setDriverClass("org.h2.Driver");
             ds.setJdbcUrl("jdbc:h2:mem:");

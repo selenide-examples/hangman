@@ -16,7 +16,7 @@ public class Launcher {
     server = new Server(port);
   }
 
-  public Launcher run() throws Exception {
+  public void run() throws Exception {
     System.out.println("Start jetty launcher at " + port);
     System.out.println("Start hangman webapp at " + new File("webapp").getAbsolutePath());
 
@@ -26,16 +26,10 @@ public class Launcher {
 
     addShutdownHook();
     server.start();
-    return this;
   }
 
   private void addShutdownHook() {
-    Runtime.getRuntime().addShutdownHook(new Thread() {
-      @Override
-      public void run() {
-        Launcher.this.stop();
-      }
-    });
+    Runtime.getRuntime().addShutdownHook(new Thread(Launcher.this::stop));
   }
 
   public final void stop() {

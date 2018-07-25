@@ -1,4 +1,4 @@
-package ee.uitest.scala
+package uitest.scala
 
 import org.scalatest.{BeforeAndAfter, FlatSpec}
 import org.scalatest.Matchers

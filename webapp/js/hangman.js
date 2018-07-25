@@ -21,7 +21,7 @@ function showWordInWork() {
 	var wordContainer = $("#wordInWork");
 	wordContainer.empty();
 
-	for (i=0; i<wordInWork.length; i++) {
+	for (var i=0; i<wordInWork.length; i++) {
 		$("<span>" + wordInWork.charAt(i) + "</span>").appendTo(wordContainer);
 	}
 }
@@ -69,15 +69,15 @@ function showAlphabet() {
 	alphabetContainer.empty();
 
 	alphabetContainer.append("<table><tr>");
-	
-	for (i=0; i<alphabet.length; i++) {
+
+	for (var i=0; i<alphabet.length; i++) {
 		var letterContainer = $("<td></td>");
 		letterContainer.text(alphabet.charAt(i));
     letterContainer.attr("letter", alphabet.charAt(i));
     letterContainer.addClass("letter");
 		letterContainer.appendTo(alphabetContainer);
 
-		if (i % 11 == 10) {
+		if (i % 11 === 10) {
 		  $("</tr><tr>").appendTo(alphabetContainer);
 		}
 	}
@@ -85,9 +85,10 @@ function showAlphabet() {
 	alphabetContainer.append("</tr></table>");
 	alphabetContainer.append($("#startGame").clone().removeAttr('id'));
 
-	$(".letter").mouseover(function() {$(this).addClass('buttonover');});
-	$(".letter").mouseout(function() {$(this).removeClass('buttonover');});
-	$(".letter").click(function() {guessLetter(this)});
+	$(".letter")
+    .mouseover(function() {$(this).addClass('buttonover');})
+	  .mouseout(function() {$(this).removeClass('buttonover');})
+	  .click(function() {guessLetter(this)});
 }
 
 function guessLetter(letterContainer) {
@@ -111,7 +112,7 @@ function guessLetter(letterContainer) {
       failures = result.failures;
       showFailures(failures);
 
-      if (result.guessed == true) {
+      if (result.guessed === true) {
         letterContainer.addClass("used");
       } else {
         letterContainer.addClass("nonused");
