@@ -78,7 +78,7 @@ dependencies {
   compile 'org.apache.struts.xwork:xwork-core:2.3.24.3'
   compile 'org.apache.struts:struts2-convention-plugin:2.3.24.3'
   compile 'org.apache.struts:struts2-json-plugin:2.3.24.3'
-  compile 'org.liquibase:liquibase-core:3.5.2'
+  compile 'org.liquibase:liquibase-core:3.6.2'
   compile('com.google.inject.extensions:guice-struts2:4.0') {
     exclude group: 'com.google.guava'
   }
