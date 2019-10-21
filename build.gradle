@@ -58,12 +58,9 @@ task chrome(type: Test) {
   systemProperties['browser'] = 'chrome'
 }
 
-task phantomjs(type: Test) {
-  systemProperties['browser'] = 'phantomjs'
-}
-
 tasks.withType(Test).all { testTask ->
   testTask.systemProperties['file.encoding'] = 'UTF-8'
+  testTask.systemProperties['selenide.headless'] = 'true'
   testTask.testLogging.showStandardStreams = true
   testTask.outputs.upToDateWhen { false }
 }
@@ -89,7 +86,6 @@ dependencies {
   testCompile('junit:junit:4.12') {transitive = false}
   testCompile 'org.mockito:mockito-core:3.1.0'
   testCompile 'com.codeborne:selenide:5.4.1'
-  testCompile 'com.codeborne:phantomjsdriver:1.4.4'
   testCompile 'org.scala-lang:scala-library:2.11.8'
   testCompile 'org.scalatest:scalatest_2.11:3.0.0'
 }

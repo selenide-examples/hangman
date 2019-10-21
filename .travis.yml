@@ -1,5 +1,25 @@
+git:
+  depth: 100
+
 language: java
-script: TERM=dumb gradle clean test htmlunit
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+
+jdk:
+  - openjdk8
+
+addons:
+  apt:
+    update: true
+  chrome: stable
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+before_install:
+  - sudo apt-get install -y libappindicator1 fonts-liberation
+  - export CHROME_BIN=/usr/bin/google-chrome
+
+install: true
+
+script: "java -version; ./gradlew clean test htmlunit chrome"
