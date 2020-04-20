@@ -23,7 +23,6 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
 
   @BeforeClass
   public static void startBrowser() {
-//    driver = new HtmlUnitDriver();
 //    driver = new FirefoxDriver();
     WebDriverManager.chromedriver().setup();
     ChromeOptions options = new ChromeOptions();

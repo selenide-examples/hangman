@@ -22,4 +22,4 @@ before_install:
 
 install: true
 
-script: "java -version; ./gradlew clean test htmlunit chrome"
+script: "java -version; ./gradlew clean test chrome"
