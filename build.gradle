@@ -82,8 +82,8 @@ dependencies {
   testCompile('junit:junit:4.13.1') {transitive = false}
   testCompile 'org.mockito:mockito-core:3.7.7'
   testCompile 'com.codeborne:selenide:5.18.0'
-  testCompile 'org.scala-lang:scala-library:2.11.8'
-  testCompile 'org.scalatest:scalatest_2.11:3.0.0'
+  testCompile 'org.scala-lang:scala-library:2.13.4'
+  testCompile 'org.scalatest:scalatest_2.13:3.2.3'
 }
 
 task(run, dependsOn: 'compile', type: JavaExec) {
