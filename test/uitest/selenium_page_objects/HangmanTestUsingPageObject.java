@@ -8,14 +8,16 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.PageFactory;
 import uitest.AbstractHangmanTest;
 
 import static java.lang.Thread.sleep;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   private static WebDriver driver;
@@ -23,11 +25,26 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
 
   @BeforeClass
   public static void startBrowser() {
-//    driver = new FirefoxDriver();
-    WebDriverManager.chromedriver().setup();
-    ChromeOptions options = new ChromeOptions();
-    options.setHeadless("true".equals(System.getProperty("selenide.headless")));
-    driver = new ChromeDriver(options);
+    String browser = System.getProperty("selenide.browser");
+    if ("chrome".equals(browser)) {
+      WebDriverManager.chromedriver().setup();
+      ChromeOptions options = new ChromeOptions();
+      options.setHeadless("true".equals(System.getProperty("selenide.headless")));
+      driver = new ChromeDriver(options);
+    }
+    else if ("firefox".equals(browser)) {
+      WebDriverManager.firefoxdriver().setup();
+      FirefoxOptions options = new FirefoxOptions();
+      options.setHeadless("true".equals(System.getProperty("selenide.headless")));
+      driver = new FirefoxDriver(options);
+    }
+    else if ("edge".equals(browser)) {
+      WebDriverManager.edgedriver().setup();
+      driver = new EdgeDriver();
+    }
+    else {
+      throw new IllegalArgumentException("Unknown selenide.browser='" + browser + "'");
+    }
   }
 
   @AfterClass
@@ -47,18 +64,18 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
 
   @Test
   public void showsTopic() {
-    assertEquals("house", hangmanPage.topic.getText());
+    assertThat(hangmanPage.topic.getText(), is("house"));
   }
 
   @Test
   public void showsMaskedWord() {
-    assertEquals("____", hangmanPage.wordInWork.getText());
+    assertThat(hangmanPage.wordInWork.getText(), is("____"));
   }
 
   @Test
   public void userCanGuessLetters() {
     hangmanPage.guessLetter('S');
-    assertEquals("s___", hangmanPage.wordInWork.getText());
+    assertThat(hangmanPage.wordInWork.getText(), is("s___"));
     assertThat(hangmanPage.letter('S').getAttribute("class"), containsString("used"));
   }
 
@@ -87,18 +104,18 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   @Test
   public void userCanChooseLanguage() {
     hangmanPage = hangmanPage.selectLanguage("EST");
-    assertEquals("maja", hangmanPage.topic.getText());
-    assertEquals("____", hangmanPage.wordInWork.getText());
-    assertEquals(27, hangmanPage.alphabet.size());
+    assertThat(hangmanPage.topic.getText(), is("maja"));
+    assertThat(hangmanPage.wordInWork.getText(), is("____"));
+    assertThat(hangmanPage.alphabet.size(), is(27));
 
     hangmanPage = hangmanPage.selectLanguage("RUS");
-    assertEquals("дом", hangmanPage.topic.getText());
-    assertEquals("______", hangmanPage.wordInWork.getText());
-    assertEquals(33, hangmanPage.alphabet.size());
+    assertThat(hangmanPage.topic.getText(), is("дом"));
+    assertThat(hangmanPage.wordInWork.getText(), is("______"));
+    assertThat(hangmanPage.alphabet.size(), is(33));
 
     hangmanPage = hangmanPage.selectLanguage("ENG");
-    assertEquals("house", hangmanPage.topic.getText());
-    assertEquals("____", hangmanPage.wordInWork.getText());
-    assertEquals(26, hangmanPage.alphabet.size());
+    assertThat(hangmanPage.topic.getText(), is("house"));
+    assertThat(hangmanPage.wordInWork.getText(), is("____"));
+    assertThat(hangmanPage.alphabet.size(), is(26));
   }
 }

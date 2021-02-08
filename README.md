@@ -12,11 +12,15 @@ To compile & run unit-tests:
 
 To run UI Tests (in FireFox):
   
-* `./gradlew uitest`
+* `./gradlew uitest_firefox`
 
 To run UI Tests (in Chrome):
   
-* `./gradlew chrome`
+* `./gradlew uitest_chrome`
+
+To run UI Tests (in Microsoft Edge):
+  
+* `./gradlew uitest_edge`
 
 
 

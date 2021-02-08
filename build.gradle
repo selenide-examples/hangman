@@ -39,17 +39,16 @@ test {
   include 'ee/era/hangman/**'
 }
 
-task uitest(type: Test) {
-  systemProperties['browser'] = 'firefox'
+task uitest_firefox(type: Test) {
+  systemProperties['selenide.browser'] = 'firefox'
 }
 
-task ie(type: Test) {
-  systemProperties['browser'] = 'ie'
-  systemProperties['timeout'] = '12000'
+task uitest_edge(type: Test) {
+  systemProperties['selenide.browser'] = 'edge'
 }
 
-task chrome(type: Test) {
-  systemProperties['browser'] = 'chrome'
+task uitest_chrome(type: Test) {
+  systemProperties['selenide.browser'] = 'chrome'
 }
 
 tasks.withType(Test).all { testTask ->
