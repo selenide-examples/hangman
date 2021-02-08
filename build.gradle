@@ -2,7 +2,6 @@ defaultTasks 'clean', 'test'
 
 apply plugin: 'java'
 apply plugin: 'war'
-apply plugin: 'scala'
 
 sourceSets {
   main {
@@ -12,7 +11,6 @@ sourceSets {
   test {
     java {srcDir 'test'}
     resources {srcDir 'test'}
-    scala { srcDirs 'test' }
   }
 }
 
@@ -31,8 +29,8 @@ task libs(type: Sync) {
 
 classes.dependsOn libs
 
-[compileJava, compileTestJava, compileScala, compileTestScala]*.options.collect {options -> options.encoding = 'UTF-8'}
-[compileJava, compileTestJava, compileScala, compileTestScala]*.options.collect {options -> options.debug = true}
+[compileJava, compileTestJava]*.options.collect {options -> options.encoding = 'UTF-8'}
+[compileJava, compileTestJava]*.options.collect {options -> options.debug = true}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -82,8 +80,6 @@ dependencies {
   testCompile('junit:junit:4.13.1') {transitive = false}
   testCompile 'org.mockito:mockito-core:3.7.7'
   testCompile 'com.codeborne:selenide:5.18.0'
-  testCompile 'org.scala-lang:scala-library:2.13.4'
-  testCompile 'org.scalatest:scalatest_2.13:3.2.3'
 }
 
 task(run, dependsOn: 'compile', type: JavaExec) {
