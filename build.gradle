@@ -62,17 +62,17 @@ tasks.withType(Test).all { testTask ->
 }
 
 dependencies {
-  providedCompile 'org.eclipse.jetty:jetty-server:9.3.9.M1'
-  providedCompile 'org.eclipse.jetty:jetty-webapp:9.3.9.M1'
+  providedCompile 'org.eclipse.jetty:jetty-server:9.4.36.v20210114'
+  providedCompile 'org.eclipse.jetty:jetty-webapp:9.4.36.v20210114'
   providedCompile 'org.eclipse.jetty:jetty-jsp:9.3.0.M1'
-  providedCompile 'org.eclipse.jetty.toolchain:jetty-osgi-servlet-api:3.1.0.M3'
+  providedCompile 'org.eclipse.jetty.toolchain:jetty-osgi-servlet-api:4.0.1'
 
-  compile 'org.apache.struts:struts2-core:2.3.24.3'
-  compile 'org.apache.struts.xwork:xwork-core:2.3.24.3'
-  compile 'org.apache.struts:struts2-convention-plugin:2.3.24.3'
-  compile 'org.apache.struts:struts2-json-plugin:2.3.24.3'
+  compile 'org.apache.struts:struts2-core:2.3.37'
+  compile 'org.apache.struts.xwork:xwork-core:2.3.37'
+  compile 'org.apache.struts:struts2-convention-plugin:2.3.37'
+  compile 'org.apache.struts:struts2-json-plugin:2.3.37'
   compile 'org.liquibase:liquibase-core:4.2.2'
-  compile('com.google.inject.extensions:guice-struts2:4.0') {
+  compile('com.google.inject.extensions:guice-struts2:4.2.3') {
     exclude group: 'com.google.guava'
   }
   runtime 'com.h2database:h2:1.4.200'
