@@ -1,5 +1,5 @@
 git:
-  depth: 100
+  depth: 3
 
 language: java
 
