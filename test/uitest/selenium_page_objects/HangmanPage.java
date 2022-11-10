@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class HangmanPage {
@@ -35,7 +36,7 @@ public class HangmanPage {
 
   public HangmanPage(WebDriver driver) {
     this.driver = driver;
-    new WebDriverWait(driver, 3).until(visibilityOfElementLocated(By.id("topic")));
+    new WebDriverWait(driver, ofSeconds(3)).until(visibilityOfElementLocated(By.id("topic")));
   }
 
   public void guessLetter(char letter) {

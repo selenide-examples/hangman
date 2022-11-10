@@ -41,6 +41,8 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
     }
     else if ("edge".equals(browser)) {
       WebDriverManager.edgedriver().setup();
+      EdgeOptions options = new EdgeOptions();
+      options.setHeadless("true".equals(System.getProperty("selenide.headless")));
       driver = new EdgeDriver();
     }
     else {
@@ -51,7 +53,7 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
   @AfterClass
   public static void closeBrowser() {
     if (driver != null) {
-      driver.close();
+      driver.quit();
     }
   }
 
