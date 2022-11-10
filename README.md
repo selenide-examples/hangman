@@ -12,15 +12,18 @@ To compile & run unit-tests:
 
 To run UI Tests (in FireFox):
   
-* `./gradlew uitest_firefox`
+* `./gradlew uitest_firefox`, or
+* `./gradlew uitest_firefox -Dselenide.headless=true`
 
 To run UI Tests (in Chrome):
   
-* `./gradlew uitest_chrome`
+* `./gradlew uitest_chrome`, or
+* `./gradlew uitest_chrome -Dselenide.headless=true`
 
 To run UI Tests (in Microsoft Edge):
   
-* `./gradlew uitest_edge`
+* `./gradlew uitest_edge`, or
+* `./gradlew uitest_edge -Dselenide.headless=true`
 
 
 
