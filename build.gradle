@@ -53,8 +53,8 @@ tasks.withType(Test) {
 }
 
 dependencies {
-  implementation 'org.eclipse.jetty:jetty-server:9.4.36.v20210114'
-  implementation 'org.eclipse.jetty:jetty-webapp:9.4.36.v20210114'
+  implementation 'org.eclipse.jetty:jetty-server:9.4.48.v20220622'
+  implementation 'org.eclipse.jetty:jetty-webapp:9.4.48.v20220622'
   implementation 'org.eclipse.jetty:jetty-jsp:9.3.0.M1'
   implementation 'org.eclipse.jetty.toolchain:jetty-osgi-servlet-api:4.0.1'
 
@@ -62,18 +62,18 @@ dependencies {
   implementation 'org.apache.struts.xwork:xwork-core:2.3.37'
   implementation 'org.apache.struts:struts2-convention-plugin:2.3.37'
   implementation 'org.apache.struts:struts2-json-plugin:2.3.37'
-  implementation 'org.liquibase:liquibase-core:4.2.2'
+  implementation 'org.liquibase:liquibase-core:4.8.0'
   implementation('com.google.inject.extensions:guice-struts2:4.2.3') {
     exclude group: 'com.google.guava'
   }
   implementation 'com.google.guava:guava:31.1-jre'
   runtimeOnly 'com.h2database:h2:1.4.200'
   implementation 'c3p0:c3p0:0.9.1.2'
-  testRuntimeOnly 'org.slf4j:slf4j-log4j12:2.0.3'
+  testRuntimeOnly 'org.slf4j:slf4j-log4j12:2.0.6'
   testImplementation 'org.hamcrest:hamcrest-all:1.3'
   testImplementation('junit:junit:4.13.2') {transitive = false}
-  testImplementation 'org.mockito:mockito-core:4.8.1'
-  testImplementation 'com.codeborne:selenide:6.9.0'
+  testImplementation 'org.mockito:mockito-core:4.11.0'
+  testImplementation 'com.codeborne:selenide:6.12.2'
 }
 
 task(run, dependsOn: 'compileJava', type: JavaExec) {

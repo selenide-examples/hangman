@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -30,23 +31,33 @@ public class HangmanTestUsingPageObject extends AbstractHangmanTest {
     if ("chrome".equals(browser)) {
       WebDriverManager.chromedriver().setup();
       ChromeOptions options = new ChromeOptions();
-      options.setHeadless("true".equals(System.getProperty("selenide.headless")));
+      setChromiumHeadless(options);
+      options.addArguments("--remote-allow-origins=*");
       driver = new ChromeDriver(options);
     }
     else if ("firefox".equals(browser)) {
       WebDriverManager.firefoxdriver().setup();
       FirefoxOptions options = new FirefoxOptions();
-      options.setHeadless("true".equals(System.getProperty("selenide.headless")));
+      if ("true".equals(System.getProperty("selenide.headless"))) {
+        options.addArguments("-headless");
+      }
       driver = new FirefoxDriver(options);
     }
     else if ("edge".equals(browser)) {
       WebDriverManager.edgedriver().setup();
       EdgeOptions options = new EdgeOptions();
-      options.setHeadless("true".equals(System.getProperty("selenide.headless")));
+      setChromiumHeadless(options);
+      options.addArguments("--remote-allow-origins=*");
       driver = new EdgeDriver();
     }
     else {
       throw new IllegalArgumentException("Unknown selenide.browser='" + browser + "'");
+    }
+  }
+
+  private static void setChromiumHeadless(ChromiumOptions<?> options) {
+    if ("true".equals(System.getProperty("selenide.headless"))) {
+      options.addArguments("--headless=new");
     }
   }
 
