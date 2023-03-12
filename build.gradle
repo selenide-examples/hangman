@@ -54,7 +54,7 @@ tasks.withType(Test) {
 
 dependencies {
   implementation 'org.eclipse.jetty:jetty-server:9.4.48.v20220622'
-  implementation 'org.eclipse.jetty:jetty-webapp:9.4.48.v20220622'
+  implementation 'org.eclipse.jetty:jetty-webapp:11.0.14'
   implementation 'org.eclipse.jetty:jetty-jsp:9.3.0.M1'
   implementation 'org.eclipse.jetty.toolchain:jetty-osgi-servlet-api:4.0.1'
 
