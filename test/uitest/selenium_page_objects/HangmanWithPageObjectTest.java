@@ -1,18 +1,10 @@
 package uitest.selenium_page_objects;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.chromium.ChromiumOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.PageFactory;
 import uitest.AbstractHangmanTest;
 
@@ -21,44 +13,13 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class HangmanTestUsingPageObject extends AbstractHangmanTest {
+public class HangmanWithPageObjectTest extends AbstractHangmanTest {
   private static WebDriver driver;
   private HangmanPage hangmanPage;
 
   @BeforeClass
   public static void startBrowser() {
-    String browser = System.getProperty("selenide.browser");
-    if ("chrome".equals(browser)) {
-      WebDriverManager.chromedriver().setup();
-      ChromeOptions options = new ChromeOptions();
-      setChromiumHeadless(options);
-      options.addArguments("--remote-allow-origins=*");
-      driver = new ChromeDriver(options);
-    }
-    else if ("firefox".equals(browser)) {
-      WebDriverManager.firefoxdriver().setup();
-      FirefoxOptions options = new FirefoxOptions();
-      if ("true".equals(System.getProperty("selenide.headless"))) {
-        options.addArguments("-headless");
-      }
-      driver = new FirefoxDriver(options);
-    }
-    else if ("edge".equals(browser)) {
-      WebDriverManager.edgedriver().setup();
-      EdgeOptions options = new EdgeOptions();
-      setChromiumHeadless(options);
-      options.addArguments("--remote-allow-origins=*");
-      driver = new EdgeDriver();
-    }
-    else {
-      throw new IllegalArgumentException("Unknown selenide.browser='" + browser + "'");
-    }
-  }
-
-  private static void setChromiumHeadless(ChromiumOptions<?> options) {
-    if ("true".equals(System.getProperty("selenide.headless"))) {
-      options.addArguments("--headless=new");
-    }
+    driver = SeleniumFactory.createDriver();
   }
 
   @AfterClass
