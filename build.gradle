@@ -58,7 +58,7 @@ dependencies {
   implementation 'org.eclipse.jetty:jetty-jsp:9.3.0.M1'
   implementation 'org.eclipse.jetty.toolchain:jetty-osgi-servlet-api:4.0.1'
 
-  implementation 'org.apache.struts:struts2-core:2.3.37'
+  implementation 'org.apache.struts:struts2-core:6.1.2'
   implementation 'org.apache.struts.xwork:xwork-core:2.3.37'
   implementation 'org.apache.struts:struts2-convention-plugin:2.3.37'
   implementation 'org.apache.struts:struts2-json-plugin:2.3.37'
