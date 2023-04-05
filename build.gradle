@@ -73,7 +73,7 @@ dependencies {
   testImplementation 'org.hamcrest:hamcrest-all:1.3'
   testImplementation('junit:junit:4.13.2') {transitive = false}
   testImplementation 'org.mockito:mockito-core:4.11.0'
-  testImplementation 'com.codeborne:selenide:6.12.4'
+  testImplementation 'com.codeborne:selenide:6.13.0'
 }
 
 task(run, dependsOn: 'compileJava', type: JavaExec) {
