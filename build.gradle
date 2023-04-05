@@ -68,7 +68,7 @@ dependencies {
   }
   implementation('commons-io:commons-io:2.11.0') {because 'used by Struts, but much older version 2.2'}
   implementation 'com.google.guava:guava:31.1-jre'
-  runtimeOnly 'com.h2database:h2:1.4.200'
+  runtimeOnly 'com.h2database:h2:2.1.214'
   implementation 'c3p0:c3p0:0.9.1.2'
   implementation 'org.slf4j:slf4j-api:2.0.7'
   runtimeOnly 'org.slf4j:slf4j-log4j12:2.0.7'
