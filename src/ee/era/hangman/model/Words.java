@@ -3,6 +3,8 @@ package ee.era.hangman.model;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,6 +18,8 @@ import java.util.Map;
 
 @Singleton
 public class Words {
+  private static final Logger log = LoggerFactory.getLogger(Words.class);
+
   @Inject @Named("dictionary")
   private DataSource dataSource;
 
@@ -32,12 +36,12 @@ public class Words {
 
   private void showTables() {
     try (Connection connection = dataSource.getConnection()) {
-      System.out.println("Read database " + connection.getMetaData().getURL());
+      log.info("Read database {}", connection.getMetaData().getURL());
 
       try (PreparedStatement statement = connection.prepareStatement("SHOW TABLES")) {
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
-            System.out.println(resultSet.getString(1));
+            log.info(resultSet.getString(1));
           }
         }
       }
@@ -47,12 +51,12 @@ public class Words {
   }
   private void showColumns(String tableName) {
     try (Connection connection = dataSource.getConnection()) {
-      System.out.println("Read database " + connection.getMetaData().getURL());
+      log.info("Read database {}", connection.getMetaData().getURL());
 
       try (PreparedStatement statement = connection.prepareStatement("SHOW COLUMNS FROM " + tableName)) {
         try (ResultSet resultSet = statement.executeQuery()) {
           while (resultSet.next()) {
-            System.out.println(resultSet.getString(1) + ": " + resultSet.getString(1));
+            log.info("{}: {}", resultSet.getString(1), resultSet.getString(1));
           }
         }
       }
