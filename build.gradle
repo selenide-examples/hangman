@@ -65,7 +65,7 @@ dependencies {
   implementation('org.liquibase:liquibase-core:4.20.0') {
     exclude group: 'org.yaml'
   }
-  implementation('com.google.inject.extensions:guice-struts2:4.2.3') {
+  implementation('com.google.inject.extensions:guice-struts2:5.1.0') {
     exclude group: 'com.google.guava'
   }
   implementation('commons-io:commons-io:2.11.0') {because 'used by Struts, but much older version 2.2'}
