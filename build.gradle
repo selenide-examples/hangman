@@ -28,26 +28,26 @@ test {
   include 'ee/era/hangman/**'
 }
 
-task uitest_firefox(type: Test) {
+tasks.register('uitest_firefox', Test) {
   systemProperties['selenide.browser'] = 'firefox'
 }
 
-task uitest_edge(type: Test) {
+tasks.register('uitest_edge', Test) {
   systemProperties['selenide.browser'] = 'edge'
 }
 
-task uitest_chrome(type: Test) {
+tasks.register('uitest_chrome', Test) {
   systemProperties['selenide.browser'] = 'chrome'
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
   systemProperties['file.encoding'] = 'UTF-8'
   System.properties.stringPropertyNames()
-      .findAll { it.startsWith("selenide.") }
-      .forEach {
-        println " set ${it} to ${System.getProperty(it)}"
-        systemProperties[it] = System.getProperty(it)
-      }
+    .findAll { it.startsWith("selenide.") }
+    .forEach {
+      println " set ${it} to ${System.getProperty(it)}"
+      systemProperties[it] = System.getProperty(it)
+    }
   testLogging.showStandardStreams = true
   outputs.upToDateWhen { false }
 }
@@ -62,7 +62,9 @@ dependencies {
   implementation 'org.apache.struts.xwork:xwork-core:2.3.37'
   implementation 'org.apache.struts:struts2-convention-plugin:2.3.37'
   implementation 'org.apache.struts:struts2-json-plugin:2.3.37'
-  implementation 'org.liquibase:liquibase-core:4.20.0'
+  implementation('org.liquibase:liquibase-core:4.20.0') {
+    exclude group: 'org.yaml'
+  }
   implementation('com.google.inject.extensions:guice-struts2:4.2.3') {
     exclude group: 'com.google.guava'
   }
@@ -78,8 +80,9 @@ dependencies {
   testImplementation 'com.codeborne:selenide:6.13.0'
 }
 
-task(run, dependsOn: 'compileJava', type: JavaExec) {
-  main = 'ee.era.hangman.Launcher'
+tasks.register('run', JavaExec) {
+  dependsOn 'compileJava'
+  mainClass = 'ee.era.hangman.Launcher'
   classpath = sourceSets.main.runtimeClasspath
   systemProperty 'file.encoding', 'UTF-8'
 }
