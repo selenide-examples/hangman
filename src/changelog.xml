@@ -10,10 +10,10 @@
       <column name="lang" type="varchar(2)">
         <constraints nullable="false" unique="false"/>
       </column>
-      <column name="topic" type="varchar2(62 CHAR)">
+      <column name="topic" type="varchar(62)">
         <constraints nullable="false" unique="false"/>
       </column>
-      <column name="word" type="varchar2(32 CHAR)">
+      <column name="word" type="varchar(32)">
         <constraints nullable="false" unique="false"/>
       </column>
     </createTable>
@@ -53,7 +53,7 @@
       <column name="lang" type="varchar(2)">
         <constraints nullable="false" unique="true" uniqueConstraintName="languages_lang_uq"/>
       </column>
-      <column name="alphabet" type="varchar2(512 CHAR)"/>
+      <column name="alphabet" type="varchar(512)"/>
     </createTable>
   </changeSet>
 
