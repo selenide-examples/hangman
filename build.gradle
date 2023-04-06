@@ -61,7 +61,7 @@ dependencies {
   implementation 'org.apache.struts:struts2-core:2.3.37'
   implementation 'org.apache.struts.xwork:xwork-core:2.3.37'
   implementation 'org.apache.struts:struts2-convention-plugin:2.3.37'
-  implementation 'org.apache.struts:struts2-json-plugin:2.3.37'
+  implementation 'org.apache.struts:struts2-json-plugin:6.1.2'
   implementation('org.liquibase:liquibase-core:4.20.0') {
     exclude group: 'org.yaml'
   }
