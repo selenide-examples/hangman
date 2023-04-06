@@ -35,7 +35,7 @@ public class GuiceListener extends GuiceServletContextListener {
           public DataSource addDataSource() throws PropertyVetoException {
             ComboPooledDataSource ds = new ComboPooledDataSource();
             ds.setDriverClass("org.h2.Driver");
-            ds.setJdbcUrl("jdbc:h2:mem:");
+            ds.setJdbcUrl("jdbc:h2:mem:hangman");
             ds.setUser("sa");
             ds.setPassword("");
             ds.setMinPoolSize(1);
