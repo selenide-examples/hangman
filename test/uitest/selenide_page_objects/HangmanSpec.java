@@ -12,7 +12,7 @@ public class HangmanSpec extends AbstractHangmanTest {
   
   @Before
   public void startGame() {
-    page = open("/hangman", HangmanPage.class);
+    page = open("/", HangmanPage.class);
     page.selectLanguage("ENG");
   }
 

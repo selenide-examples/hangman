@@ -1,8 +1,5 @@
 package ee.era.hangman.model;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +13,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Singleton
-public class Words {
-  private static final Logger log = LoggerFactory.getLogger(Words.class);
+public class WordsService {
+  private static final Logger log = LoggerFactory.getLogger(WordsService.class);
+  
+  private final DataSource dataSource;
 
-  @Inject @Named("dictionary")
-  private DataSource dataSource;
+  public WordsService(DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
 
   public String getAlphabet(String language) {
     return getLanguages().get(language).getAlphabet();
@@ -49,6 +48,7 @@ public class Words {
       throw new RuntimeException(e);
     }
   }
+
   private void showColumns(String tableName) {
     try (Connection connection = dataSource.getConnection()) {
       log.info("Read database {}", connection.getMetaData().getURL());

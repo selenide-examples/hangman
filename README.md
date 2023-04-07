@@ -31,15 +31,13 @@ To run UI Tests (in Microsoft Edge):
 * `src` - Java sources
 * `test/ee/` - unit-tests
 * `test/uitest/` - UI tests
-* `webapp` - web application resources
+* `src/webapp` - web application resources
 
 # Technology
-* web framework - `Struts 2`
 * unit-tests - `JUnit`
 * UI Tests - `Selenide`
 * Database - `H2` (in-memory database, especially useful in tests)
 * Database migration - `LiquiBase`
-* Dependency injection - `Guice`
 
 
 # Thanks

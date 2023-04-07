@@ -2,16 +2,19 @@ package ee.era.hangman.model;
 
 import org.junit.Test;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
-public class WordsTest {
-  private Words words = spy(new Words());
+public class WordsServiceTest {
+  private final DataSource dataSource = mock();
+  private final WordsService wordsService = spy(new WordsService(dataSource));
 
   @Test
   public void choosesRandomTopicAndWord() {
@@ -19,7 +22,7 @@ public class WordsTest {
         new Word("дом", "гвоздь"), new Word("дом", "унитаз"), new Word("дом", "чайник"),
         new Word("флора", "гвоздика"), new Word("флора", "куст"),
         new Word("фауна", "верблюд")
-    )).when(words).getDictionary("ru");
+    )).when(wordsService).getDictionary("ru");
 
     Map<String, Integer> count = new HashMap<>();
     count.put("гвоздь", 0);
@@ -30,7 +33,7 @@ public class WordsTest {
     count.put("верблюд", 0);
 
     for (int i = 0; i < 2 * 6000; i++) {
-      Word randomWord = words.getRandomWord("ru");
+      Word randomWord = wordsService.getRandomWord("ru");
       count.put(randomWord.getWord(), count.get(randomWord.getWord()) + 1);
     }
 

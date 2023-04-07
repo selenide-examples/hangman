@@ -1,42 +1,39 @@
 package ee.era.hangman.actions;
 
-import com.google.inject.Inject;
+import ee.era.hangman.Request;
+import ee.era.hangman.Response;
+import ee.era.hangman.Session;
 import ee.era.hangman.model.Hangman;
 import ee.era.hangman.model.Word;
-import ee.era.hangman.model.Words;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Result;
+import ee.era.hangman.model.WordsService;
 
-public class Game extends GameActionSupport {
-  @Inject
-  private Words words;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Map;
 
-  private Word randomWord;
-  private Hangman game;
+import static ee.era.hangman.Response.json;
+import static java.util.Objects.requireNonNull;
 
-  @Action(value = "game", results = {
-      @Result(name = "success", type = "freemarker", location = "game.ftl")
-  })
-  public String startGame() {
-    randomWord = words.getRandomWord(getLanguage());
-    game = new Hangman(randomWord.getWord());
-    session.put("hangman", game);
-    return SUCCESS;
+@ParametersAreNonnullByDefault
+public class Game {
+  private final WordsService wordsService;
+
+  public Game(WordsService wordsService) {
+    this.wordsService = wordsService;
   }
 
-  public String getAlphabet() {
-    return words.getAlphabet(getLanguage());
-  }
+  public Response startGame(Request request) {
+    Session session = request.getSession();
+    String language = requireNonNull(session.getLanguage());
+    Word randomWord = wordsService.getRandomWord(language);
+    Hangman game = new Hangman(randomWord.getWord());
+    session.setAttribute("hangman", game);
 
-  private String getLanguage() {
-    return getLocale().getLanguage();
-  }
-
-  public String getWord() {
-    return game.getWord();
-  }
-
-  public String getTopic() {
-    return randomWord.getTopic();
+    Map<String, Object> response = Map.of(
+      "alphabet", wordsService.getAlphabet(language),
+      "language", language,
+      "word", game.getWord(),
+      "topic", randomWord.getTopic()
+    );
+    return json(200, response);
   }
 }

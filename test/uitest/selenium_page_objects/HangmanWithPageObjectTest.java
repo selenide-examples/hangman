@@ -31,7 +31,7 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
 
   @Before
   public void startGame() throws InterruptedException {
-    driver.get("http://localhost:9999/hangman");
+    driver.get("http://localhost:9999");
     hangmanPage = PageFactory.initElements(driver, HangmanPage.class);
     hangmanPage.selectLanguage("ENG");
     sleep(1000);
