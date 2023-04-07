@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import uitest.AbstractHangmanTest;
 
-import static java.lang.Thread.sleep;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,11 +29,10 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
   }
 
   @Before
-  public void startGame() throws InterruptedException {
+  public void startGame() {
     driver.get("http://localhost:9999");
     hangmanPage = PageFactory.initElements(driver, HangmanPage.class);
-    hangmanPage.selectLanguage("ENG");
-    sleep(1000);
+    hangmanPage.selectLanguage("ENG", "Topic");
   }
 
   @Test
@@ -78,17 +76,17 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
 
   @Test
   public void userCanChooseLanguage() {
-    hangmanPage = hangmanPage.selectLanguage("EST");
+    hangmanPage.selectLanguage("EST", "Teema");
     assertThat(hangmanPage.topic.getText(), is("maja"));
     assertThat(hangmanPage.wordInWork.getText(), is("____"));
     assertThat(hangmanPage.alphabet.size(), is(27));
 
-    hangmanPage = hangmanPage.selectLanguage("RUS");
+    hangmanPage = hangmanPage.selectLanguage("RUS", "Тема");
     assertThat(hangmanPage.topic.getText(), is("дом"));
     assertThat(hangmanPage.wordInWork.getText(), is("______"));
     assertThat(hangmanPage.alphabet.size(), is(33));
 
-    hangmanPage = hangmanPage.selectLanguage("ENG");
+    hangmanPage = hangmanPage.selectLanguage("ENG", "Topic");
     assertThat(hangmanPage.topic.getText(), is("house"));
     assertThat(hangmanPage.wordInWork.getText(), is("____"));
     assertThat(hangmanPage.alphabet.size(), is(26));

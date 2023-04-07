@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -19,6 +20,10 @@ public class HangmanPage {
   @FindBy(id = "topic")
   @CacheLookup
   WebElement topic;
+
+  @FindBy(id = "topic-label")
+  @CacheLookup
+  WebElement topicLabel;
 
   @FindBy(id = "wordInWork")
   @CacheLookup
@@ -47,8 +52,9 @@ public class HangmanPage {
     return driver.findElement(By.xpath("//*[@letter='" + letter + "']"));
   }
 
-  public HangmanPage selectLanguage(String language) {
+  public HangmanPage selectLanguage(String language, String expectedTopicLabel) {
     driver.findElement(By.linkText(language)).click();
+    new FluentWait<>(topicLabel).until(e -> e.getText().equals(expectedTopicLabel));
     return PageFactory.initElements(driver, HangmanPage.class);
   }
 }
