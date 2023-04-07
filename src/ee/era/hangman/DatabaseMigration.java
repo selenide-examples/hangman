@@ -1,7 +1,5 @@
 package ee.era.hangman;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
@@ -10,22 +8,22 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletContextEvent;
 import javax.sql.DataSource;
 import java.sql.Connection;
 
-public class LiquibaseServletListener implements javax.servlet.ServletContextListener {
-  private static final Logger log = LoggerFactory.getLogger(LiquibaseServletListener.class);
+public class DatabaseMigration {
+  private static final Logger log = LoggerFactory.getLogger(DatabaseMigration.class);
   
-  @Inject @Named("dictionary")
-  private static DataSource dataSource;
+  private final DataSource dataSource;
+  private final String environment;
 
-  @Inject @Named("environment")
-  private static String environment;
+  public DatabaseMigration(DataSource dataSource, String environment) {
+    this.dataSource = dataSource;
+    this.environment = environment;
+  }
 
-  @Override
-  public void contextInitialized(ServletContextEvent servletContextEvent) {
-    log.info("Context initialized: {}, dataSource: {}, environment: {}", servletContextEvent, dataSource, environment);
+  public void migrate() {
+    log.info("Context initialized - dataSource: {}, environment: {}", dataSource, environment);
 
     try (Connection connection = dataSource.getConnection()) {
       log.info("Initialize database {}", connection.getMetaData().getURL());
@@ -39,10 +37,5 @@ public class LiquibaseServletListener implements javax.servlet.ServletContextLis
       throw new RuntimeException(e);
     }
     log.info("Database migration completed");
-  }
-
-  @Override
-  public void contextDestroyed(ServletContextEvent servletContextEvent) {
-    log.info("Context destroyed: {}", servletContextEvent);
   }
 }

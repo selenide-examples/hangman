@@ -20,13 +20,13 @@ public abstract class AbstractHangmanTest {
   public synchronized static void startServer() throws Exception {
     if (launcher == null) {
       Configuration.baseUrl = "http://localhost:9999";
-      log.info("Starting {}/hangman (user dir: {}) ...", Configuration.baseUrl, System.getProperty("user.dir"));
-      launcher = new Launcher("test", 9999);
+      log.info("Starting {} (user dir: {}) ...", Configuration.baseUrl, System.getProperty("user.dir"));
+      launcher = new Launcher("test", "localhost", 9999);
       launcher.run();
-      log.info("Started {}/hangman (user dir: {})", Configuration.baseUrl, System.getProperty("user.dir"));
+      log.info("Started {} (user dir: {})", Configuration.baseUrl, System.getProperty("user.dir"));
     }
 
-    String sanityCheck = IOUtils.toString(new URL(Configuration.baseUrl + "/hangman"), UTF_8);
+    String sanityCheck = IOUtils.toString(new URL(Configuration.baseUrl), UTF_8);
     log.info("Sanity check passed: {}", substring(sanityCheck, 0, 42));
   }
 

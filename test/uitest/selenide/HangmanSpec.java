@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class HangmanSpec extends AbstractHangmanTest {
   @Before
   public void startGame() {
-    open("/hangman");
+    open("/");
     $(byText("ENG")).click();
   }
 
