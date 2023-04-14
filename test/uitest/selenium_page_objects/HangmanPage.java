@@ -54,7 +54,8 @@ public class HangmanPage {
 
   public HangmanPage selectLanguage(String language, String expectedTopicLabel) {
     driver.findElement(By.linkText(language)).click();
-    new FluentWait<>(topicLabel).until(e -> e.getText().equals(expectedTopicLabel));
-    return PageFactory.initElements(driver, HangmanPage.class);
+    HangmanPage newPage = PageFactory.initElements(driver, HangmanPage.class);
+    new FluentWait<>(newPage.topicLabel).until(e -> e.getText().equals(expectedTopicLabel));
+    return newPage;
   }
 }
