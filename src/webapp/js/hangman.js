@@ -10,7 +10,8 @@
     topicLabel: document.getElementById('topic-label'),
     wordLabel: document.getElementById('word-label'),
     guessLabel: document.getElementById('guess-label'),
-    playAgainLabel: document.getElementById('label-play-again')
+    playAgainLabel: document.getElementById('label-play-again'),
+    languageSwitch: document.getElementById('language-switch')
   }
   
   async function startGame() {
@@ -149,15 +150,16 @@
     Array.prototype.forEach.call(document.getElementsByClassName('switch-language'), (e) => {
       e.addEventListener('click', () => init(e.getAttribute('data-language')))
     })
-    document.getElementById('language-switch').style.display = 'block'
+    elements.languageSwitch.style.display = 'block'
   }
 
   async function init(language) {
-    elements.title.textContent = '...'
-    elements.topicLabel.textContent = '...'
-    elements.wordLabel.textContent = '...'
-    elements.guessLabel.textContent = '...'
-    elements.playAgainLabel.textContent = '...'
+    elements.languageSwitch.style.display = 'none'
+    elements.title.textContent = ''
+    elements.topicLabel.textContent = ''
+    elements.wordLabel.textContent = ''
+    elements.guessLabel.textContent = ''
+    elements.playAgainLabel.textContent = ''
 
     const url = language ? `/init?language=${language}` : '/init';
     const r = await (await fetch(url)).json();
@@ -167,6 +169,7 @@
     elements.wordLabel.textContent = r.i18n['word']
     elements.guessLabel.textContent = r.i18n['guess-a-letter']
     elements.playAgainLabel.textContent = r.i18n['play-again']
+    elements.languageSwitch.style.display = 'block'
 
     await startGame();
   }
