@@ -11,7 +11,9 @@
     wordLabel: document.getElementById('word-label'),
     guessLabel: document.getElementById('guess-label'),
     playAgainLabel: document.getElementById('label-play-again'),
-    languageSwitch: document.getElementById('language-switch')
+    languageSwitch: document.getElementById('language-switch'),
+    buttonStartGame: document.getElementById('startGame'),
+    alphabet: document.getElementById('alphabet')
   }
   
   async function startGame() {
@@ -83,7 +85,7 @@
   }
   
   function showAlphabet() {
-    const alphabetContainer = $("#alphabet");
+    const alphabetContainer = $(elements.alphabet);
     alphabetContainer.empty();
   
     alphabetContainer.append("<table><tr>");
@@ -106,6 +108,8 @@
       .mouseover(function() {$(this).addClass('buttonover');})
       .mouseout(function() {$(this).removeClass('buttonover');})
       .click(function() {guessLetter(this)});
+    
+    elements.alphabet.style.visibility = 'visible';
   }
   
   function guessLetter(letterContainer) {
@@ -143,18 +147,18 @@
   }
   
   function bindHandlers() {
-    const buttonStartGame = document.getElementById('startGame')
-    buttonStartGame.addEventListener('click', startGame)
-    buttonStartGame.style.display = 'block'
+    elements.buttonStartGame.addEventListener('click', startGame)
+    elements.buttonStartGame.style.display = 'block'
 
     Array.prototype.forEach.call(document.getElementsByClassName('switch-language'), (e) => {
       e.addEventListener('click', () => init(e.getAttribute('data-language')))
     })
-    elements.languageSwitch.style.display = 'block'
+    elements.languageSwitch.style.visibility = 'visible'
   }
 
   async function init(language) {
-    elements.languageSwitch.style.display = 'none'
+    elements.languageSwitch.style.visibility = 'hidden';
+    elements.alphabet.style.visibility = 'hidden';
     elements.title.textContent = ''
     elements.topicLabel.textContent = ''
     elements.wordLabel.textContent = ''
@@ -169,7 +173,7 @@
     elements.wordLabel.textContent = r.i18n['word']
     elements.guessLabel.textContent = r.i18n['guess-a-letter']
     elements.playAgainLabel.textContent = r.i18n['play-again']
-    elements.languageSwitch.style.display = 'block'
+    elements.languageSwitch.style.visibility = 'visible'
 
     await startGame();
   }
