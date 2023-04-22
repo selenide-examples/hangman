@@ -32,7 +32,7 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
   public void startGame() {
     driver.get("http://localhost:9999");
     hangmanPage = PageFactory.initElements(driver, HangmanPage.class);
-    hangmanPage.selectLanguage("ENG", "Topic");
+    hangmanPage = hangmanPage.selectLanguage("ENG", "Topic");
   }
 
   @Test
@@ -76,7 +76,7 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
 
   @Test
   public void userCanChooseLanguage() {
-    hangmanPage.selectLanguage("EST", "Teema");
+    hangmanPage = hangmanPage.selectLanguage("EST", "Teema");
     assertThat(hangmanPage.topic.getText(), is("maja"));
     assertThat(hangmanPage.wordInWork.getText(), is("____"));
     assertThat(hangmanPage.alphabet.size(), is(27));
