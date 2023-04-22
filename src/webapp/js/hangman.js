@@ -5,6 +5,14 @@
   let topic;
   let wordInWork;
   
+  const elements = {
+    title: document.getElementById('title'),
+    topicLabel: document.getElementById('topic-label'),
+    wordLabel: document.getElementById('word-label'),
+    guessLabel: document.getElementById('guess-label'),
+    playAgainLabel: document.getElementById('label-play-again')
+  }
+  
   async function startGame() {
     const r = await (await fetch("/game")).json();
     alphabet = r.alphabet;
@@ -145,14 +153,20 @@
   }
 
   async function init(language) {
+    elements.title.textContent = '...'
+    elements.topicLabel.textContent = '...'
+    elements.wordLabel.textContent = '...'
+    elements.guessLabel.textContent = '...'
+    elements.playAgainLabel.textContent = '...'
+
     const url = language ? `/init?language=${language}` : '/init';
     const r = await (await fetch(url)).json();
     document.title = r.i18n['title']
-    document.getElementById('title').textContent = r.i18n['title']
-    document.getElementById('topic-label').textContent = r.i18n['topic']
-    document.getElementById('word-label').textContent = r.i18n['word']
-    document.getElementById('guess-label').textContent = r.i18n['guess-a-letter']
-    document.getElementById('label-play-again').textContent = r.i18n['play-again']
+    elements.title.textContent = r.i18n['title']
+    elements.topicLabel.textContent = r.i18n['topic']
+    elements.wordLabel.textContent = r.i18n['word']
+    elements.guessLabel.textContent = r.i18n['guess-a-letter']
+    elements.playAgainLabel.textContent = r.i18n['play-again']
 
     await startGame();
   }
