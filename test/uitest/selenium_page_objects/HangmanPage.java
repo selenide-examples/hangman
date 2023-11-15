@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 import static java.time.Duration.ofSeconds;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class HangmanPage {
@@ -45,11 +46,16 @@ public class HangmanPage {
   }
 
   public void guessLetter(char letter) {
+    new FluentWait<>(driver).until(elementToBeClickable(letterSelector(letter)));
     letter(letter).click();
   }
 
   public WebElement letter(char letter) {
-    return driver.findElement(By.xpath("//*[@letter='" + letter + "']"));
+    return driver.findElement(letterSelector(letter));
+  }
+
+  private By letterSelector(char letter) {
+    return By.xpath("//*[@letter='" + letter + "']");
   }
 
   public HangmanPage selectLanguage(String language, String expectedTopicLabel) {
