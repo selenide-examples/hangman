@@ -1,16 +1,19 @@
 package uitest.selenium_page_objects;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import uitest.AbstractHangmanTest;
+import org.openqa.selenium.support.ui.FluentWait;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import uitest.AbstractHangmanTest;
 
 public class HangmanWithPageObjectTest extends AbstractHangmanTest {
   private static WebDriver driver;
@@ -82,12 +85,12 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
     assertThat(hangmanPage.alphabet.size(), is(27));
 
     hangmanPage = hangmanPage.selectLanguage("RUS", "Тема");
-    assertThat(hangmanPage.topic.getText(), is("дом"));
+    new FluentWait<>(driver).until(textToBePresentInElement(hangmanPage.topic, "дом"));
     assertThat(hangmanPage.wordInWork.getText(), is("______"));
     assertThat(hangmanPage.alphabet.size(), is(33));
 
     hangmanPage = hangmanPage.selectLanguage("ENG", "Topic");
-    assertThat(hangmanPage.topic.getText(), is("house"));
+    new FluentWait<>(driver).until(textToBePresentInElement(hangmanPage.topic, "house"));
     assertThat(hangmanPage.wordInWork.getText(), is("____"));
     assertThat(hangmanPage.alphabet.size(), is(26));
   }
