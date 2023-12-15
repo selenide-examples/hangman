@@ -33,7 +33,7 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: uitest_firefox -Dselenide.headless=true
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: test-report
