@@ -22,15 +22,15 @@ jobs:
         distribution: 'temurin'
         cache: 'gradle'
     - name: Unit-tests
-      uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v3
       with:
         arguments: test
     - name: UI Tests [chrome]
-      uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v3
       with:
         arguments: uitest_chrome -Dselenide.headless=true
     - name: UI Tests [firefox]
-      uses: gradle/gradle-build-action@v2
+      uses: gradle/gradle-build-action@v3
       with:
         arguments: uitest_firefox -Dselenide.headless=true
     - uses: actions/upload-artifact@v4
