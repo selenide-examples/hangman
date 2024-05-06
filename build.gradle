@@ -52,7 +52,7 @@ tasks.withType(Test).configureEach {
 }
 
 dependencies {
-  implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+  implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.1'
   implementation('org.liquibase:liquibase-core:4.27.0') {
     exclude group: 'org.yaml'
   }
