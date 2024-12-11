@@ -21,18 +21,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: 'gradle'
+    - uses: gradle/actions/setup-gradle@v4
     - name: Unit-tests
-      uses: gradle/gradle-build-action@v3
-      with:
-        arguments: test
+      run: ./gradlew test
     - name: UI Tests [chrome]
-      uses: gradle/gradle-build-action@v3
-      with:
-        arguments: uitest_chrome -Dselenide.headless=true
+      run: ./gradlew uitest_chrome -Dselenide.headless=true
     - name: UI Tests [firefox]
-      uses: gradle/gradle-build-action@v3
-      with:
-        arguments: uitest_firefox -Dselenide.headless=true
+      run: ./gradlew uitest_firefox -Dselenide.headless=true
     - uses: actions/upload-artifact@v4
       if: failure()
       with:
