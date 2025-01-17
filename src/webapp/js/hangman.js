@@ -4,9 +4,10 @@
   let alphabet;
   let topic;
   let wordInWork;
-  
+
   const elements = {
     title: document.getElementById('title'),
+    topic: document.getElementById('topic'),
     topicLabel: document.getElementById('topic-label'),
     wordLabel: document.getElementById('word-label'),
     guessLabel: document.getElementById('guess-label'),
@@ -15,13 +16,13 @@
     buttonStartGame: document.getElementById('startGame'),
     alphabet: document.getElementById('alphabet')
   }
-  
+
   async function startGame() {
     const r = await (await fetch("/game")).json();
     alphabet = r.alphabet;
     topic = r.topic;
     wordInWork = r.word;
-  
+
     failures = 0;
     showFailures(0);
     showAlphabet();
@@ -31,21 +32,22 @@
     $("#gameLost").hide();
     isPlaying = true;
   }
-  
+
   function isGameLost() {
     return failures > 5;
   }
-  
+
   function showWordInWork() {
-    $("#topic").html(topic);
+    elements.topic.innerText = topic;
+    elements.topic.visibility = 'visible';
     const wordContainer = $("#wordInWork");
     wordContainer.empty();
-  
+
     for (let i=0; i<wordInWork.length; i++) {
       $("<span>" + wordInWork.charAt(i) + "</span>").appendTo(wordContainer);
     }
   }
-  
+
   function showFailures(failures) {
     switch (failures) {
       case 0:
@@ -69,10 +71,10 @@
         break;
     }
   }
-  
+
   function gameOver() {
     showWordInWork();
-  
+
     $("#hangmanImageContainer #chair").hide();
     $("#hangmanImageContainer .body").hide();
     if (isGameLost()) {
@@ -83,43 +85,43 @@
     $(".restartGame").show();
     isPlaying = false;
   }
-  
+
   function showAlphabet() {
     const alphabetContainer = $(elements.alphabet);
     alphabetContainer.empty();
-  
+
     alphabetContainer.append("<table><tr>");
-  
+
     for (let i=0; i<alphabet.length; i++) {
       const letterContainer = $("<td></td>");
       letterContainer.text(alphabet.charAt(i));
       letterContainer.attr("letter", alphabet.charAt(i));
       letterContainer.addClass("letter");
       letterContainer.appendTo(alphabetContainer);
-  
+
       if (i % 11 === 10) {
         $("</tr><tr>").appendTo(alphabetContainer);
       }
     }
-  
+
     alphabetContainer.append("</tr></table>");
-  
+
     $(".letter")
       .mouseover(function() {$(this).addClass('buttonover');})
       .mouseout(function() {$(this).removeClass('buttonover');})
       .click(function() {guessLetter(this)});
-    
+
     elements.alphabet.style.visibility = 'visible';
   }
-  
+
   function guessLetter(letterContainer) {
     if (!isPlaying) {
       return;
     }
-  
+
     letterContainer = $(letterContainer);
     letterContainer.unbind("click");
-  
+
     $.ajax({
       url: 'guess',
       type: 'POST',
@@ -129,23 +131,23 @@
       success: function (result) {
         wordInWork = result.word;
         showWordInWork();
-  
+
         failures = result.failures;
         showFailures(failures);
-  
+
         if (result.guessed === true) {
           letterContainer.addClass("used");
         } else {
           letterContainer.addClass("nonused");
         }
-  
+
         if (result.gameOver) {
           gameOver();
         }
       }
     });
   }
-  
+
   function bindHandlers() {
     elements.buttonStartGame.addEventListener('click', startGame)
     elements.buttonStartGame.style.display = 'block'
@@ -160,6 +162,8 @@
     elements.languageSwitch.style.visibility = 'hidden';
     elements.alphabet.style.visibility = 'hidden';
     elements.title.textContent = ''
+    elements.topic.textContent = ''
+    elements.topic.visibility = 'hidden';
     elements.topicLabel.textContent = ''
     elements.wordLabel.textContent = ''
     elements.guessLabel.textContent = ''
