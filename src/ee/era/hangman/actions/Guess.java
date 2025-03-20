@@ -4,12 +4,10 @@ import ee.era.hangman.Request;
 import ee.era.hangman.Response;
 import ee.era.hangman.model.Hangman;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 
-@ParametersAreNonnullByDefault
 public class Guess {
 
   public Response guessLetter(Request request) throws IOException {

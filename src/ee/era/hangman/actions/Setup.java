@@ -4,7 +4,6 @@ import ee.era.hangman.Request;
 import ee.era.hangman.Response;
 import ee.era.hangman.Session;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -13,7 +12,6 @@ import java.util.Properties;
 import static ee.era.hangman.Response.json;
 import static java.util.Objects.requireNonNullElse;
 
-@ParametersAreNonnullByDefault
 public class Setup {
 
   private static final String DEFAULT_LANGUAGE = "en";

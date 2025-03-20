@@ -1,10 +1,6 @@
 package uitest.selenium_page_objects;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
-
+import org.jspecify.annotations.Nullable;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -12,10 +8,15 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
-
 import uitest.AbstractHangmanTest;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
+
 public class HangmanWithPageObjectTest extends AbstractHangmanTest {
+  @Nullable
   private static WebDriver driver;
   private HangmanPage hangmanPage;
 

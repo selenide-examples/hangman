@@ -2,8 +2,7 @@ package ee.era.hangman;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -12,7 +11,7 @@ public class Response {
   public final int statusCode;
   public final byte[] body;
   public final String contentType;
-  
+
   @Nullable
   public final Session session;
 
@@ -23,7 +22,7 @@ public class Response {
     this.session = session;
   }
 
-  public Response(int statusCode, String body, String contentType, Session session) {
+  public Response(int statusCode, String body, String contentType, @Nullable Session session) {
     this(statusCode, body.getBytes(UTF_8), contentType, session);
   }
 

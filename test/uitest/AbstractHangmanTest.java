@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
 import ee.era.hangman.Launcher;
 import org.apache.commons.io.IOUtils;
+import org.jspecify.annotations.Nullable;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.openqa.selenium.logging.LogEntry;
@@ -23,6 +24,8 @@ import static org.apache.commons.lang3.StringUtils.substring;
 
 public abstract class AbstractHangmanTest {
   private static final Logger log = LoggerFactory.getLogger(AbstractHangmanTest.class);
+
+  @Nullable
   private static volatile Launcher launcher;
 
   @BeforeClass
@@ -30,8 +33,7 @@ public abstract class AbstractHangmanTest {
     if (launcher == null) {
       Configuration.baseUrl = "http://localhost:9999";
       log.info("Starting {} (user dir: {}) ...", Configuration.baseUrl, System.getProperty("user.dir"));
-      launcher = new Launcher("test", "localhost", 9999);
-      launcher.run();
+      launcher = new Launcher("test", "localhost", 9999).run();
       log.info("Started {} (user dir: {})", Configuration.baseUrl, System.getProperty("user.dir"));
 
       LoggingPreferences logPrefs = new LoggingPreferences();

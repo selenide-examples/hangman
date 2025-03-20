@@ -4,11 +4,9 @@ import ee.era.hangman.Request;
 import ee.era.hangman.Response;
 import org.apache.commons.io.IOUtils;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.io.InputStream;
 
-@ParametersAreNonnullByDefault
 public class StaticFiles {
   public Response index() throws IOException {
     return resource("index.html");
@@ -23,7 +21,7 @@ public class StaticFiles {
     if (resource == null) {
       return Response.error(404, "Not found");
     }
-    
+
     byte[] content = IOUtils.toByteArray(resource);
     return new Response(200, content, contentTypeOf(path), null);
   }

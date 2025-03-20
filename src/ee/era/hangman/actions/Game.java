@@ -7,13 +7,11 @@ import ee.era.hangman.model.Hangman;
 import ee.era.hangman.model.Word;
 import ee.era.hangman.model.WordsService;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 
 import static ee.era.hangman.Response.json;
 import static java.util.Objects.requireNonNull;
 
-@ParametersAreNonnullByDefault
 public class Game {
   private final WordsService wordsService;
 

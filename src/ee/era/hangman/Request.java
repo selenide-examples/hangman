@@ -1,16 +1,14 @@
 package ee.era.hangman;
 
 import com.sun.net.httpserver.HttpExchange;
+import org.jspecify.annotations.Nullable;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.function.Function;
 
 import static ee.era.hangman.RequestParser.parseQuery;
 
-@ParametersAreNonnullByDefault
 public class Request {
   private final HttpExchange exchange;
   private final Function<String, Session> sessionProvider;
@@ -19,7 +17,7 @@ public class Request {
     this.exchange = exchange;
     this.sessionProvider = sessionProvider;
   }
-  
+
   public String getMethod() {
     return exchange.getRequestMethod();
   }

@@ -1,8 +1,10 @@
 package ee.era.hangman;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.sun.net.httpserver.HttpServer;
 import ee.era.hangman.model.WordsService;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,7 @@ public class Launcher {
   private final String environment;
   private final String host;
   private final int port;
+  @Nullable
   private HttpServer server;
 
   private final DataSource dataSource = createDataSource();
@@ -27,18 +30,19 @@ public class Launcher {
     this.port = port;
   }
 
-  public void run() throws Exception {
+  @CanIgnoreReturnValue
+  public Launcher run() throws Exception {
     log.info("Start hangman webapp at http://{}:{} from {}", host, port, System.getProperty("user.dir"));
 
     new DatabaseMigration(dataSource, environment).migrate();
 
     InetSocketAddress addr = new InetSocketAddress(host, port);
     server = HttpServer.create(addr, 0);
-    RequestHandler handler = new RequestHandler(wordsService);
-    server.createContext("/", handler);
+    server.createContext("/", new RequestHandler(wordsService));
     server.start();
-    
+
     addShutdownHook();
+    return this;
   }
 
   private void addShutdownHook() {
@@ -46,12 +50,15 @@ public class Launcher {
   }
 
   public final void stop() {
-    try {
-      log.info("Shutdown jetty launcher at {}...", port);
-      server.stop(0);
-      log.info("Shutdown complete at {}", port);
-    } catch (Exception e) {
-      log.warn("Failed to shutdown jetty launcher at {}", port, e);
+    if (server != null) {
+      try {
+        log.info("Shutdown jetty launcher at {}...", port);
+        server.stop(0);
+        server = null;
+        log.info("Shutdown complete at {}", port);
+      } catch (Exception e) {
+        log.warn("Failed to shutdown jetty launcher at {}", port, e);
+      }
     }
   }
 
