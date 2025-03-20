@@ -12,6 +12,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        gradle-task: [ 'check', 'uitest_chrome', 'uitest_firefox' ]
 
     steps:
     - uses: actions/checkout@v4
@@ -22,16 +25,12 @@ jobs:
         distribution: 'temurin'
         cache: 'gradle'
     - uses: gradle/actions/setup-gradle@v4
-    - name: Unit-tests
-      run: ./gradlew test
-    - name: UI Tests [chrome]
-      run: ./gradlew uitest_chrome -Dselenide.headless=true
-    - name: UI Tests [firefox]
-      run: ./gradlew uitest_firefox -Dselenide.headless=true
+    - name: ${{ matrix.gradle-task }}
+      run: ./gradlew ${{ matrix.gradle-task }} -Dselenide.headless=true
     - uses: actions/upload-artifact@v4
       if: failure()
       with:
-        name: test-report
+        name: test-report-${{matrix.gradle-task}}
         retention-days: 28
         path: |
           **/build/reports
