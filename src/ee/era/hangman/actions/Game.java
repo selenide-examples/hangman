@@ -23,14 +23,14 @@ public class Game {
     Session session = request.getSession();
     String language = requireNonNull(session.getLanguage());
     Word randomWord = wordsService.getRandomWord(language);
-    Hangman game = new Hangman(randomWord.getWord());
+    Hangman game = new Hangman(randomWord.word());
     session.setAttribute("hangman", game);
 
     Map<String, Object> response = Map.of(
       "alphabet", wordsService.getAlphabet(language),
       "language", language,
       "word", game.getWord(),
-      "topic", randomWord.getTopic()
+      "topic", randomWord.topic()
     );
     return json(200, response);
   }

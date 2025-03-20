@@ -34,7 +34,7 @@ public class WordsServiceTest {
 
     for (int i = 0; i < 2 * 6000; i++) {
       Word randomWord = wordsService.getRandomWord("ru");
-      count.put(randomWord.getWord(), count.get(randomWord.getWord()) + 1);
+      count.put(randomWord.word(), count.get(randomWord.word()) + 1);
     }
 
     assertTrue(count.get("гвоздь") > 1000);
