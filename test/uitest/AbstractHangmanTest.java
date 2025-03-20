@@ -5,8 +5,8 @@ import com.codeborne.selenide.WebDriverRunner;
 import ee.era.hangman.Launcher;
 import org.apache.commons.io.IOUtils;
 import org.jspecify.annotations.Nullable;
-import org.junit.After;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -28,7 +28,7 @@ public abstract class AbstractHangmanTest {
   @Nullable
   private static volatile Launcher launcher;
 
-  @BeforeClass
+  @BeforeAll
   public synchronized static void startServer() throws Exception {
     if (launcher == null) {
       Configuration.baseUrl = "http://localhost:9999";
@@ -46,7 +46,7 @@ public abstract class AbstractHangmanTest {
     log.info("Sanity check passed: {}", substring(sanityCheck, 0, 42));
   }
 
-  @After
+  @AfterEach
   public void checkBrowserLogs() {
     if (hasWebDriverStarted() && !WebDriverRunner.isFirefox()) {
       try {

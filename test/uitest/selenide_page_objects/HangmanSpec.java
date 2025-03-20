@@ -1,16 +1,16 @@
 package uitest.selenide_page_objects;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import uitest.AbstractHangmanTest;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Selenide.open;
 
 public class HangmanSpec extends AbstractHangmanTest {
-  HangmanPage page;
-  
-  @Before
+  private HangmanPage page;
+
+  @BeforeEach
   public void startGame() {
     page = open("/", HangmanPage.class);
     page.selectLanguage("ENG");
@@ -19,7 +19,7 @@ public class HangmanSpec extends AbstractHangmanTest {
   @Test
   public void showsTopicAndMaskedWordAtTheBeginning() {
     page.shouldHaveTopic("house");
-    page.shouldHaveWord("____");    
+    page.shouldHaveWord("____");
   }
 
   @Test

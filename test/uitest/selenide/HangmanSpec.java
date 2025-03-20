@@ -1,18 +1,22 @@
 package uitest.selenide;
 
 import com.codeborne.selenide.SelenideElement;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import uitest.AbstractHangmanTest;
 
 import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class HangmanSpec extends AbstractHangmanTest {
-  @Before
+  @BeforeEach
   public void startGame() {
     open("/");
     $(byText("ENG")).click();

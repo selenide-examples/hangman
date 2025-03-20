@@ -1,5 +1,7 @@
 package ee.era.hangman.model;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import static java.lang.Character.toLowerCase;
 import static org.apache.commons.lang3.StringUtils.repeat;
 
@@ -18,6 +20,7 @@ public class Hangman {
     return errors;
   }
 
+  @CanIgnoreReturnValue
   public boolean guessLetter(char letter) {
     boolean guessed = false;
 

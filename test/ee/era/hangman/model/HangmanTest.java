@@ -1,91 +1,87 @@
 package ee.era.hangman.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class HangmanTest {
-  Hangman game;
-
-  private void startGame(String word) {
-    game = new Hangman(word);
+  private Hangman startGame(String word) {
+    return new Hangman(word);
   }
 
   @Test
   public void userCanGuessLetters() {
-    startGame("sofa");
-    assertEquals("____", game.getWord());
-    assertEquals(0, game.getErrors());
+    Hangman game = startGame("sofa");
+    assertThat(game.getWord()).isEqualTo("____");
+    assertThat(game.getErrors()).isEqualTo(0);
 
     game.guessLetter('a');
-    assertEquals("___a", game.getWord());
-    assertEquals(0, game.getErrors());
+    assertThat(game.getWord()).isEqualTo("___a");
+    assertThat(game.getErrors()).isEqualTo(0);
 
     game.guessLetter('b');
-    assertEquals("___a", game.getWord());
-    assertEquals(1, game.getErrors());
+    assertThat(game.getWord()).isEqualTo("___a");
+    assertThat(game.getErrors()).isEqualTo(1);
   }
 
   @Test
   public void userWinsWhenAllLettersOfWordAreGuessed() {
-    startGame("sofa");
+    Hangman game = startGame("sofa");
     game.guessLetter('s');
     game.guessLetter('o');
     game.guessLetter('f');
     game.guessLetter('a');
-    assertEquals("sofa", game.getWord());
-    assertFalse(game.isLost());
-    assertTrue(game.isWon());
+    assertThat(game.getWord()).isEqualTo("sofa");
+    assertThat(game.isLost()).isFalse();
+    assertThat(game.isWon()).isTrue();
   }
 
   @Test
   public void userHas6Tries() {
-    startGame("sofa");
+    Hangman game = startGame("sofa");
     game.guessLetter('b');
     game.guessLetter('c');
     game.guessLetter('d');
     game.guessLetter('e');
     game.guessLetter('g');
-    assertEquals("____", game.getWord());
-    assertEquals(5, game.getErrors());
-    assertFalse(game.isLost());
+    assertThat(game.getWord()).isEqualTo("____");
+    assertThat(game.getErrors()).isEqualTo(5);
+    assertThat(game.isLost()).isFalse();
 
     game.guessLetter('h');
-    assertEquals("sofa", game.getWord());
-    assertEquals(6, game.getErrors());
-    assertTrue(game.isLost());
-    assertFalse(game.isWon());
+    assertThat(game.getWord()).isEqualTo("sofa");
+    assertThat(game.getErrors()).isEqualTo(6);
+    assertThat(game.isLost()).isTrue();
+    assertThat(game.isWon()).isFalse();
   }
 
   @Test
   public void supportsCyrillicCharacters() {
-    startGame("Диван");
+    Hangman game = startGame("Диван");
     game.guessLetter('н');
     game.guessLetter('а');
     game.guessLetter('в');
     game.guessLetter('и');
     game.guessLetter('д');
-    assertEquals("Диван", game.getWord());
-    assertTrue(game.isWon());
+    assertThat(game.getWord()).isEqualTo("Диван");
+    assertThat(game.isWon()).isTrue();
   }
 
   @Test
   public void duplicateLetters() {
-    startGame("hologram");
+    Hangman game = startGame("hologram");
     game.guessLetter('o');
-    assertEquals("_o_o____", game.getWord());
-    assertEquals(0, game.getErrors());
+    assertThat(game.getWord()).isEqualTo("_o_o____");
+    assertThat(game.getErrors()).isEqualTo(0);
   }
 
   @Test
   public void matchingIsCaseInsensitive() {
-    startGame("TopConf");
+    Hangman game = startGame("TopConf");
     game.guessLetter('t');
     game.guessLetter('C');
     game.guessLetter('o');
-    assertEquals("To_Co__", game.getWord());
-    assertEquals(0, game.getErrors());
+    assertThat(game.getWord()).isEqualTo("To_Co__");
+    assertThat(game.getErrors()).isEqualTo(0);
   }
 }

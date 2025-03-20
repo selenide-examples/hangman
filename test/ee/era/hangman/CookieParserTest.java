@@ -1,21 +1,20 @@
 package ee.era.hangman;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CookieParserTest {
   @Test
   public void parsesCookieValueFromHeader() {
-    assertEquals("423fd", CookieParser.parse("SID=423fd; SAD=423fdb1e", "SID"));
-    assertEquals("423fdb1e", CookieParser.parse("SID=423fd; SAD=423fdb1e", "SAD"));
+    assertThat(CookieParser.parse("SID=423fd; SAD=423fdb1e", "SID")).isEqualTo("423fd");
+    assertThat(CookieParser.parse("SID=423fd; SAD=423fdb1e", "SAD")).isEqualTo("423fdb1e");
   }
 
   @Test
   public void returnsNullIfCookieIsMissing() {
-    assertNull(CookieParser.parse("SID=423fd; SAD=423fdb1e", "Another"));
-    assertNull(CookieParser.parse("", "Another"));
-    assertNull(CookieParser.parse((String) null, "Another"));
+    assertThat(CookieParser.parse("SID=423fd; SAD=423fdb1e", "Another")).isNull();
+    assertThat(CookieParser.parse("", "Another")).isNull();
+    assertThat(CookieParser.parse((String) null, "Another")).isNull();
   }
 }
