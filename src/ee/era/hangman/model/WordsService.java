@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class WordsService {
   private static final Logger log = LoggerFactory.getLogger(WordsService.class);
-  
+
   private final DataSource dataSource;
 
   public WordsService(DataSource dataSource) {
@@ -23,7 +23,7 @@ public class WordsService {
   }
 
   public String getAlphabet(String language) {
-    return getLanguages().get(language).getAlphabet();
+    return getLanguages().get(language).alphabet();
   }
 
   public Word getRandomWord(String language) {
@@ -90,7 +90,7 @@ public class WordsService {
           Map<String, Language> languages = new HashMap<>();
           while (resultSet.next()) {
             Language language = new Language(resultSet.getString(1), resultSet.getString(2));
-            languages.put(language.getName(), language);
+            languages.put(language.name(), language);
           }
           return languages;
         }
