@@ -53,7 +53,7 @@ public abstract class AbstractHangmanTest {
         log.info("Checking browser logs after test ...");
         List<LogEntry> browserLogs = getWebDriver().manage().logs().get(LogType.BROWSER).getAll();
         log.info("Found {} browser logs", browserLogs.size());
-        if (browserLogs.size() > 0) {
+        if (!browserLogs.isEmpty()) {
           for (LogEntry browserLog : browserLogs) {
             log.info(browserLog.toString());
           }

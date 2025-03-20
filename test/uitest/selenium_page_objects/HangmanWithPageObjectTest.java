@@ -53,7 +53,7 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
   public void userCanGuessLetters() {
     hangmanPage.guessLetter('S');
     assertThat(hangmanPage.wordInWork.getText(), is("s___"));
-    assertThat(hangmanPage.letter('S').getAttribute("class"), containsString("used"));
+    assertThat(hangmanPage.letter('S').getDomAttribute("class"), containsString("used"));
   }
 
   @Test
@@ -74,7 +74,7 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
     hangmanPage.guessLetter('H');
     hangmanPage.guessLetter('I');
     hangmanPage.guessLetter('J');
-    assertThat(hangmanPage.letter('B').getAttribute("class"), containsString("nonused"));
+    assertThat(hangmanPage.letter('B').getDomAttribute("class"), containsString("nonused"));
     assertThat(hangmanPage.gameLost.isDisplayed(), is(true));
   }
 

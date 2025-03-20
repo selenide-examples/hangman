@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.time.LocalDateTime.now;
-import static java.time.temporal.ChronoUnit.MINUTES;
 import static java.util.Objects.requireNonNull;
 
 public class Session {
@@ -24,7 +23,7 @@ public class Session {
   }
 
   public boolean isExpired() {
-    return lastAccessedAt.isBefore(now().minus(10, MINUTES));
+    return lastAccessedAt.isBefore(now().minusMinutes(10));
   }
 
   public void updateTimestamp() {
