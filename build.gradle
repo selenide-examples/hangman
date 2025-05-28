@@ -83,7 +83,7 @@ dependencies {
 
   testImplementation "org.assertj:assertj-core:3.27.3"
   testImplementation 'org.mockito:mockito-core:5.18.0'
-  testImplementation 'com.codeborne:selenide:7.9.2'
+  testImplementation 'com.codeborne:selenide:7.9.3'
 }
 
 configurations.configureEach {
