@@ -81,7 +81,7 @@ dependencies {
   testImplementation "org.junit.platform:junit-platform-engine"
   testImplementation "org.junit.platform:junit-platform-launcher"
 
-  testImplementation "org.assertj:assertj-core:3.27.3"
+  testImplementation "org.assertj:assertj-core:3.27.4"
   testImplementation 'org.mockito:mockito-core:5.18.0'
   testImplementation 'com.codeborne:selenide:7.9.4'
 }
