@@ -21,13 +21,12 @@ repositories {
 [compileJava, compileTestJava]*.options.collect { options -> options.debug = true }
 
 java {
+  sourceCompatibility = 17
+  targetCompatibility = 17
   toolchain {
     languageVersion = JavaLanguageVersion.of(17)
   }
 }
-
-sourceCompatibility = 17
-targetCompatibility = 17
 
 tasks.withType(Test).configureEach {
   useJUnitPlatform()
