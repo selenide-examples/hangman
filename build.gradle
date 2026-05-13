@@ -72,8 +72,8 @@ dependencies {
   implementation 'com.google.guava:guava:33.6.0-jre'
   runtimeOnly 'com.h2database:h2:2.4.240'
   implementation 'c3p0:c3p0:0.9.1.2'
-  implementation 'org.slf4j:slf4j-api:2.0.17'
-  runtimeOnly 'org.slf4j:slf4j-log4j12:2.0.17'
+  implementation 'org.slf4j:slf4j-api:2.0.18'
+  runtimeOnly 'org.slf4j:slf4j-log4j12:2.0.18'
 
   testImplementation platform("org.junit:junit-bom:6.0.3")
   testImplementation "org.junit.jupiter:junit-jupiter"
