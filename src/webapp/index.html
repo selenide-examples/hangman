@@ -22,29 +22,120 @@
   <a class="switch-language" data-language="ru">RUS</a>
 </div>
 
-<h2><span id="topic-label">Topic</span>:</h2>
-<div id="topic"></div>
+<div id="toolbar">
+  <button id="howToPlay" title="Shortcut: ?">How to play</button>
+</div>
 
-<h2><span id="word-label">Word</span>:</h2>
-<div id="wordInWork"></div>
+<div id="modeSelect" style="display: none;">
+  <h2 id="mode-label">Choose mode</h2>
+  <button id="modeTimed" class="modeButton" title="Shortcut: T">Timed</button>
+  <button id="modeUntimed" class="modeButton" title="Shortcut: U">Untimed</button>
+</div>
 
-<h2><span id="guess-label">Guess a letter</span>:</h2>
-<div id="alphabet"></div>
+<div id="gameArea" style="display: none;">
+  <h2><span id="hint-label">Hint</span>:
+    <button id="hintButton" disabled title="Shortcut: Alt+H">Show hint</button>
+    <span id="hintLocked"></span>
+  </h2>
+  <div id="topic" style="visibility: hidden;"></div>
+
+  <h2><span id="word-label">Word</span>:
+    <span id="timer" style="display: none;"></span>
+  </h2>
+  <div id="wordInWork"></div>
+
+  <h2><span id="guess-label">Guess a letter</span>:</h2>
+  <div id="alphabet"></div>
+</div>
 
 <div id="hangmanImageContainer">
   <h1 align="center" id="title">Hangman</h1>
 
-  <img id="hangman1" class="hangman" src="img/hangman.png"/>
-  <img id="hangman2" class="hangman" src="img/hangman.png"/>
-  <img id="hangman3" class="hangman" src="img/hangman.png"/>
-  <img id="hangman4" class="hangman body" src="img/hangman.png"/>
-  <img id="hangman5" class="hangman body" src="img/hangman.png"/>
+  <svg id="hangmanSvg" width="420" height="420" viewBox="0 0 420 420">
+    <!-- gallows -->
+    <line id="gallows1" class="gallows" x1="60" y1="400" x2="60" y2="40" stroke="#654321" stroke-width="10" style="display:none"/>
+    <line id="gallows2" class="gallows" x1="55" y1="40" x2="250" y2="40" stroke="#654321" stroke-width="10" style="display:none"/>
+    <line id="gallows3" class="gallows" x1="250" y1="40" x2="250" y2="90" stroke="#8b5a2b" stroke-width="6" style="display:none"/>
+    <!-- figure (always visible) -->
+    <g id="figure">
+      <!-- head -->
+      <circle cx="250" cy="120" r="30" stroke="#222" stroke-width="4" fill="#ffe0b3"/>
+      <!-- body -->
+      <line x1="250" y1="150" x2="250" y2="250" stroke="#222" stroke-width="4"/>
+      <!-- arms -->
+      <line id="armLeft"  x1="250" y1="180" x2="210" y2="220" stroke="#222" stroke-width="4"/>
+      <line id="armRight" x1="250" y1="180" x2="290" y2="220" stroke="#222" stroke-width="4"/>
+      <!-- legs -->
+      <line x1="250" y1="250" x2="220" y2="320" stroke="#222" stroke-width="4"/>
+      <line x1="250" y1="250" x2="280" y2="320" stroke="#222" stroke-width="4"/>
+      <!-- face: eyes -->
+      <g id="eyesNormal">
+        <circle cx="240" cy="113" r="3" fill="#222"/>
+        <circle cx="260" cy="113" r="3" fill="#222"/>
+      </g>
+      <g id="eyesWide" style="display:none;">
+        <circle cx="240" cy="113" r="5" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <circle cx="260" cy="113" r="5" fill="#fff" stroke="#222" stroke-width="1.5"/>
+        <circle cx="240" cy="113" r="2" fill="#222"/>
+        <circle cx="260" cy="113" r="2" fill="#222"/>
+      </g>
+      <g id="eyesDead" style="display:none;">
+        <line x1="235" y1="108" x2="245" y2="118" stroke="#222" stroke-width="2"/>
+        <line x1="245" y1="108" x2="235" y2="118" stroke="#222" stroke-width="2"/>
+        <line x1="255" y1="108" x2="265" y2="118" stroke="#222" stroke-width="2"/>
+        <line x1="265" y1="108" x2="255" y2="118" stroke="#222" stroke-width="2"/>
+      </g>
+      <!-- brows (worried) -->
+      <g id="brows" style="display:none;">
+        <line x1="234" y1="103" x2="244" y2="107" stroke="#222" stroke-width="2"/>
+        <line x1="266" y1="103" x2="256" y2="107" stroke="#222" stroke-width="2"/>
+      </g>
+      <!-- mouths -->
+      <path id="mouthHappy"   d="M238,128 Q250,140 262,128" stroke="#222" stroke-width="2.5" fill="none"/>
+      <line id="mouthNeutral" x1="240" y1="132" x2="260" y2="132" stroke="#222" stroke-width="2.5" style="display:none;"/>
+      <path id="mouthWorried" d="M238,135 Q250,124 262,135" stroke="#222" stroke-width="2.5" fill="none" style="display:none;"/>
+      <ellipse id="mouthScared" cx="250" cy="132" rx="6" ry="8" fill="#222" style="display:none;"/>
+      <!-- sweat -->
+      <g id="sweat" style="display:none;">
+        <ellipse cx="228" cy="105" rx="2.5" ry="5" fill="#4fb4ff"/>
+        <ellipse cx="273" cy="108" rx="2.5" ry="5" fill="#4fb4ff"/>
+      </g>
+    </g>
+    <!-- noose overlay (drawn after figure so it sits in front of the neck) -->
+    <ellipse id="noose" class="gallows" cx="250" cy="150" rx="14" ry="8" stroke="#8b5a2b" stroke-width="5" fill="none" style="display:none"/>
+  </svg>
+
   <img id="chair" src="img/chair.jpg"/>
   <img id="gameWin" class='gameOver' src="img/thumbs-up.jpeg" style="width: 400px;"/>
   <img id="gameLost" class='gameOver' src="img/gameOver.png"/>
   <button id="startGame" class="restartGame" style="display: none;">
     <nobr id="label-play-again">Play again</nobr>
   </button>
+</div>
+
+<div id="howToPlayModal" style="display: none;">
+  <div id="howToPlayContent">
+    <h2 id="howto-title">How to play</h2>
+    <div id="howto-body">
+      <p><b>Goal:</b> guess the hidden word one letter at a time before the hangman runs out of luck.</p>
+      <ol>
+        <li>Pick a mode: <b>Timed</b> gives you a countdown based on the word length (≈10&nbsp;s per letter + 5&nbsp;s). <b>Untimed</b> lets you think as long as you like.</li>
+        <li>Click a letter (or type it on your keyboard). Correct letters fill the blanks and turn green; wrong letters turn red and the gallows grows.</li>
+        <li>You get <b>6 wrong guesses for short words</b> and <b>more for longer words</b> (1 extra per letter beyond 5). Watch the hangman's face: he starts out happy and gets increasingly anxious as things get dicey.</li>
+        <li>Stuck? Halfway through your allowed wrong guesses the <b>Hint</b> button unlocks and reveals the topic of the word.</li>
+        <li>Guess every letter (or beat the clock) to win. Run out of guesses or time and it's game over.</li>
+      </ol>
+      <p><b>Keyboard shortcuts</b></p>
+      <ul>
+        <li><kbd>A</kbd>-<kbd>Z</kbd> / <kbd>А</kbd>-<kbd>Я</kbd>: guess that letter</li>
+        <li><kbd>T</kbd> / <kbd>U</kbd>: pick Timed / Untimed mode</li>
+        <li><kbd>Alt</kbd>+<kbd>H</kbd> (Windows/Linux) or <kbd>Option</kbd>+<kbd>H</kbd> (Mac): reveal hint (when unlocked)</li>
+        <li><kbd>Enter</kbd> or <kbd>Space</kbd>: play again</li>
+        <li><kbd>?</kbd>: open / close this guide, <kbd>Esc</kbd>: close</li>
+      </ul>
+    </div>
+    <button id="howToPlayClose">Close</button>
+  </div>
 </div>
 
 </body>
