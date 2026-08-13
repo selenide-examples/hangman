@@ -19,7 +19,8 @@ public class Guess {
       "word", game.getWord(),
       "guessed", guessed,
       "gameOver", game.isLost() || game.isWon(),
-      "failures", game.getErrors()
+      "failures", game.getErrors(),
+      "maxErrors", game.getMaxErrors()
     );
     return Response.json(200, response);
   }
