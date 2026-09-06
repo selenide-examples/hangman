@@ -14,12 +14,21 @@ public class HangmanSpec extends AbstractHangmanTest {
   public void startGame() {
     page = open("/", HangmanPage.class);
     page.selectLanguage("ENG");
+    page.chooseUntimedMode();
   }
 
   @Test
-  public void showsTopicAndMaskedWordAtTheBeginning() {
-    page.shouldHaveTopic("house");
+  public void showsMaskedWordAtTheBeginning() {
     page.shouldHaveWord("____");
+  }
+
+  @Test
+  public void hintRevealsTopicAfterThreeWrongGuesses() {
+    page.guessLetter("B");
+    page.guessLetter("C");
+    page.guessLetter("D");
+    page.revealHint();
+    page.shouldHaveTopic("house");
   }
 
   @Test
@@ -54,17 +63,17 @@ public class HangmanSpec extends AbstractHangmanTest {
   @Test
   public void userCanChooseLanguage() {
     page.selectLanguage("EST");
-    page.shouldHaveTopic("maja");
+    page.chooseUntimedMode();
     page.shouldHaveWord("____");
     page.alphabet().shouldHave(size(27));
 
     page.selectLanguage("RUS");
-    page.shouldHaveTopic("дом");
+    page.chooseUntimedMode();
     page.shouldHaveWord("______");
     page.alphabet().shouldHave(size(33));
 
     page.selectLanguage("ENG");
-    page.shouldHaveTopic("house");
+    page.chooseUntimedMode();
     page.shouldHaveWord("____");
     page.alphabet().shouldHave(size(26));
   }
