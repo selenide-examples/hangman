@@ -40,16 +40,13 @@ test {
   include 'ee/era/hangman/**'
 }
 
-tasks.register('uitest_firefox', Test) {
-  systemProperties['selenide.browser'] = 'firefox'
-}
-
-tasks.register('uitest_edge', Test) {
-  systemProperties['selenide.browser'] = 'edge'
-}
-
-tasks.register('uitest_chrome', Test) {
-  systemProperties['selenide.browser'] = 'chrome'
+['firefox', 'edge', 'chrome'].each { browser ->
+  tasks.register("uitest_${browser}", Test) {
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+    include 'uitest/**'
+    systemProperties['selenide.browser'] = browser
+  }
 }
 
 tasks.withType(Test).configureEach {

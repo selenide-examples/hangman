@@ -15,6 +15,14 @@ public class HangmanPage {
     $(byText(language)).click();
   }
 
+  public void chooseUntimedMode() {
+    $("#modeUntimed").shouldBe(visible).click();
+  }
+
+  public void revealHint() {
+    $("#hintButton").click();
+  }
+
   public void shouldHaveTopic(String topic) {
     $("#topic").shouldHave(text(topic));
   }
@@ -36,7 +44,7 @@ public class HangmanPage {
   }
 
   private SelenideElement letter(String letter) {
-    return $(byText(letter));
+    return $("#alphabet").$(byText(letter));
   }
 
   public void assertGameIsWon() {
