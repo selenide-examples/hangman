@@ -34,12 +34,19 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
   public void startGame() {
     driver.get("http://localhost:9999");
     hangmanPage = PageFactory.initElements(driver, HangmanPage.class);
-    hangmanPage = hangmanPage.selectLanguage("ENG", "Topic");
+    hangmanPage = hangmanPage.selectLanguage("ENG", "Hint");
   }
 
   @Test
-  public void showsTopic() {
-    assertThat(hangmanPage.topic.getText()).isEqualTo("house");
+  public void hintIsLockedUntilThreeFailuresThenRevealsTopic() {
+    assertThat(hangmanPage.hintButton.isEnabled()).isFalse();
+    assertThat(hangmanPage.topic.isDisplayed()).isFalse();
+    hangmanPage.guessLetter('B');
+    hangmanPage.guessLetter('C');
+    hangmanPage.guessLetter('D');
+    assertThat(hangmanPage.hintButton.isEnabled()).isTrue();
+    hangmanPage.hintButton.click();
+    new FluentWait<>(driver).until(textToBePresentInElement(hangmanPage.topic, "house"));
   }
 
   @Test
@@ -78,19 +85,16 @@ public class HangmanWithPageObjectTest extends AbstractHangmanTest {
 
   @Test
   public void userCanChooseLanguage() {
-    hangmanPage = hangmanPage.selectLanguage("EST", "Teema");
-    assertThat(hangmanPage.topic.getText()).isEqualTo("maja");
+    hangmanPage = hangmanPage.selectLanguage("EST", "Vihje");
     assertThat(hangmanPage.wordInWork.getText()).isEqualTo("____");
     assertThat(hangmanPage.alphabet).hasSize(27);
 
-    hangmanPage = hangmanPage.selectLanguage("RUS", "Тема");
-    new FluentWait<>(driver).until(textToBePresentInElement(hangmanPage.topic, "дом"));
-    assertThat(hangmanPage.wordInWork.getText()).isEqualTo("______");
+    hangmanPage = hangmanPage.selectLanguage("RUS", "Подсказка");
+    new FluentWait<>(driver).until(textToBePresentInElement(hangmanPage.wordInWork, "______"));
     assertThat(hangmanPage.alphabet).hasSize(33);
 
-    hangmanPage = hangmanPage.selectLanguage("ENG", "Topic");
-    new FluentWait<>(driver).until(textToBePresentInElement(hangmanPage.topic, "house"));
-    assertThat(hangmanPage.wordInWork.getText()).isEqualTo("____");
+    hangmanPage = hangmanPage.selectLanguage("ENG", "Hint");
+    new FluentWait<>(driver).until(textToBePresentInElement(hangmanPage.wordInWork, "____"));
     assertThat(hangmanPage.alphabet).hasSize(26);
   }
 }

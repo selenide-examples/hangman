@@ -8,16 +8,22 @@ import static org.apache.commons.lang3.StringUtils.repeat;
 public class Hangman {
   private final String correctWord;
   private String word;
+  private final int maxErrors;
 
   private int errors;
 
   public Hangman(String correctWord) {
     this.correctWord = correctWord;
+    this.maxErrors = 6 + Math.max(0, correctWord.length() - 5);
     word = repeat('_', correctWord.length());
   }
 
   public int getErrors() {
     return errors;
+  }
+
+  public int getMaxErrors() {
+    return maxErrors;
   }
 
   @CanIgnoreReturnValue
@@ -52,10 +58,10 @@ public class Hangman {
   }
 
   public boolean isLost() {
-    return errors >= 6;
+    return errors >= maxErrors;
   }
 
   public boolean isWon() {
-    return errors < 6 && word.equals(correctWord);
+    return errors < maxErrors && word.equals(correctWord);
   }
 }

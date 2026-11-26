@@ -76,6 +76,34 @@ public class HangmanTest {
   }
 
   @Test
+  public void longerWordsGetMoreTries() {
+    // "sofa" = 4 letters → 6 max errors (base)
+    assertThat(startGame("sofa").getMaxErrors()).isEqualTo(6);
+    // "piano" = 5 letters → 6 max errors (base)
+    assertThat(startGame("piano").getMaxErrors()).isEqualTo(6);
+    // "guitar" = 6 letters → 7 max errors
+    assertThat(startGame("guitar").getMaxErrors()).isEqualTo(7);
+    // "hologram" = 8 letters → 9 max errors
+    assertThat(startGame("hologram").getMaxErrors()).isEqualTo(9);
+    // "refrigerator" = 12 letters → 13 max errors
+    assertThat(startGame("refrigerator").getMaxErrors()).isEqualTo(13);
+  }
+
+  @Test
+  public void longerWordNotLostUntilMaxErrors() {
+    Hangman game = startGame("guitar"); // 6 letters → 7 max errors
+    for (int i = 0; i < 6; i++) {
+      game.guessLetter((char) ('1' + i));
+    }
+    assertThat(game.getErrors()).isEqualTo(6);
+    assertThat(game.isLost()).isFalse();
+
+    game.guessLetter('0');
+    assertThat(game.getErrors()).isEqualTo(7);
+    assertThat(game.isLost()).isTrue();
+  }
+
+  @Test
   public void matchingIsCaseInsensitive() {
     Hangman game = startGame("TopConf");
     game.guessLetter('t');

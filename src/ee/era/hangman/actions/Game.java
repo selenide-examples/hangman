@@ -30,7 +30,8 @@ public class Game {
       "alphabet", wordsService.getAlphabet(language),
       "language", language,
       "word", game.getWord(),
-      "topic", randomWord.topic()
+      "topic", randomWord.topic(),
+      "maxErrors", game.getMaxErrors()
     );
     return json(200, response);
   }

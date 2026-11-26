@@ -33,46 +33,133 @@
   top: 50px;
 }
 
+#language-switch .switch-language {
+  cursor: pointer;
+  padding: 2px 6px;
+}
+#language-switch .switch-language:hover {
+  text-decoration: underline;
+}
+
 img#chair {
   position: absolute;
   width: 160px;
-  left: 275px;
-  top: 340px;
+  left: 210px;
+  top: 350px;
 }
 
 img.gameOver {
   position: absolute;
   width: 200px;
-  left: 260px;
+  left: 190px;
   top: 80px;
   display: none;
 }
+img#gameWin {
+  left: 90px;
+}
 
-img.hangman {
+#hangmanSvg {
   position: absolute;
-  left: 0;
-  top: 0;
-  display: none;
-}
-
-img#hangman1 {
-  clip: rect(0px, 250px, 390px, 200px);
-}
-img#hangman2 {
-  clip: rect(0px, 500px, 30px, 200px);
-}
-img#hangman3 {
-  clip: rect(30px, 500px, 62px, 250px);
-}
-img#hangman4 {
-  clip: rect(62px, 500px, 142px, 250px);
-}
-img#hangman5 {
-  clip: rect(142px, 500px, 390px, 250px);
+  left: 40px;
+  top: 40px;
 }
 
 #startGame {
   position: absolute;
-  left: 300px;
-  top: 380px;
+  left: 220px;
+  top: 400px;
+}
+
+#toolbar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#modeSelect .modeButton {
+  font-size: 24px;
+  padding: 12px 28px;
+  margin: 8px 12px 8px 0;
+  cursor: pointer;
+}
+
+#timer {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 24px;
+  margin-left: 20px;
+  padding: 2px 10px;
+  border: 2px solid #333;
+  border-radius: 6px;
+}
+
+#timer.timer-warning {
+  color: #b00000;
+  border-color: #b00000;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+#hintButton {
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#hintButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+#hintLocked {
+  font-size: 14px;
+  font-weight: normal;
+  color: #777;
+  margin-left: 8px;
+}
+
+#topic {
+  font-size: 28px;
+  font-style: italic;
+  min-height: 34px;
+}
+
+#howToPlayModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+#howToPlayContent {
+  background: #fff;
+  max-width: 560px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 20px 28px;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+#howToPlayContent kbd {
+  background: #eee;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#howToPlayClose {
+  margin-top: 12px;
+  font-size: 16px;
+  padding: 6px 18px;
+  cursor: pointer;
 }

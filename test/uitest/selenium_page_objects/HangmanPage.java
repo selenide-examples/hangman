@@ -22,9 +22,13 @@ public class HangmanPage {
   @CacheLookup
   WebElement topic;
 
-  @FindBy(id = "topic-label")
+  @FindBy(id = "hint-label")
   @CacheLookup
-  WebElement topicLabel;
+  WebElement hintLabel;
+
+  @FindBy(id = "hintButton")
+  @CacheLookup
+  WebElement hintButton;
 
   @FindBy(id = "wordInWork")
   @CacheLookup
@@ -42,7 +46,6 @@ public class HangmanPage {
 
   public HangmanPage(WebDriver driver) {
     this.driver = driver;
-    new WebDriverWait(driver, ofSeconds(3)).until(visibilityOfElementLocated(By.id("topic")));
   }
 
   public void guessLetter(char letter) {
@@ -58,10 +61,12 @@ public class HangmanPage {
     return By.xpath("//*[@letter='" + letter + "']");
   }
 
-  public HangmanPage selectLanguage(String language, String expectedTopicLabel) {
-    driver.findElement(By.linkText(language)).click();
+  public HangmanPage selectLanguage(String language, String expectedHintLabel) {
+    new WebDriverWait(driver, ofSeconds(5)).until(elementToBeClickable(By.linkText(language))).click();
+    new WebDriverWait(driver, ofSeconds(5)).until(visibilityOfElementLocated(By.id("modeUntimed"))).click();
+    new WebDriverWait(driver, ofSeconds(5)).until(visibilityOfElementLocated(By.id("wordInWork")));
     HangmanPage newPage = PageFactory.initElements(driver, HangmanPage.class);
-    new FluentWait<>(newPage.topicLabel).until(e -> e.isDisplayed() && e.getText().equals(expectedTopicLabel));
+    new FluentWait<>(newPage.hintLabel).until(e -> e.isDisplayed() && e.getText().equals(expectedHintLabel));
     return newPage;
   }
 }
